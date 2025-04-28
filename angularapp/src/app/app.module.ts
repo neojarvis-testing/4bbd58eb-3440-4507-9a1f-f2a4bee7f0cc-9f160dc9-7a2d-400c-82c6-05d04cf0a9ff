@@ -46,7 +46,6 @@ import { UserviewtrainingComponent } from './components/userviewtraining/uservie
     AppRoutingModule
   ],
   providers: [],
-  
   bootstrap: [AppComponent]
 })
 export class AppModule { }
