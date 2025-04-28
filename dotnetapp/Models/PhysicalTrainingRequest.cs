@@ -1,10 +1,11 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
  
 namespace dotnetapp.Models
 {
-    [Index(nameOf(PhysicalTrainingRequestId), Name = "Idx_PhysicalTrainingRequest_PhysicalTrainingRequestId")] // Apply index directly on PhysicalTrainingRequestId
+    [Index(nameof(PhysicalTrainingRequestId), Name = "Idx_PhysicalTrainingRequest_PhysicalTrainingRequestId")] // Apply index directly on PhysicalTrainingRequestId
 
     // Represents a request for a physical training session made by a user
     public class PhysicalTrainingRequest

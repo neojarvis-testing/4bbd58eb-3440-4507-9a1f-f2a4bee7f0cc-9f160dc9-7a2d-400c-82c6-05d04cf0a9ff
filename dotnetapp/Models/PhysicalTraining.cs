@@ -1,11 +1,12 @@
 using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
  
 namespace dotnetapp.Models
 {
 
-    [Index(nameOf(TrainerName), Name = "Idx_PhysicalTraining_TrainingName")] //Apply index directly to TrainingName
-    [Index(nameOf(Description), Name = "Idx_PhysicalTraining_Description")] //Apply index directly to Description
-    [Index(nameOf(FocusArea), Name = "Idx_PhysicalTraining_FocusArea")] //Apply index directly to FocusArea
+    [Index(nameof(TrainerName), Name = "Idx_PhysicalTraining_TrainingName")] //Apply index directly to TrainingName
+    [Index(nameof(Description), Name = "Idx_PhysicalTraining_Description")] //Apply index directly to Description
+    [Index(nameof(FocusArea), Name = "Idx_PhysicalTraining_FocusArea")] //Apply index directly to FocusArea
     
     // Represents a physical training session
     public class PhysicalTraining
