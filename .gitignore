@@ -6,7 +6,7 @@
 /out-tsc
 # Only exists if Bazel was run
 /bazel-out
- 
+ /home/coder/project/workspace/dotnetapp/Models
 # dependencies
 /node_modules
 /package-lock.json
@@ -19,7 +19,7 @@ bin/
 obj/
 dotnetapp.sln
 appsettings.json
-Migrations/
+Migrations/ 
  
 # IDEs and editors
 /.idea
