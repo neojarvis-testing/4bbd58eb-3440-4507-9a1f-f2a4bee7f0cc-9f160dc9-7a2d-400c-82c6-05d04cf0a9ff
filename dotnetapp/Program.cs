@@ -1,8 +1,3 @@
-using dotnetapp.Models;
-using dotnetapp.Data;
-using dotnetapp.Services;
-using Microsoft.EntityFrameworkCore;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -13,15 +8,6 @@ builder.Services.AddControllers(); // Registers the controllers to handle API re
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-// Configures the database context with SQL Server using the connection string from appsettings.json
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("conString")));
-
-// Registers application services with dependency injection for scoped lifetime
-builder.Services.AddScoped<FeedbackService>(); // Service for handling feedback operations
-builder.Services.AddScoped<PhysicalTrainingService>(); // Service for managing physical training sessions
-builder.Services.AddScoped<PhysicalTrainingRequestService>(); // Service for handling training requests
 
 var app = builder.Build();
 
