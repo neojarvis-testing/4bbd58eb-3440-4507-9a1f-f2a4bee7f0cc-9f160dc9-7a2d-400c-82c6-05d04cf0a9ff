@@ -2,6 +2,7 @@ using dotnetapp.Models;
 using dotnetapp.Data;
 using dotnetapp.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging.Log4Net.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddScoped<FeedbackService>(); // Service for handling feedback operations
 builder.Services.AddScoped<PhysicalTrainingService>(); // Service for managing physical training sessions
 builder.Services.AddScoped<PhysicalTrainingRequestService>(); // Service for handling training requests
+
+
+builder.Logging.AddLog4Net();
 
 var app = builder.Build();
 
@@ -45,3 +49,6 @@ app.MapControllers();
 
 // Runs the application
 app.Run();
+
+
+
