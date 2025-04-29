@@ -1,10 +1,12 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using dotnetapp.Models;
 
 namespace dotnetapp.Data
 {
     // Represents the application's database context, managing entity interactions with the database
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         // Constructor to initialize the DbContext with specific options (e.g., database provider settings)
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)

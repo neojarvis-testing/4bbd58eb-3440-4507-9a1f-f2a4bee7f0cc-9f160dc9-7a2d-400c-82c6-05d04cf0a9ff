@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using log4net;
 using System.Reflection;
+using Microsoft.AspNetCore.Authorization;
+using Newtonsoft.Json;
 
 namespace dotnetapp.Controllers
 {
@@ -25,6 +27,7 @@ namespace dotnetapp.Controllers
         }
 
         // Get all physical trainings [Access for both Admin and User]
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PhysicalTraining>>> GetAllPhysicalTrainings()
         {
@@ -43,6 +46,7 @@ namespace dotnetapp.Controllers
         }
 
         // Get specific physical training by ID [Access for Admin only]
+        [Authorize(Roles = UserRoles.Admin)]
         [HttpGet("{trainingId}")]
         public async Task<ActionResult<PhysicalTraining>> GetPhysicalTrainingById(int trainingId)
         {
@@ -67,30 +71,52 @@ namespace dotnetapp.Controllers
         }
 
         // Add new physical training [Access for Admin only]
+        [Authorize(Roles = UserRoles.Admin)]
         [HttpPost]
         public async Task<ActionResult> AddPhysicalTraining([FromBody] PhysicalTraining training)
         {
             log.Info("Attempting to add new physical training.");
+
+            // Check for Authorization Header
+            var authHeader = Request.Headers["Authorization"].ToString();
+            if (string.IsNullOrEmpty(authHeader) || !authHeader.StartsWith("Bearer "))
+            {
+                log.Warn("Missing or invalid Authorization header.");
+                return Unauthorized(new { message = "Authorization token is required." });
+            }
+            
             try
             {
+                // Log incoming request data for debugging
+                log.Info($"Received Training Request: {JsonConvert.SerializeObject(training)}");
+
+                // Ensure training object is valid
+                if (training == null)
+                {
+                    log.Warn("Invalid training payload received.");
+                    return BadRequest(new { message = "Invalid training data." });
+                }
+
+                // Call service to add physical training
                 var success = await _physicalTrainingService.AddPhysicalTraining(training);
                 if (success)
                 {
                     log.Info("Physical training added successfully.");
-                    return Ok(new { message = "Physical training added successfully." });  // Success message
+                    return Ok(new { message = "Physical training added successfully." });
                 }
 
                 log.Warn("Failed to add physical training.");
-                return StatusCode(500, new { message = "Failed to add physical training." });  // Failure message
+                return StatusCode(500, new { message = "Failed to add physical training." });
             }
             catch (Exception ex)
             {
                 log.Error($"Error adding physical training: {ex.Message}", ex);
-                return StatusCode(500, new { message = $"Internal server error: {ex.Message}" });  // Exception handling
+                return StatusCode(500, new { message = $"Internal server error: {ex.Message}" });
             }
         }
 
         // Update physical training [Access for Admin only]
+        [Authorize(Roles = UserRoles.Admin)]
         [HttpPut("{trainingId}")]
         public async Task<ActionResult> UpdatePhysicalTraining(int trainingId, [FromBody] PhysicalTraining training)
         {
@@ -115,6 +141,7 @@ namespace dotnetapp.Controllers
         }
 
         // Delete physical training [Access for Admin only]
+        [Authorize(Roles = UserRoles.Admin)]
         [HttpDelete("{trainingId}")]
         public async Task<ActionResult> DeletePhysicalTraining(int trainingId)
         {

@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
- 
+using System.Text.Json.Serialization;
+
 namespace dotnetapp.Models
 {
     // Represents the user in the system (either Admin or regular user)
@@ -7,6 +8,7 @@ namespace dotnetapp.Models
     {
         // Unique identifier for the user
         [Key]
+        [JsonIgnore]
         public int UserId { get; set; }
  
         [Required(ErrorMessage = "Email is required.")]

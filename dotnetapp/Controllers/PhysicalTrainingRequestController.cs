@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using log4net;
 using System.Reflection;
+using Microsoft.AspNetCore.Authorization;
 
 namespace dotnetapp.Controllers
 {
@@ -28,6 +29,7 @@ namespace dotnetapp.Controllers
 
         // 1. Get all physical training requests (Admin access)
         // Retrieves all physical training requests from the system
+        [Authorize(Roles = UserRoles.Admin)]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PhysicalTrainingRequest>>> GetAllPhysicalTrainingRequests()
         {
@@ -53,6 +55,7 @@ namespace dotnetapp.Controllers
 
         // 2. Get requests by user ID (User access)
         // Retrieves physical training requests associated with a specific user
+        [Authorize(Roles = UserRoles.User)]
         [HttpGet("user/{userId}")]
         public async Task<ActionResult<IEnumerable<PhysicalTrainingRequest>>> GetPhysicalTrainingRequestsByUserId(int userId)
         {
@@ -75,6 +78,7 @@ namespace dotnetapp.Controllers
 
         // 3. Add a new request (User access)
         // Allows users to submit a new physical training request
+        [Authorize(Roles = UserRoles.User)]
         [HttpPost]
         public async Task<ActionResult> AddPhysicalTrainingRequest([FromBody] PhysicalTrainingRequest request)
         {
@@ -101,6 +105,7 @@ namespace dotnetapp.Controllers
 
         // 4. Update request (Admin and User access)
         // Allows an admin or user to update an existing physical training request
+        [Authorize]
         [HttpPut("{requestId}")]
         public async Task<ActionResult> UpdatePhysicalTrainingRequest(int requestId, [FromBody] PhysicalTrainingRequest request)
         {
@@ -127,6 +132,7 @@ namespace dotnetapp.Controllers
 
         // 5. Delete request (User access)
         // Allows users to delete an existing physical training request
+        [Authorize(Roles = UserRoles.User)]
         [HttpDelete("{requestId}")]
         public async Task<ActionResult> DeletePhysicalTrainingRequest(int requestId)
         {

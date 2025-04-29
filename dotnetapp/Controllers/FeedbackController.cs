@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System;
 using log4net;
 using System.Reflection;
+using Microsoft.AspNetCore.Authorization;
 
 namespace dotnetapp.Controllers
 {
@@ -26,6 +27,7 @@ namespace dotnetapp.Controllers
         }
 
         // HTTP GET method to retrieve all feedback records from the database.
+        [Authorize(Roles = UserRoles.Admin)]
         [HttpGet] // Defines an HTTP GET endpoint to fetch all feedbacks.
         public async Task<ActionResult<IEnumerable<Feedback>>> GetAllFeedbacks()
         {
@@ -45,6 +47,7 @@ namespace dotnetapp.Controllers
         }
 
         // HTTP GET method to retrieve feedback records for a specific user ID.
+        [Authorize(Roles = UserRoles.User)]
         [HttpGet("user/{userId}")] // Defines an endpoint to fetch feedbacks by user ID.
         public async Task<ActionResult<IEnumerable<Feedback>>> GetFeedbacksByUserId(int userId)
         {
@@ -64,6 +67,7 @@ namespace dotnetapp.Controllers
         }
 
         // HTTP POST method to add new feedback entry.
+        [Authorize(Roles = UserRoles.User)]
         [HttpPost] // Defines an HTTP POST endpoint for adding feedbacks.
         public async Task<ActionResult> AddFeedback([FromBody] Feedback feedback) // Accepts feedback data from the request body.
         {
@@ -89,6 +93,7 @@ namespace dotnetapp.Controllers
         }
 
         // HTTP DELETE method to remove a feedback entry by feedback ID.
+        [Authorize(Roles = UserRoles.User)]
         [HttpDelete("{feedbackId}")] // Defines an endpoint to delete feedback by ID.
         public async Task<ActionResult> DeleteFeedback(int feedbackId)
         {
