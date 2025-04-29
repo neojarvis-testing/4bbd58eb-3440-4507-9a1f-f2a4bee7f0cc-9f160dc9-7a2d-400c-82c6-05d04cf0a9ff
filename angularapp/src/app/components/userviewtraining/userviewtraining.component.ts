@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'app-userviewtraining',
   templateUrl: './userviewtraining.component.html',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserviewtrainingComponent implements OnInit {
 
-  constructor() { }
+
+  constructor(
+
+  ) { }
 
   ngOnInit(): void {
-  }
 
+  }
 }

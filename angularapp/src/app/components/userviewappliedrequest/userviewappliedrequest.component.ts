@@ -5,11 +5,13 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './userviewappliedrequest.component.html',
   styleUrls: ['./userviewappliedrequest.component.css']
 })
-export class UserviewappliedrequestComponent implements OnInit {
+export class UserViewAppliedRequestComponent implements OnInit {
+ 
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
+   
   }
 
 }

@@ -5,11 +5,12 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './adminviewtraining.component.html',
   styleUrls: ['./adminviewtraining.component.css']
 })
-export class AdminviewtrainingComponent implements OnInit {
+export class AdminViewTrainingComponent implements OnInit {
+ 
 
-  constructor() { }
-
+  constructor() {}
   ngOnInit(): void {
+    
   }
 
 }
