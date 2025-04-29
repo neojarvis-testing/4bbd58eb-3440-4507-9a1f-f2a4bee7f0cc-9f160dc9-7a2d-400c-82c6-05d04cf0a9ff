@@ -12,6 +12,7 @@ namespace dotnetapp.Models
     {
         // Unique identifier for the training request
         [Key]
+        [JsonIgnore]
         public int PhysicalTrainingRequestId { get; set; }
  
         // User ID of the person making the request (required field)

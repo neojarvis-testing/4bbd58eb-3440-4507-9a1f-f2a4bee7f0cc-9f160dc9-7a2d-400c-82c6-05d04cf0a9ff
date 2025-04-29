@@ -2,15 +2,25 @@ using dotnetapp.Models;
 using dotnetapp.Data;
 using dotnetapp.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using System.Buffers;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Runtime.Intrinsics.X86;
+using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
-builder.Services.AddControllers(); // Registers the controllers to handle API requests
+builder.Services.AddControllers()
+        .AddJsonOptions(opt=> {
+            opt.JsonSerializerOptions.PropertyNamingPolicy=null;
+        });
 
 // Enables API documentation with Swagger
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -18,30 +28,65 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("conString")));
 
+builder.Services.AddCors(opttions=>{
+    opttions.AddDefaultPolicy(builder=>{
+        builder.AllowAnyOrigin()
+        .AllowAnyHeader()
+        .AllowAnyMethod();
+    });
+});
+
+// Configure Identity for authentication
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
+
+// Configure authentication using JWT
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.RequireHttpsMetadata = false;
+    options.SaveToken = true;
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration["JWT:ValidIssuer"],
+        ValidAudience = builder.Configuration["JWT:ValidAudience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"]))
+    };
+});
+
 // Registers application services with dependency injection for scoped lifetime
-builder.Services.AddScoped<FeedbackService>(); // Service for handling feedback operations
-builder.Services.AddScoped<PhysicalTrainingService>(); // Service for managing physical training sessions
-builder.Services.AddScoped<PhysicalTrainingRequestService>(); // Service for handling training requests
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<FeedbackService>();
+builder.Services.AddScoped<PhysicalTrainingService>();
+builder.Services.AddScoped<PhysicalTrainingRequestService>();
+
+builder.Logging.AddLog4Net();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-
-// Enables Swagger UI and API documentation only in development mode
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-// Enforces HTTPS for secure communication
 app.UseHttpsRedirection();
 
-// Enables authorization middleware to handle authentication and authorization logic
+// Enable authentication and authorization middleware
+app.UseAuthentication();
 app.UseAuthorization();
 
-// Maps controllers to endpoints so the API routes work correctly
+// Map controllers to endpoints
 app.MapControllers();
 
-// Runs the application
 app.Run();

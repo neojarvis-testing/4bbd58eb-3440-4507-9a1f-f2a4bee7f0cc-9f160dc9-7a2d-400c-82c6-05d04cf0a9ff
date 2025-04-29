@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
  
 namespace dotnetapp.Models
 {
@@ -11,9 +12,9 @@ namespace dotnetapp.Models
     // Represents a physical training session
     public class PhysicalTraining
     {
-        
         // Unique identifier for the physical training session
         [Key]
+        [JsonIgnore]
         public int PhysicalTrainingId { get; set; }
  
         // Name of the training session (required)
