@@ -1,0 +1,128 @@
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+ }
+ h2, h3 {
+    text-align: center;
+    color: #333;
+    margin: 20px 0;
+ }
+ /* Navbar */
+ .navbar {
+    background-color: #1a1a2e;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+ }
+ .navbar a {
+    color: white;
+    margin-left: 20px;
+    text-decoration: none;
+ }
+ .navbar a:hover {
+    text-decoration: underline;
+ }
+ /* Table Styling */
+ .table-container {
+    width: 95%;
+    margin: 20px auto;
+    overflow-x: auto;
+ }
+ table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+ }
+ table, th, td {
+    border: 1px solid #ccc;
+ }
+ th {
+    background-color: #003366;
+    color: white;
+    padding: 10px;
+ }
+ td {
+    text-align: center;
+    padding: 8px;
+ }
+ tr:nth-child(even) {
+    background-color: #f2f2f2;
+ }
+ /* Search Bar */
+ .search-bar {
+    width: 300px;
+    padding: 8px;
+    margin: 10px auto;
+    display: block;
+ }
+ /* Buttons */
+ button, .btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-weight: bold;
+ }
+ .btn-edit {
+    background-color: #28a745;
+    color: white;
+ }
+ .btn-delete {
+    background-color: #dc3545;
+    color: white;
+ }
+ .btn-cancel {
+    background-color: #6c757d;
+    color: white;
+ }
+ .btn-back {
+    background-color: #007bff;
+    color: white;
+    float: right;
+    margin: 10px;
+ }
+ /* Form Styling */
+ .form-container {
+    width: 90%;
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    margin-top: 20px;
+ }
+ input[type="text"], select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+ }
+ /* Success Message */
+ .success-msg {
+    background-color: #d4edda;
+    color: #155724;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #c3e6cb;
+    margin: 10px auto;
+    width: fit-content;
+    border-radius: 5px;
+ }
+ /* Delete Confirmation */
+ .confirm-dialog {
+    margin: 20px auto;
+    padding: 15px;
+    text-align: center;
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    width: fit-content;
+    border-radius: 5px;
+ }
+
