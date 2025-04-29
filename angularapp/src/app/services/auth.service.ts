@@ -9,7 +9,7 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-  public baseUrl = 'https://8080-abcbddecbfceedecbfefbafcfdcadccdcfaff.premiumproject.examly.io/api/user';
+  public baseUrl = 'https://8080-afeeedcfbfbfcbfefbafcfdcadccdcfaff.premiumproject.examly.io/api';
   private currentUserSubject: BehaviorSubject<User | null>;
   public currentUser: Observable<User | null>;
 
@@ -30,7 +30,9 @@ export class AuthService {
   }
 
   login(loginData: Login): Observable<{ token: string; user: User }> {
-    return this.http.post<{ token: string; user: User }>(`${this.baseUrl}/login`, loginData).pipe(
+    const headers = { 'Content-Type': 'application/json' };
+
+    return this.http.post<{ token: string; user: User }>(`${this.baseUrl}/login`, loginData, {headers}).pipe(
       tap(response => {
         const { token, user } = response;
         if (token && user) {
@@ -49,6 +51,14 @@ export class AuthService {
   getUserRole(): string | null {
     const user = this.currentUserValue;
     return user ? user.UserRole : null;
+  }
+
+  isAdmin(): boolean {
+    return this.getUserRole() === 'Admin';
+  }
+
+  isUser(): boolean {
+    return this.getUserRole() === 'User';
   }
 
   logout(): void {
