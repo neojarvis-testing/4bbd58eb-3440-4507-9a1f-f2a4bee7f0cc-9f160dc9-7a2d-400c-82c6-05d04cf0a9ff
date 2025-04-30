@@ -56,8 +56,8 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("conString")));
 
-builder.Services.AddCors(opttions=>{
-    opttions.AddDefaultPolicy(builder=>{
+builder.Services.AddCors(options=>{
+    options.AddDefaultPolicy(builder=>{
         builder.AllowAnyOrigin()
         .AllowAnyHeader()
         .AllowAnyMethod();
