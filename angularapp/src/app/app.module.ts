@@ -19,7 +19,6 @@ import { UsernavComponent } from './components/usernav/usernav.component';
 import { UserviewappliedrequestComponent } from './components/userviewappliedrequest/userviewappliedrequest.component';
 import { UserviewfeedbackComponent } from './components/userviewfeedback/userviewfeedback.component';
 import { UserviewtrainingComponent } from './components/userviewtraining/userviewtraining.component';
-import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -44,8 +43,7 @@ import { FormsModule } from '@angular/forms';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    FormsModule
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
