@@ -1,1 +1,17 @@
-<p>usernav works!</p>
+<nav>
+    <ul>
+        <li><h1>TRAINING HUB</h1></li>
+        <li>{{user.Username}}/{{user.UserRole}}</li>
+        <li><a routerLink="/">Home</a></li>
+        <li><a routerLink="/viewalltrainings">Trainings</a></li>
+        <li><a routerLink="/appliedtrainings">Applied Training</a></li>
+        <li class="dropdown">
+            <a>Feedback</a>
+            <div class="dropdown-content">
+                <a routerLink="/postfeedback">Post Feedback</a>
+                <a routerLink="/myfeedbacks">My Feedbacks</a>
+            </div>
+        </li>
+        <li><button (click)="logout()">Logout</button></li>
+    </ul>
+  </nav> 
