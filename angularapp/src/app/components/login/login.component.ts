@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
         }
       });
     } else {
-      alert("Incorrect email or password");
+      return;
     }
   }
 }
