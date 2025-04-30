@@ -77,6 +77,11 @@ namespace dotnetapp.Controllers
         {
             log.Info("Attempting to add new physical training.");
 
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { message = "Invalid training data." });
+            }
+
             // Check for Authorization Header
             var authHeader = Request.Headers["Authorization"].ToString();
             if (string.IsNullOrEmpty(authHeader) || !authHeader.StartsWith("Bearer "))

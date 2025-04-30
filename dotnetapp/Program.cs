@@ -11,6 +11,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Runtime.Intrinsics.X86;
 using System.Configuration;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,8 +23,35 @@ builder.Services.AddControllers()
 
 // Enables API documentation with Swagger
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
 
+    // Enable Authorization in Swagger UI
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        Scheme = "Bearer",
+        In = ParameterLocation.Header,
+        Description = "Enter 'Bearer' [space] and then your token."
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] { }
+        }
+    });
+});
 // Configures the database context with SQL Server using the connection string from appsettings.json
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("conString")));
@@ -35,6 +63,7 @@ builder.Services.AddCors(opttions=>{
         .AllowAnyMethod();
     });
 });
+
 
 // Configure Identity for authentication
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -81,7 +110,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseCors();
 // Enable authentication and authorization middleware
 app.UseAuthentication();
 app.UseAuthorization();

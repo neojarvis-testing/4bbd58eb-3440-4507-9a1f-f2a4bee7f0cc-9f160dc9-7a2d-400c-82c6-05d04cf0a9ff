@@ -29,12 +29,14 @@ export class AuthService {
     return this.http.post<User>(`${this.baseUrl}/register`, newUser);
   }
 
-  login(loginData: Login): Observable<{ token: string; user: User }> {
-    const headers = { 'Content-Type': 'application/json' };
-
-    return this.http.post<{ token: string; user: User }>(`${this.baseUrl}/login`, loginData, {headers}).pipe(
+  login(loginData: Login): Observable<any> {
+    return this.http.post<{ token: string; user: User }>(`${this.baseUrl}/login`, loginData).pipe(
       tap(response => {
-        const { token, user } = response;
+        console.log('Login API response:', response);
+        const token = response.Token;
+        const user = response.User;
+        console.log('Storing token:', token);
+        console.log('Storing user:', user);      
         if (token && user) {
           localStorage.setItem('jwtToken', token);
           localStorage.setItem('currentUser', JSON.stringify(user));
