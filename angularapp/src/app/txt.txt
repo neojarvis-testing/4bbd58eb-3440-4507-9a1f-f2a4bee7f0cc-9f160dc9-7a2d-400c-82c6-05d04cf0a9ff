@@ -1,0 +1,903 @@
+⸻
+
+USER SIDE
+
+1. useraddrequest.component.ts
+
+import { Component, OnInit } from '@angular/core';
+
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { TrainingRequestService } from '../services/training-request.service';
+
+@Component({
+
+  selector: 'app-useraddrequest',
+
+  templateUrl: './useraddrequest.component.html',
+
+  styleUrls: ['./useraddrequest.component.css']
+
+})
+
+export class UserAddRequestComponent implements OnInit {
+
+  trainingId!: number;
+
+  userId!: number;
+
+  request = {
+
+    HealthConditions: '',
+
+    FitnessGoals: '',
+
+    Comments: ''
+
+  };
+
+  constructor(
+
+    private route: ActivatedRoute,
+
+    private router: Router,
+
+    private requestService: TrainingRequestService
+
+  ) {}
+
+  ngOnInit(): void {
+
+    this.trainingId = +this.route.snapshot.paramMap.get('trainingId')!;
+
+    this.userId = Number(localStorage.getItem('userId'));
+
+  }
+
+  onSubmit(form: any) {
+
+    if (form.invalid) {
+
+      alert('All fields are required');
+
+      return;
+
+    }
+
+    const payload = {
+
+      UserId: this.userId,
+
+      PhysicalTrainingId: this.trainingId,
+
+      RequestDate: new Date().toISOString(),
+
+      Status: 'Pending',
+
+      ...this.request
+
+    };
+
+    this.requestService.submitTrainingRequest(payload).subscribe(() => {
+
+      alert('Successfully Submitted!');
+
+      this.router.navigate(['/user/applied-trainings']);
+
+    });
+
+  }
+
+  goBack() {
+
+    this.router.navigate(['/user/applied-trainings']);
+
+  }
+
+}
+
+
+
+
+useraddrequest.component.html
+<h2>Training Request Form</h2>
+<form #form="ngForm" (ngSubmit)="onSubmit(form)">
+<label>Health Conditions</label>
+<input name="HealthConditions" [(ngModel)]="request.HealthConditions" required />
+<label>Fitness Goals</label>
+<input name="FitnessGoals" [(ngModel)]="request.FitnessGoals" required />
+<label>Comments</label>
+<textarea name="Comments" [(ngModel)]="request.Comments"></textarea>
+<div *ngIf="form.submitted && form.invalid" class="error">All fields are required</div>
+<button type="submit">Submit</button>
+<button type="button" (click)="goBack()">Back</button>
+</form>
+
+
+
+
+⸻
+
+2. useraddfeedback.component.ts
+
+import { Component } from '@angular/core';
+
+import { FeedbackService } from '../services/feedback.service';
+
+@Component({
+
+  selector: 'app-useraddfeedback',
+
+  templateUrl: './useraddfeedback.component.html',
+
+  styleUrls: ['./useraddfeedback.component.css']
+
+})
+
+export class UserAddFeedbackComponent {
+
+  feedbackText = '';
+
+  userId = Number(localStorage.getItem('userId'));
+
+  constructor(private feedbackService: FeedbackService) {}
+
+  onSubmit(form: any) {
+
+    if (form.invalid) {
+
+      alert("Feedback is required");
+
+      return;
+
+    }
+
+    const feedback = {
+
+      UserId: this.userId,
+
+      FeedbackText: this.feedbackText,
+
+      Date: new Date()
+
+    };
+
+    this.feedbackService.submitFeedback(feedback).subscribe(() => {
+
+      alert("Successfully Added!");
+
+      form.resetForm();
+
+    });
+
+  }
+
+}
+
+
+
+useraddfeedback.component.html
+<h2>Add Feedback</h2>
+<form #form="ngForm" (ngSubmit)="onSubmit(form)">
+<textarea name="FeedbackText" [(ngModel)]="feedbackText" required placeholder="Enter your feedback"></textarea>
+<div *ngIf="form.submitted && form.invalid" class="error">Feedback is required</div>
+<button type="submit">Submit</button>
+</form>
+
+
+
+
+
+
+
+USER SIDE (continued)
+
+⸻
+
+3. userviewappliedrequest.component.ts
+
+import { Component, OnInit } from '@angular/core';
+
+import { TrainingRequestService } from '../services/training-request.service';
+
+@Component({
+
+  selector: 'app-userviewappliedrequest',
+
+  templateUrl: './userviewappliedrequest.component.html',
+
+  styleUrls: ['./userviewappliedrequest.component.css']
+
+})
+
+export class UserViewAppliedRequestComponent implements OnInit {
+
+  requests: any[] = [];
+
+  search = '';
+
+  constructor(private requestService: TrainingRequestService) {}
+
+  ngOnInit(): void {
+
+    this.loadRequests();
+
+  }
+
+  loadRequests() {
+
+    this.requestService.getUserRequests().subscribe(data => this.requests = data);
+
+  }
+
+  deleteRequest(id: number) {
+
+    if (confirm("Are you sure you want to delete this request?")) {
+
+      this.requestService.deleteRequest(id).subscribe(() => this.loadRequests());
+
+    }
+
+  }
+
+  get filteredRequests() {
+
+    return this.requests.filter(r => r.TrainingName.toLowerCase().includes(this.search.toLowerCase()));
+
+  }
+
+}
+
+
+
+
+userviewappliedrequest.component.html
+<h2>Applied Trainings</h2>
+<input [(ngModel)]="search" placeholder="Search by Training Name" />
+<table *ngIf="filteredRequests.length > 0">
+<thead>
+<tr>
+<th>Training</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr *ngFor="let r of filteredRequests">
+<td>{{ r.TrainingName }}</td>
+<td>{{ r.Status }}</td>
+<td><button (click)="deleteRequest(r.PhysicalTrainingRequestId)">Delete</button></td>
+</tr>
+</tbody>
+</table>
+<div *ngIf="filteredRequests.length === 0">No requests found.</div>
+
+
+4. userviewfeedback.component.ts
+
+import { Component, OnInit } from '@angular/core';
+
+import { FeedbackService } from '../services/feedback.service';
+
+@Component({
+
+  selector: 'app-userviewfeedback',
+
+  templateUrl: './userviewfeedback.component.html',
+
+  styleUrls: ['./userviewfeedback.component.css']
+
+})
+
+export class UserViewFeedbackComponent implements OnInit {
+
+  feedbacks: any[] = [];
+
+  constructor(private feedbackService: FeedbackService) {}
+
+  ngOnInit(): void {
+
+    this.loadFeedbacks();
+
+  }
+
+  loadFeedbacks() {
+
+    this.feedbackService.getUserFeedbacks().subscribe(data => this.feedbacks = data);
+
+  }
+
+  deleteFeedback(id: number) {
+
+    if (confirm("Are you sure you want to delete this feedback?")) {
+
+      this.feedbackService.deleteFeedback(id).subscribe(() => this.loadFeedbacks());
+
+    }
+
+  }
+
+}
+
+
+
+
+userviewfeedback.component.html
+<h2>My Feedback</h2>
+<ul *ngIf="feedbacks.length > 0">
+<li *ngFor="let fb of feedbacks">
+
+    {{ fb.FeedbackText }} ({{ fb.Date | date:'short' }})
+<button (click)="deleteFeedback(fb.FeedbackId)">Delete</button>
+</li>
+</ul>
+<div *ngIf="feedbacks.length === 0">No feedbacks found.</div> 
+
+
+
+-------------------------------------------------------------------------
+
+
+ADMIN SIDE
+
+3. adminaddtraining.component.ts
+
+import { Component } from '@angular/core';
+
+import { Router } from '@angular/router';
+
+import { TrainingService } from '../services/training.service';
+
+@Component({
+
+  selector: 'app-adminaddtraining',
+
+  templateUrl: './adminaddtraining.component.html',
+
+  styleUrls: ['./adminaddtraining.component.css']
+
+})
+
+export class AdminAddTrainingComponent {
+
+  training: any = {
+
+    TrainingName: '',
+
+    Description: '',
+
+    TrainerName: '',
+
+    Location: '',
+
+    IsIndoor: false,
+
+    Fee: null,
+
+    FocusArea: '',
+
+    PhysicalRequirements: ''
+
+  };
+
+  errorMessage = '';
+
+  constructor(private trainingService: TrainingService, private router: Router) {}
+
+  onSubmit(form: any) {
+
+    if (form.invalid) {
+
+      alert("All fields are required");
+
+      return;
+
+    }
+
+    this.trainingService.addTraining(this.training).subscribe({
+
+      next: () => {
+
+        alert("Successfully Added!");
+
+        form.resetForm();
+
+      },
+
+      error: err => {
+
+        if (err.status === 409) {
+
+          this.errorMessage = "Training with the same name already exists";
+
+        }
+
+      }
+
+    });
+
+  }
+
+}
+
+
+
+
+adminaddtraining.component.html
+<h2>Create New Training</h2>
+<form #form="ngForm" (ngSubmit)="onSubmit(form)">
+<div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+<label>Training Name</label>
+<input name="TrainingName" [(ngModel)]="training.TrainingName" required />
+<label>Description</label>
+<textarea name="Description" [(ngModel)]="training.Description" required></textarea>
+<label>Trainer Name</label>
+<input name="TrainerName" [(ngModel)]="training.TrainerName" required />
+<label>Location</label>
+<input name="Location" [(ngModel)]="training.Location" required />
+<label>Indoor</label>
+<input type="checkbox" name="IsIndoor" [(ngModel)]="training.IsIndoor" />
+<label>Fee</label>
+<input type="number" name="Fee" [(ngModel)]="training.Fee" required />
+<label>Focus Area</label>
+<input name="FocusArea" [(ngModel)]="training.FocusArea" required />
+<label>Physical Requirements</label>
+<textarea name="PhysicalRequirements" [(ngModel)]="training.PhysicalRequirements" required></textarea>
+<div *ngIf="form.submitted && form.invalid" class="error">All fields are required</div>
+<button type="submit">Submit</button>
+</form>
+
+
+
+
+
+⸻
+
+4. adminedittraining.component.ts
+
+import { Component, OnInit } from '@angular/core';
+
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { TrainingService } from '../services/training.service';
+
+@Component({
+
+  selector: 'app-adminedittraining',
+
+  templateUrl: './adminedittraining.component.html',
+
+  styleUrls: ['./adminedittraining.component.css']
+
+})
+
+export class AdminEditTrainingComponent implements OnInit {
+
+  trainingId!: number;
+
+  training: any = {};
+
+  constructor(
+
+    private route: ActivatedRoute,
+
+    private trainingService: TrainingService,
+
+    private router: Router
+
+  ) {}
+
+  ngOnInit(): void {
+
+    this.trainingId = +this.route.snapshot.paramMap.get('id')!;
+
+    this.trainingService.getTrainingById(this.trainingId).subscribe(data => {
+
+      this.training = data;
+
+    });
+
+  }
+
+  updateTraining(form: any) {
+
+    if (form.invalid) {
+
+      alert("All fields are required");
+
+      return;
+
+    }
+
+    this.trainingService.updateTraining(this.trainingId, this.training).subscribe(() => {
+
+      alert("Training updated successfully!");
+
+      this.router.navigate(['/admin/view-trainings']);
+
+    });
+
+  }
+
+  back() {
+
+    this.router.navigate(['/admin/view-trainings']);
+
+  }
+
+}
+
+
+
+adminedittraining.component.html
+<h2>Edit Training</h2>
+<form #form="ngForm" (ngSubmit)="updateTraining(form)">
+<label>Training Name</label>
+<input name="TrainingName" [(ngModel)]="training.TrainingName" required />
+<label>Description</label>
+<textarea name="Description" [(ngModel)]="training.Description" required></textarea>
+<label>Trainer Name</label>
+<input name="TrainerName" [(ngModel)]="training.TrainerName" required />
+<label>Location</label>
+<input name="Location" [(ngModel)]="training.Location" required />
+<label>Indoor</label>
+<input type="checkbox" name="IsIndoor" [(ngModel)]="training.IsIndoor" />
+<label>Fee</label>
+<input type="number" name="Fee" [(ngModel)]="training.Fee" required />
+<label>Focus Area</label>
+<input name="FocusArea" [(ngModel)]="training.FocusArea" required />
+<label>Physical Requirements</label>
+<textarea name="PhysicalRequirements" [(ngModel)]="training.PhysicalRequirements" required></textarea>
+<div *ngIf="form.submitted && form.invalid" class="error">All fields are required</div>
+<button type="submit">Update Training</button>
+<button type="button" (click)="back()">Back</button>
+</form> 
+
+
+
+
+
+
+
+Admin View Training Component
+
+adminviewtraining.component.ts
+
+
+import { Component, OnInit } from '@angular/core';
+
+import { TrainingService } from '../services/training.service';
+
+import { Router } from '@angular/router';
+
+@Component({
+
+  selector: 'app-adminviewtraining',
+
+  templateUrl: './adminviewtraining.component.html',
+
+  styleUrls: ['./adminviewtraining.component.css']
+
+})
+
+export class AdminViewTrainingComponent implements OnInit {
+
+  trainings: any[] = [];
+
+  search = '';
+
+  constructor(private trainingService: TrainingService, private router: Router) {}
+
+  ngOnInit(): void {
+
+    this.loadTrainings();
+
+  }
+
+  loadTrainings() {
+
+    this.trainingService.getAllTrainings().subscribe(data => this.trainings = data);
+
+  }
+
+  editTraining(id: number) {
+
+    this.router.navigate(['/admin/edit-training', id]);
+
+  }
+
+  deleteTraining(id: number) {
+
+    if (confirm("Are you sure you want to delete this training?")) {
+
+      this.trainingService.deleteTraining(id).subscribe(() => this.loadTrainings());
+
+    }
+
+  }
+
+  get filteredTrainings() {
+
+    return this.trainings.filter(t =>
+
+      t.TrainingName.toLowerCase().includes(this.search.toLowerCase())
+
+    );
+
+  }
+
+}
+
+
+
+
+adminviewtraining.component.html
+
+<h2>Training Sessions</h2>
+<input [(ngModel)]="search" placeholder="Search by Training Name" />
+<table *ngIf="filteredTrainings.length > 0">
+<thead>
+<tr>
+<th>Training Name</th>
+<th>Trainer</th>
+<th>Location</th>
+<th>Fee</th>
+<th>Focus Area</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody>
+<tr *ngFor="let training of filteredTrainings">
+<td>{{ training.TrainingName }}</td>
+<td>{{ training.TrainerName }}</td>
+<td>{{ training.Location }}</td>
+<td>{{ training.Fee }}</td>
+<td>{{ training.FocusArea }}</td>
+<td>
+<button (click)="editTraining(training.PhysicalTrainingId)">Edit</button>
+<button (click)="deleteTraining(training.PhysicalTrainingId)">Delete</button>
+</td>
+</tr>
+</tbody>
+</table>
+<div *ngIf="filteredTrainings.length === 0">
+
+  No trainings found.
+</div>
+
+
+
+
+adminviewtraining.component.css
+
+table {
+
+  width: 100%;
+
+  border-collapse: collapse;
+
+  margin-top: 20px;
+
+}
+
+th, td {
+
+  padding: 10px;
+
+  border: 1px solid #ccc;
+
+}
+
+input {
+
+  margin-bottom: 10px;
+
+  padding: 5px;
+
+  width: 300px;
+
+} 
+
+
+
+
+
+
+
+
+
+
+ADMIN SIDE (continued)
+
+⸻
+
+5. adminviewappliedrequest.component.ts
+
+import { Component, OnInit } from '@angular/core';
+
+import { TrainingRequestService } from '../services/training-request.service';
+
+@Component({
+
+  selector: 'app-adminviewappliedrequest',
+
+  templateUrl: './adminviewappliedrequest.component.html',
+
+  styleUrls: ['./adminviewappliedrequest.component.css']
+
+})
+
+export class AdminViewAppliedRequestComponent implements OnInit {
+
+  requests: any[] = [];
+
+  search = '';
+
+  statusFilter = '';
+
+  constructor(private requestService: TrainingRequestService) {}
+
+  ngOnInit(): void {
+
+    this.loadRequests();
+
+  }
+
+  loadRequests() {
+
+    this.requestService.getAllRequests().subscribe(data => this.requests = data);
+
+  }
+
+  updateStatus(id: number, status: string) {
+
+    this.requestService.updateStatus(id, status).subscribe(() => this.loadRequests());
+
+  }
+
+  get filteredRequests() {
+
+    return this.requests.filter(r =>
+
+      r.TrainingName.toLowerCase().includes(this.search.toLowerCase()) &&
+
+      (this.statusFilter ? r.Status === this.statusFilter : true)
+
+    );
+
+  }
+
+}
+
+
+
+
+adminviewappliedrequest.component.html
+<h2>Training Requests</h2>
+<input [(ngModel)]="search" placeholder="Search by Training Name" />
+<select [(ngModel)]="statusFilter">
+<option value="">All</option>
+<option value="Pending">Pending</option>
+<option value="Approved">Approved</option>
+<option value="Rejected">Rejected</option>
+</select>
+<table *ngIf="filteredRequests.length > 0">
+<thead>
+<tr>
+<th>User</th>
+<th>Training</th>
+<th>Status</th>
+<th>Health</th>
+<th>Goals</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr *ngFor="let r of filteredRequests">
+<td>{{ r.Username }}</td>
+<td>{{ r.TrainingName }}</td>
+<td>{{ r.Status }}</td>
+<td>{{ r.HealthConditions }}</td>
+<td>{{ r.FitnessGoals }}</td>
+<td *ngIf="r.Status === 'Pending'">
+<button (click)="updateStatus(r.PhysicalTrainingRequestId, 'Approved')">Approve</button>
+<button (click)="updateStatus(r.PhysicalTrainingRequestId, 'Rejected')">Reject</button>
+</td>
+<td *ngIf="r.Status !== 'Pending'">—</td>
+</tr>
+</tbody>
+</table>
+<div *ngIf="filteredRequests.length === 0">Oops! No records found</div>
+
+
+
+6. adminviewfeedback.component.ts
+
+import { Component, OnInit } from '@angular/core';
+
+import { FeedbackService } from '../services/feedback.service';
+
+@Component({
+
+  selector: 'app-adminviewfeedback',
+
+  templateUrl: './adminviewfeedback.component.html',
+
+  styleUrls: ['./adminviewfeedback.component.css']
+
+})
+
+export class AdminViewFeedbackComponent implements OnInit {
+
+  feedbacks: any[] = [];
+
+  selectedUser: any = null;
+
+  constructor(private feedbackService: FeedbackService) {}
+
+  ngOnInit(): void {
+
+    this.feedbackService.getAllFeedbacks().subscribe(data => this.feedbacks = data);
+
+  }
+
+  showProfile(user: any) {
+
+    this.selectedUser = user;
+
+  }
+
+  closeModal() {
+
+    this.selectedUser = null;
+
+  }
+
+}
+
+
+
+
+adminviewfeedback.component.html
+<h2>User Feedbacks</h2>
+<table *ngIf="feedbacks.length > 0">
+<thead>
+<tr>
+<th>User</th>
+<th>Feedback</th>
+<th>Date</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr *ngFor="let fb of feedbacks">
+<td>{{ fb.Username }}</td>
+<td>{{ fb.FeedbackText }}</td>
+<td>{{ fb.Date | date:'short' }}</td>
+<td><button (click)="showProfile(fb.User)">Show Profile</button></td>
+</tr>
+</tbody>
+</table>
+<div *ngIf="feedbacks.length === 0">No data found</div>
+<!-- Modal -->
+<div class="modal" *ngIf="selectedUser">
+<div class="modal-content">
+<h3>User Profile</h3>
+<p><strong>Username:</strong> {{ selectedUser.Username }}</p>
+<p><strong>Email:</strong> {{ selectedUser.Email }}</p>
+<p><strong>Mobile:</strong> {{ selectedUser.MobileNumber }}</p>
+<button (click)="closeModal()">Close</button>
+</div>
+</div> 
+
+
+
+
+
+
+
+
+
+
+
+
