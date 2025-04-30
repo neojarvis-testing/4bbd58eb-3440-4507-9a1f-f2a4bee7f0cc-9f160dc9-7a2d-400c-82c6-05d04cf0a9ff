@@ -1,1 +1,21 @@
-<h2>Login</h2>
+<div class="login-container">
+    <h2>Login</h2>
+    <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+        <div>
+            <label for="email">Email<span class="required">*</span></label>
+            <input type="email" id="email" name="email" [(ngModel)]="email" required  #emailNgModel="ngModel">
+            <div class="error-message" *ngIf="emailNgModel.invalid && (emailNgModel.dirty || emailNgModel.touched)">
+                Email is required
+            </div>
+        </div>
+        <div>
+            <label for="password">Password<span class="required">*</span></label>
+            <input type="password" id="password" name="password" [(ngModel)]="password" required #passwordNgModel="ngModel">
+            <div class="error-message" *ngIf="passwordNgModel.invalid && (passwordNgModel.dirty || passwordNgModel.touched)">
+                Password is required<br />
+                Password must include at least one uppercase letter, one lowercase letter, one digit, and one special character
+            </div>
+        </div>
+        <button type="submit" id="submit">Login</button>
+    </form>
+</div>`

@@ -9,6 +9,7 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
+  public baseUrl = 'https://8080-afeeedcfbfbfcbfefbafcfdcadccdcfaff.premiumproject.examly.io/api';
   public baseUrl = 'https://8080-abcbddecbfceedecbfefbafcfdcadccdcfaff.premiumproject.examly.io/api';
   private currentUserSubject: BehaviorSubject<User | null>;
   public currentUser: Observable<User | null>;
@@ -29,10 +30,14 @@ export class AuthService {
     return this.http.post<User>(`${this.baseUrl}/register`, newUser);
   }
 
-  login(loginData: Login): Observable<{ token: string; user: User }> {
+  login(loginData: Login): Observable<any> {
     return this.http.post<{ token: string; user: User }>(`${this.baseUrl}/login`, loginData).pipe(
       tap(response => {
-        const { token, user } = response;
+        console.log('Login API response:', response);
+        const token = response.Token;
+        const user = response.User;
+        console.log('Storing token:', token);
+        console.log('Storing user:', user);      
         if (token && user) {
           localStorage.setItem('jwtToken', token);
           localStorage.setItem('currentUser', JSON.stringify(user));
@@ -49,6 +54,14 @@ export class AuthService {
   getUserRole(): string | null {
     const user = this.currentUserValue;
     return user ? user.UserRole : null;
+  }
+
+  isAdmin(): boolean {
+    return this.getUserRole() === 'Admin';
+  }
+
+  isUser(): boolean {
+    return this.getUserRole() === 'User';
   }
 
   logout(): void {
