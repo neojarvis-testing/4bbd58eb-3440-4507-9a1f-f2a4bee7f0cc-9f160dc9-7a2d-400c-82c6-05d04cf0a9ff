@@ -8,7 +8,7 @@
         <li class="dropdown">
             <a>Feedback</a>
             <div class="dropdown-content">
-                <a routerLink="/postfeedback">Post Feedback</a>
+                <a [routerLink]="['/postfeedback', user.UserId]">Post Feedback</a>
                 <a routerLink="/myfeedbacks">My Feedbacks</a>
             </div>
         </li>

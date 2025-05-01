@@ -29,7 +29,7 @@ namespace dotnetapp.Controllers
 
         // 1. Get all physical training requests (Admin access)
         // Retrieves all physical training requests from the system
-        [Authorize(Roles = UserRoles.Admin)]
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PhysicalTrainingRequest>>> GetAllPhysicalTrainingRequests()
         {

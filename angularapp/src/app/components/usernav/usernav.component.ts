@@ -12,6 +12,7 @@ export class UsernavComponent implements OnInit {
   constructor(private authService: AuthService) { }
  
   user: User = {
+    UserId: 0,
     Email: '',
     Password: '',
     Username: '',

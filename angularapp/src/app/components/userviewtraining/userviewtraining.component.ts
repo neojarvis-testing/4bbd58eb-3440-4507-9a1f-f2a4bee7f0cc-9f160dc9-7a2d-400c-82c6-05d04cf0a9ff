@@ -12,7 +12,7 @@ import { PhysicalTrainingService } from 'src/app/services/physical-training.serv
 })
 export class UserviewtrainingComponent implements OnInit {
 
-  investments: any;
+    trainings: any;
     filteredTrainings: PhysicalTraining[] = [];
     searchQuery: string = '';
     appliedTrainings: number[] = [];
@@ -33,7 +33,7 @@ export class UserviewtrainingComponent implements OnInit {
 
     getTrainings(): void {
       this.trainingService.getAllPhysicalTrainings().subscribe((data) => {
-        this.investments = data;
+        this.trainings = data;
         this.filteredTrainings = data;
         this.getUserAppliedTrainings();
       });
@@ -52,15 +52,16 @@ export class UserviewtrainingComponent implements OnInit {
  
     searchTrainings(): void {
       if (this.searchQuery.trim() === '') {
-        this.filteredTrainings = this.investments;
+        this.filteredTrainings = this.trainings;
       } else {
-        this.filteredTrainings = this.investments.filter(investment =>
-          investment.Name.toLowerCase().includes(this.searchQuery.toLowerCase())
+        this.filteredTrainings = this.trainings.filter(training =>
+          training.TrainingName.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          training.Description.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          training.FocusArea.toLowerCase().includes(this.searchQuery.toLowerCase())
         );
       }
     }
 
-   
     isApplied(investmentId: number): boolean {
       console.log(this.appliedTrainings);
       return this.appliedTrainings.includes(investmentId);

@@ -30,7 +30,7 @@ const routes: Routes = [
   { path: 'viewalltrainings', component: UserviewtrainingComponent, canActivate: [AuthGuard], data: { roles: ['User'] } },
   { path: 'applytraining/:id', component: UseraddrequestComponent, canActivate: [AuthGuard], data: { roles: ['User'] } },
   { path: 'appliedtrainings', component: UserviewappliedrequestComponent, canActivate: [AuthGuard], data: { roles: ['User'] } },
-  { path: 'postfeedback', component: UseraddfeedbackComponent, canActivate: [AuthGuard], data: { roles: ['User'] } },
+  { path: 'postfeedback/:id', component: UseraddfeedbackComponent, canActivate: [AuthGuard], data: { roles: ['User'] } },
   { path: 'myfeedbacks', component: UserviewfeedbackComponent, canActivate: [AuthGuard], data: { roles: ['User'] } },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegistrationComponent },

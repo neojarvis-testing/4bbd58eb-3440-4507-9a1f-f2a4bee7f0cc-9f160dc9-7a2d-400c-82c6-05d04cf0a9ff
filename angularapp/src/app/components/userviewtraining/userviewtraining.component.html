@@ -1,7 +1,9 @@
-<div>
-    <h1> Available Trainings </h1>
-     <hr class="heading-line">
-    <input type="text" name="serachInput" id="searchInput" placeholder="Search by Training Name, Description, or Focus Area" [(ngModel)]="searchQuery" (input)="searchTrainings()">
+<div class="trainings-container">
+    <h2> Available Trainings </h2>
+     <hr class="line">
+     <div class="search-bar">
+         <input type="text" name="serachInput" id="searchInput" placeholder="Search by Training Name, Description, or Focus Area" [(ngModel)]="searchQuery" (input)="searchTrainings()">
+     </div>
     <table>
         <thead>
             <tr>
@@ -32,7 +34,7 @@
                     <button *ngIf="!isApplied(training.PhysicalTrainingId)" [routerLink]="['/applytraining', training.PhysicalTrainingId]">
                         Apply
                     </button>
-                    <button *ngIf="isApplied(training.PhysicalTrainingId)" disabled>
+                    <button *ngIf="isApplied(training.PhysicalTrainingId)" class="redButton">
                         Applied
                     </button>
                 </td>
