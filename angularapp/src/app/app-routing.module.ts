@@ -16,6 +16,7 @@ import { UserviewappliedrequestComponent } from './components/userviewappliedreq
 import { UseraddfeedbackComponent } from './components/useraddfeedback/useraddfeedback.component';
 import { UserviewfeedbackComponent } from './components/userviewfeedback/userviewfeedback.component';
 import { AdminedittrainingComponent } from './components/adminedittraining/adminedittraining.component';
+import { UseraddrequestComponent } from './components/useraddrequest/useraddrequest.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'view-feedbacks', component: AdminviewfeedbackComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] } },
   { path: 'user', component: UsernavComponent, canActivate: [AuthGuard], data: { roles: ['User'] } },
   { path: 'viewalltrainings', component: UserviewtrainingComponent, canActivate: [AuthGuard], data: { roles: ['User'] } },
+  { path: 'applytraining/:id', component: UseraddrequestComponent, canActivate: [AuthGuard], data: { roles: ['User'] } },
   { path: 'appliedtrainings', component: UserviewappliedrequestComponent, canActivate: [AuthGuard], data: { roles: ['User'] } },
   { path: 'postfeedback', component: UseraddfeedbackComponent, canActivate: [AuthGuard], data: { roles: ['User'] } },
   { path: 'myfeedbacks', component: UserviewfeedbackComponent, canActivate: [AuthGuard], data: { roles: ['User'] } },

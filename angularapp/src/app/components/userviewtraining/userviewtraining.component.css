@@ -1,0 +1,151 @@
+/* Global Styles */
+body {
+    font-family: 'Lobster', cursive;
+    background: linear-gradient(to right, #f9f9f9, #e3e3e3);
+    color: #333;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+  }
+  
+  h1 {
+    font-family: 'Lobster', cursive;
+    text-align: center;
+    color: #2c3e50;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .heading-line {
+    width: 50%;
+    margin: 0 auto 20px auto;
+    border: none;
+    border-top: 3px solid #34495e;
+    opacity: 0.5;
+  }
+  
+  /* Search and Button */
+  #searchInput {
+    width: calc(100% - 50%); /* Reduced the size of the search bar */
+  padding: 2px 50px;
+  margin-bottom: 2px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 16px;
+
+  margin-left: 350px;
+  }
+  
+  button {
+    padding:  4px 10px; /* Match the padding with the search input */
+  margin-left: 3px; /* Match the margin with the search input */
+  border: 1px solid #ddd; /* Match the border with the search input */
+  border-radius: 8px; /* Match the border radius with the search input */
+  background-color: #2980b9;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+ 
+  }
+  
+  button:hover {
+    background-color: #1f6391;
+  }
+  
+  /* Table Styles */
+  table {
+    
+        margin: 20px; /* Sets all margins (top, right, bottom, left) to 20px */
+        width: calc(100% - 40px); /* Adjust width to account for the total horizontal margin */
+        border-collapse: collapse;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        animation: slideIn 0.5s ease-in-out;
+    }
+   
+
+  
+  th, td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  th {
+    background: linear-gradient(to right, #34495e, #2c3e50);
+    color: #fff;
+  }
+  
+  td {
+    background-color: #f9f9f9;
+  }
+  
+  tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  /* Modal */
+  .modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  .modal-dialog {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .modal-body p {
+    margin: 10px 0;
+    font-size: 16px;
+  }
+  
+  .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .modal-footer button {
+    width: auto;
+  }
+  
+  /* Keyframes */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideIn {
+    from {
+      transform: translateY(50px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  /* Message Styles */
+  #noRecordsFound {
+    text-align: center;
+    color: #e74c3c;
+    font-size: 18px;
+  }
+  

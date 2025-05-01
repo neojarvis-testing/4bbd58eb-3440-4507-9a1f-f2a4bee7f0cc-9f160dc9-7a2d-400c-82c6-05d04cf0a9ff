@@ -28,7 +28,7 @@
         <td>{{ training.TrainingName }}</td>
         <td>{{ training.Location }}</td>
         <td>{{ training.TrainerName }}</td>
-        <td>{{ training.Fee }}</td>
+        <td>{{ training.Fee | currency:'INR':'symbol' }}</td>
         <td>{{ training.FocusArea }}</td>
         <td>{{ training.Description }}</td>
         <td>

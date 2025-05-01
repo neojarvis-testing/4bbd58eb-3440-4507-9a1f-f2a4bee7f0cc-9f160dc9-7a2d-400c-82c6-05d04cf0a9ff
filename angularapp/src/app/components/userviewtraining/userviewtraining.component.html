@@ -1,1 +1,45 @@
-<h2>Available Trainings</h2>
+<div>
+    <h1> Available Trainings </h1>
+     <hr class="heading-line">
+    <input type="text" name="serachInput" id="searchInput" placeholder="Search by Training Name, Description, or Focus Area" [(ngModel)]="searchQuery" (input)="searchTrainings()">
+    <table>
+        <thead>
+            <tr>
+                <th>S.No</th>
+                <th>Training Name</th>
+                <th>Description</th>
+                <th>Trainer Name</th>
+                <th>Location</th>
+                <th>Indoor/Outdoor</th>
+                <th>Fee</th>
+                <th>Focus Area</th>
+                <th>Requirements</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let training of filteredTrainings| paginate: { itemsPerPage: 6, currentPage: page }; let i = index">
+                <td>{{i+1 + (page - 1) * 6}}</td>
+                <td>{{ training.TrainingName }}</td>
+                <td>{{ training.Description }}</td>
+                <td>{{ training.TrainerName }}</td>
+                <td>{{ training.Location }}</td>
+                <td>{{ training.IsIndoor ? "Indoor" : "Outdoor" }}</td>
+                <td>{{ training.Fee | currency:'INR':'symbol' }}</td>
+                <td>{{ training.FocusArea }}</td>
+                <td>{{ training.PhysicalRequirements }}</td>
+                <td>
+                    <button *ngIf="!isApplied(training.PhysicalTrainingId)" [routerLink]="['/applytraining', training.PhysicalTrainingId]">
+                        Apply
+                    </button>
+                    <button *ngIf="isApplied(training.PhysicalTrainingId)" disabled>
+                        Applied
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+
+    <p id="noRecordsFound" style="display:none;">Oops! No records found</p> 
+</div>
