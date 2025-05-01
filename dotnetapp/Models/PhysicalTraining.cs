@@ -14,7 +14,6 @@ namespace dotnetapp.Models
     {
         // Unique identifier for the physical training session
         [Key]
-        [JsonIgnore]
         public int PhysicalTrainingId { get; set; }
  
         // Name of the training session (required)

@@ -1,0 +1,221 @@
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #f9f9f9, #e3e3e3);
+    color: #333;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1 {
+    font-family: 'Lobster', cursive;
+    text-align: center;
+    color: #2c3e50;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+}
+
+.heading-line {
+    width: 50%;
+    margin: 0 auto 20px auto;
+    border: none;
+    border-top: 3px solid #34495e;
+    opacity: 0.5;
+}
+
+/* Search Input */
+#searchInput {
+    width: calc(100% - 50%);
+    padding: 2px 100px;
+    margin-bottom: 2px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 16px;
+    margin-left: 350px;
+}
+
+.search-box {
+    padding: 8px 10px 8px 10px;
+    border: 2px solid grey;
+    border-radius: 10px;
+    font-size: 16px;
+    flex: 1;
+    width: 40px;
+    height: 40px;
+}
+
+label[for="filterByStatus"] {
+    margin-right: 10px;
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    color: #000;
+}
+
+/* Buttons */
+button {
+    padding: 2px 6px;
+    margin-left: 3px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #2980b9;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background-color: #1f6391;
+    transform: translateY(-2px);
+}
+
+button:active {
+    background-color: #1a5276;
+    transform: translateY(0);
+}
+
+/* Table Styles */
+table {
+    width: calc(100% - 40px);
+    margin: 20px 20px;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    animation: slideIn 0.5s ease-in-out;
+}
+
+th, td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background: linear-gradient(to right, #34495e, #2c3e50);
+    color: #fff;
+}
+
+td {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Dialog Styling */
+.dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    z-index: 9999;
+}
+
+.dialog-dialog {
+    position: fixed; /* Change from absolute to fixed */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center the modal */
+    background: #fff;
+    padding: 20px 40px;
+    border-radius: 8px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 80%;
+    overflow-y: auto; /* Add scroll if content is too tall */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dialog-content {
+    text-align: center;
+}
+
+.dialog-body p {
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+.dialog-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.dialog-footer button {
+    width: auto;
+    padding: 6px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.dialog-footer button:first-child {
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+.dialog-footer button:last-child {
+    background-color: #95a5a6;
+    color: #fff;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Message Styles */
+#noRecordsFound {
+    text-align: center;
+    color: #e74c3c;
+    font-size: 18px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    #searchInput {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .search-sep {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .dialog-dialog {
+        width: 95%;
+        padding: 15px 20px;
+    }
+}
+
+/* Add Gap Between Search and Filter */
+.search-sep {
+    display: flex;
+    gap: 900px;
+}

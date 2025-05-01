@@ -1,1 +1,57 @@
-<h2>Training Sessions</h2>
+<div class="navbar"> </div>
+<div class="training-container">
+  <h1>Training Sessions</h1>
+  <hr class="heading-line">
+  <head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
+</head>
+   <div>
+    <input type="text" id="searchInput" [(ngModel)]="searchTerm" placeholder="Search by Training Name..." class="search-box" />
+</div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>S.No</th>
+        <th>Training Name</th>
+        <th>Location</th>
+        <th>Trainer Name</th>
+        <th>Fee</th>
+        <th>Focus Area</th>
+        <th>Description</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let training of filteredTrainings()| paginate: { itemsPerPage: 6, currentPage: page }; let i = index">
+        <td>{{i+1 + (page - 1) * 6}}</td>
+        <td>{{ training.TrainingName }}</td>
+        <td>{{ training.Location }}</td>
+        <td>{{ training.TrainerName }}</td>
+        <td>{{ training.Fee }}</td>
+        <td>{{ training.FocusArea }}</td>
+        <td>{{ training.Description }}</td>
+        <td>
+          <button (click)="editTraining(training)">Edit</button>
+          <button (click)="openDialogue(training)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table> 
+</div>
+
+<pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+
+    <div class="dialog" tabindex="-1" role="dialog" [ngClass]="{'show':isDialogueOpen}" aria-labelledby="profileDialogLabel" style="display: block;" *ngIf="isDialogueOpen">
+        <div class="dialog-dialog dialog-dialog-centered" role="document">
+            <div class="dialog-content">
+                <div class="dialog-body text-center" style="font-family: 'Gilroy-Medium',sans-serif;">
+                    <p><strong>Are you sure you want to delete {{ selectedTraining?.TrainingName }}?</strong></p>
+                    <div *ngIf="errorMessage" class="text-danger"><strong>{{ errorMessage }}</strong></div>
+                </div>
+                <div class="dialog-footer">
+                    <button (click)="deleteTraining()">Yes, Delete</button>
+                    <button type="button" class="btn btn-danger" (click)="closeDialogue()">Cancel</button>
+                </div>
+            </div>
+          </div> 

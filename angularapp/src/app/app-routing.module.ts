@@ -15,6 +15,7 @@ import { UserviewtrainingComponent } from './components/userviewtraining/uservie
 import { UserviewappliedrequestComponent } from './components/userviewappliedrequest/userviewappliedrequest.component';
 import { UseraddfeedbackComponent } from './components/useraddfeedback/useraddfeedback.component';
 import { UserviewfeedbackComponent } from './components/userviewfeedback/userviewfeedback.component';
+import { AdminedittrainingComponent } from './components/adminedittraining/adminedittraining.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'add-training', component: AdminaddtrainingComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] } },
   { path: 'view-trainings', component: AdminviewtrainingComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] } },
   { path: 'trainings-requested', component: AdminviewappliedrequestComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] } },
+  { path: 'adminedittraining/:id', component: AdminedittrainingComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] } },
   { path: 'view-feedbacks', component: AdminviewfeedbackComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] } },
   { path: 'user', component: UsernavComponent, canActivate: [AuthGuard], data: { roles: ['User'] } },
   { path: 'viewalltrainings', component: UserviewtrainingComponent, canActivate: [AuthGuard], data: { roles: ['User'] } },

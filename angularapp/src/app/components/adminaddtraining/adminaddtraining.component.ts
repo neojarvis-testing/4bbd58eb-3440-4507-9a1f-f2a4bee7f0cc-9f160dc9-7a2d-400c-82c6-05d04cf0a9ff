@@ -26,7 +26,7 @@ export class AdminaddtrainingComponent implements OnInit {
   isTrainingExist : boolean = false;
   isDialogOpen : boolean = false;
   
-  constructor(private service : PhysicalTrainingService, private router: Router) { }
+  constructor(private trainingService : PhysicalTrainingService, private router: Router) { }
  
  
   ngOnInit(): void {
@@ -34,7 +34,7 @@ export class AdminaddtrainingComponent implements OnInit {
   }
  
   loadTrainings() {
-    this.service.getAllPhysicalTrainings().subscribe((data) => {
+    this.trainingService.getAllPhysicalTrainings().subscribe((data) => {
       this.trainings = data;
       console.log(this.trainings);
     })
@@ -48,7 +48,7 @@ export class AdminaddtrainingComponent implements OnInit {
     
     if(isUnique) {
       if(this.IsFormValid()) {
-        this.service.addPhysicalTraining(this.newTraining).subscribe(() => {
+        this.trainingService.addPhysicalTraining(this.newTraining).subscribe(() => {
           this.resetForm();
         })
         this.openDialog();
@@ -95,7 +95,7 @@ export class AdminaddtrainingComponent implements OnInit {
  
   closeDialog(): void {
     this.isDialogOpen = false;
-    document.body.classList.remove('dialog-open')
+    document.body.classList.remove('dialog-open');
+    this.router.navigate(['/view-trainings']);
   }
-
 }

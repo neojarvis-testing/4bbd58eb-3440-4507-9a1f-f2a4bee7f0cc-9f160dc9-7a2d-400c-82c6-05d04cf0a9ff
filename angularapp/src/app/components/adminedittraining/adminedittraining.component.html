@@ -1,1 +1,95 @@
-<p>adminedittraining works!</p>
+<div>
+    <div>
+        <div class="form-container">
+            <div class="header-container">
+                <h2>Edit Training</h2>
+                <button class="btn btn-secondary btn-1" [routerLink]="['/view-trainings']">Back</button>
+            </div>
+            <form #trainingForm="ngForm" (ngSubmit)="updateTraining()">
+                <div>
+                    <label for="Name">Training Name<span class="error">*</span></label>
+                    <input type="text" id="Name" name="Name" [(ngModel)]="training.TrainingName" placeholder="Training Name" required />
+                    <div *ngIf="formSubmitted && !training.TrainingName" class="error">
+                        *Training Name is required
+                    </div>
+                </div>
+
+                <div>
+                    <label for="Description">Description<span class="error">*</span></label>
+                    <input type="text" id="Description" name="Description" [(ngModel)]="training.Description"
+                    placeholder="Training Description" required />
+                    <div *ngIf="formSubmitted && !training.Description" class="error">
+                        *Description is required
+                    </div>
+                </div>
+
+                <div>
+                    <label for="Trainer">Trainer Name<span class="error">*</span></label>
+                    <input type="text" id="Trainer" name="Trainer" [(ngModel)]="training.TrainerName"
+                    placeholder="Trainer Name" required />
+                    <div *ngIf="formSubmitted && !training.TrainerName" class="error">
+                        *Trainer Name is required
+                    </div>
+                </div>
+
+                <div>
+                    <label for="Location">Location<span class="error">*</span></label>
+                    <input type="text" id="Location" name="Location" [(ngModel)]="training.Location"
+                    placeholder="Location" required />
+                    <div *ngIf="formSubmitted && !training.Location" class="error">
+                        *Location is required
+                    </div>
+                </div>
+
+                <div>
+                    <label for="Type">Indoor/Outdoor<span class="error">*</span></label>
+                    <select name="Type" id="Type"
+                        [(ngModel)]="training.IsIndoor" required>
+                        <option value="true" selected>Indoor</option>
+                        <option value="false">Outdoor</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="Fee">Fee<span class="error">*</span></label>
+                    <input type="number" id="Fee" name="Fee" [(ngModel)]="training.Fee"
+                    placeholder="Fee" required />
+                    <div *ngIf="formSubmitted && !training.Fee" class="error">
+                        *Fee is required
+                    </div>
+                </div>
+
+                <div>
+                    <label for="FocusArea">Focus Area<span class="error">*</span></label>
+                    <input type="FocusArea" id="FocusArea" name="FocusArea" [(ngModel)]="training.FocusArea"
+                    placeholder="FocusArea" required />
+                    <div *ngIf="formSubmitted && !training.FocusArea" class="error">
+                        *FocusArea is required
+                    </div>
+                </div>
+
+                <div>
+                    <label for="PhysicalRequirements">Physical Requirements<span class="error">*</span></label>
+                    <input type="text" id="PhysicalRequirements" name="PhysicalRequirements" [(ngModel)]="training.PhysicalRequirements"
+                    placeholder="Physical Requirements" required />
+                    <div *ngIf="formSubmitted && !training.PhysicalRequirements" class="error">
+                        *Physical Requirements are required
+                    </div>
+                </div>
+
+                <div *ngIf="trainingForm.invalid" class="error">
+                    *All fields are required
+                </div>
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="isDialogOpen" class="dialog">
+    <div class="dialog-content">
+        <p><b>Training updated successfully!</b></p>
+        <button (click)="closeDialog()">OK</button>
+    </div>
+</div>

@@ -8,7 +8,6 @@ namespace dotnetapp.Models
     {
         // Unique identifier for the user
         [Key]
-        [JsonIgnore]
         public int UserId { get; set; }
  
         [Required(ErrorMessage = "Email is required.")]

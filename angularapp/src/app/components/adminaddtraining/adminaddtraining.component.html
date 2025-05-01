@@ -1,9 +1,9 @@
 <div>
     <div>
-        <div>
-            <h2>Create New Training</h2>
-        </div>
         <div class="form-container">
+            <div class="header-container">
+                <h2>Create New Training</h2>
+            </div>
             <form #trainingForm="ngForm" (ngSubmit)="addTraining()">
                 <div>
                     <label for="Name">Training Name<span class="error">*</span></label>
@@ -97,5 +97,4 @@
         <p><b>Successfully Added!</b></p>
         <button (click)="closeDialog()">OK</button>
     </div>
-
 </div>
