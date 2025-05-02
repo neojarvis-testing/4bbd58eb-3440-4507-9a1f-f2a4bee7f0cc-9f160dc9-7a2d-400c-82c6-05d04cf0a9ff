@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -97,3 +98,5 @@ export class PhysicalTrainingService {
     });
   }
 }
+=======
+>>>>>>> 6c4b9d6d03fe718c058d69e9f3b8263c62015b83

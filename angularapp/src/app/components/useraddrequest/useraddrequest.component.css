@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 /* Ensure body does not have overflow */
+=======
+>>>>>>> 9ecb8e18ce53a9260bed8b937339c93d6a0fc4f1
 body, html {
     display: flex;
     justify-content: center;
@@ -116,4 +119,8 @@ body.dialog-open {
     margin-top: 5px;
     padding: 5px;
     border-radius: 2px;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 9ecb8e18ce53a9260bed8b937339c93d6a0fc4f1
