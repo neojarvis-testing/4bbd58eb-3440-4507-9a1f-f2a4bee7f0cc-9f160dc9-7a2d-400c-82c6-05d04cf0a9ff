@@ -10,8 +10,8 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let feedback of feedbacks| paginate: { itemsPerPage: 6, currentPage: page }; let i = index">
-                <td>{{i+1 + (page - 1) * 6}}</td>
+            <tr *ngFor="let feedback of feedbacks; let i = index">
+                <td>{{i+1}}</td>
                 <td>{{feedback.FeedbackText}}</td>
                 <td>
                     <button class="redButton" (click)="openDialog(feedback)">Delete</button>
@@ -20,8 +20,6 @@
         </tbody>
         <p *ngIf="feedbacks.length == 0">Oops! No records found</p>
     </table>
-    <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
-
 
     <div class="dialog" *ngIf="isDialogOpen">
         <div class="dialog-content">

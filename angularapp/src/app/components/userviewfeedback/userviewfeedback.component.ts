@@ -24,7 +24,7 @@ export class UserviewfeedbackComponent implements OnInit {
     ngOnInit(): void {
       const storedUser = localStorage.getItem('currentUser');
       const user = JSON.parse(storedUser);
-      this.UserId = user.UserId;
+      this.UserId = user?.UserId;
       this.loadFeedbacks();
     }
  
@@ -55,9 +55,5 @@ export class UserviewfeedbackComponent implements OnInit {
       });
       this.closeDialog();
       this.loadFeedbacks();
-    }
-
-    pageChanged(event: number): void {
-      this.page = event;
     }
 }

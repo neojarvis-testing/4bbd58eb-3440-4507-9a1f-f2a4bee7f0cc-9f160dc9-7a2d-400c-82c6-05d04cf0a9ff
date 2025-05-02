@@ -18,7 +18,7 @@ export class UserviewtrainingComponent implements OnInit {
     appliedTrainings: number[] = [];
     page : number = 1;
 
-    userId: number; // Replace with the actual user ID
+    userId: number = 0; // Replace with the actual user ID
  
     constructor(private trainingService: PhysicalTrainingService, private router : Router, private as : AuthService) {}
  
@@ -27,8 +27,8 @@ export class UserviewtrainingComponent implements OnInit {
       const storedUser = localStorage.getItem('currentUser');
       const user = JSON.parse(storedUser);
       console.log(user);
-      console.log(user.UserId);
-      this.userId = user.UserId;
+      console.log(user?.UserId);
+      this.userId = user?.UserId;
     }
 
     getTrainings(): void {
@@ -65,9 +65,5 @@ export class UserviewtrainingComponent implements OnInit {
     isApplied(investmentId: number): boolean {
       console.log(this.appliedTrainings);
       return this.appliedTrainings.includes(investmentId);
-    }
-
-    pageChanged(event: number): void {
-      this.page = event;
     }
 }
