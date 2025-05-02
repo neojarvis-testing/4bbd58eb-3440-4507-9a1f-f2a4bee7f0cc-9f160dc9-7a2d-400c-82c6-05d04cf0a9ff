@@ -1,0 +1,151 @@
+
+/* Global Styles */
+body {
+    font-family: 'Lobster', cursive;
+    background: linear-gradient(to right, #f9f9f9, #e3e3e3);
+    color: #333;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  
+  }
+  
+  .trainings-container {
+    padding: 30px 50px;
+    font-family: Arial, sans-serif;
+  }
+   
+  .trainings-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+   
+  .search-bar {
+    margin-bottom: 15px;
+    text-align: left;
+  }
+   
+  .search-bar input {
+    padding: 8px 10px;
+    width: 350px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0px 0px 3px 0px;
+  }
+   
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+  }
+   
+  th, td {
+    padding: 12px 10px;
+    border: 1px solid #ccc;
+    text-align: left;
+    font-size: 14px;
+  }
+   
+  thead {
+    background-color: #326c9d;
+    color: white;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .line {
+    margin: 10px 0; /* Adds one line space (10px top and bottom) */
+    border: 0;
+    height: 1px;
+    box-shadow: 0px 0px 1px 0px;
+    background-color: #326c9d;
+  }
+  
+  /* Message Styles */
+  #noRecordsFound {
+    text-align: center;
+    color: #e74c3c;
+    font-size: 18px;
+  }
+
+  .redButton{
+    background-color: red;
+  }
+
+  /* Modal Styles */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh; /* Ensures it covers the entire viewport height */
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  .modal-content {
+    border: none;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .modal-header {
+    background-color: #2980b9;
+    color: white;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .modal-title {
+    font-size: 1.5em;
+    margin: 0;
+  }
+  
+  .modal-body {
+    padding: 15px;
+    font-size: 1em;
+    text-align: left;
+  }
+  
+  .modal-body p {
+    margin: 10px 0;
+  }
+  
+  .modal-footer {
+    padding: 10px;
+    text-align: right;
+  }
+  
+  .modal-footer button {
+    padding: 8px 15px;
+    font-size: 1em;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .modal-footer button:first-child {
+    background-color: #2b936e; /* Green for Yes */
+    color: white;
+  }
+  
+  .modal-footer button:last-child {
+    background-color: #c0392b; /* Red for Cancel */
+    color: white;
+  }
+  
+  .modal-footer button:hover {
+    background-color: #34495e;
+  }
+
+
+
+

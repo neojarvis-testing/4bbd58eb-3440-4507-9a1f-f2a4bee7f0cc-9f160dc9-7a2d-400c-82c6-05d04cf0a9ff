@@ -1,1 +1,43 @@
-<h2>My Feedback</h2>
+
+
+<div class="trainings-container">
+    <h2>My Feedback</h2>
+    <hr class="line">
+    <table>
+        <thead>
+            <tr>
+                <th>S.No</th>
+                <th>Feedback</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let feedback of feedbacks| paginate: { itemsPerPage: 6, currentPage: page }; let i = index">
+                <td>{{i+1 + (page - 1) * 6}}</td>
+                <td>{{feedback.FeedbackText}}</td>
+                <td>
+                    <button class="redButton" (click)="openDialog(feedback)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+        <p *ngIf="feedbacks.length == 0">Oops! No records found</p>
+    </table>
+    <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+
+
+    <div class="dialog" *ngIf="isDialogOpen">
+        <div class="dialog-content">
+            <div class="modal-body text-center">
+                <p><strong>Are you sure you want to delete?</strong></p>
+            </div>
+            <div class="modal-footer">
+                <button (click)="confirmDelete()">Yes, Delete</button>
+                <button type="button" (click)="closeDialog()">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
