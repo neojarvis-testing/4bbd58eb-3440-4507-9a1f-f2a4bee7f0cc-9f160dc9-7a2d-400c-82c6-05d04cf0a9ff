@@ -9,7 +9,10 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
+<<<<<<< HEAD
   public baseUrl = 'https://8080-afeeedcfbfbfcbfefbafcfdcadccdcfaff.premiumproject.examly.io/api';
+=======
+>>>>>>> 198552416bbd9901c41f9ca855713c8a4f334c0b
   public baseUrl = 'https://8080-abcbddecbfceedecbfefbafcfdcadccdcfaff.premiumproject.examly.io/api';
   private currentUserSubject: BehaviorSubject<User | null>;
   public currentUser: Observable<User | null>;
@@ -30,6 +33,7 @@ export class AuthService {
     return this.http.post<User>(`${this.baseUrl}/register`, newUser);
   }
 
+<<<<<<< HEAD
   login(loginData: Login): Observable<any> {
     return this.http.post<{ token: string; user: User }>(`${this.baseUrl}/login`, loginData).pipe(
       tap(response => {
@@ -38,6 +42,12 @@ export class AuthService {
         const user = response.User;
         console.log('Storing token:', token);
         console.log('Storing user:', user);      
+=======
+  login(loginData: Login): Observable<{ token: string; user: User }> {
+    return this.http.post<{ token: string; user: User }>(`${this.baseUrl}/login`, loginData).pipe(
+      tap(response => {
+        const { token, user } = response;
+>>>>>>> 198552416bbd9901c41f9ca855713c8a4f334c0b
         if (token && user) {
           localStorage.setItem('jwtToken', token);
           localStorage.setItem('currentUser', JSON.stringify(user));
@@ -56,6 +66,7 @@ export class AuthService {
     return user ? user.UserRole : null;
   }
 
+<<<<<<< HEAD
   isAdmin(): boolean {
     return this.getUserRole() === 'Admin';
   }
@@ -64,9 +75,15 @@ export class AuthService {
     return this.getUserRole() === 'User';
   }
 
+=======
+>>>>>>> 198552416bbd9901c41f9ca855713c8a4f334c0b
   logout(): void {
     localStorage.removeItem('jwtToken');
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 198552416bbd9901c41f9ca855713c8a4f334c0b
