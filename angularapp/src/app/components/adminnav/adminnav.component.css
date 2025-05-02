@@ -4,10 +4,6 @@
 * {
     box-sizing: border-box;
 }
-
-body{
-    margin: 0;
-}
  
 /* Navigation Bar */
 nav {
@@ -190,3 +186,4 @@ nav ul li button:hover {
     }
 }
  
+

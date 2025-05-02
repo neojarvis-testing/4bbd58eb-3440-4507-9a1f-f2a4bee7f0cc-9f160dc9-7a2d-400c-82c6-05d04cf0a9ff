@@ -1,20 +1,18 @@
 
-
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
-  selector: 'app-usernav',
-  templateUrl: './usernav.component.html',
-  styleUrls: ['./usernav.component.css']
+  selector: 'app-adminnav',
+  templateUrl: './adminnav.component.html',
+  styleUrls: ['./adminnav.component.css']
 })
-export class UsernavComponent implements OnInit {
-
+export class AdminnavComponent implements OnInit {
+  
   constructor(private authService: AuthService) { }
  
   user: User = {
-    UserId: 0,
     Email: '',
     Password: '',
     Username: '',
@@ -30,7 +28,7 @@ export class UsernavComponent implements OnInit {
   logout() {
     this.authService.logout();
   }
-}
 
+}
 
 

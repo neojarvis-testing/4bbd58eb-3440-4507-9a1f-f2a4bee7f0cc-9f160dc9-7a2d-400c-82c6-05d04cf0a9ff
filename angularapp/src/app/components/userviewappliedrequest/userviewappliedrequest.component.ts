@@ -8,10 +8,8 @@ import { PhysicalTrainingService } from 'src/app/services/physical-training.serv
   templateUrl: './userviewappliedrequest.component.html',
   styleUrls: ['./userviewappliedrequest.component.css']
 })
-export class UserViewAppliedRequestComponent implements OnInit {
- 
+export class UserviewappliedrequestComponent implements OnInit {
 
-<<<<<<< HEAD
     trainings: PhysicalTrainingRequest[] = [];
     filteredTrainings: PhysicalTrainingRequest[] = [];
     searchQuery: string = '';
@@ -69,13 +67,6 @@ export class UserViewAppliedRequestComponent implements OnInit {
     pageChanged(event: number): void {
       this.page = event;
     }
-=======
-  constructor() {}
-
-  ngOnInit(): void {
-   
-  }
->>>>>>> b10dfc60dc99de4db0d7ecb598188718570d2977
 
 }
 

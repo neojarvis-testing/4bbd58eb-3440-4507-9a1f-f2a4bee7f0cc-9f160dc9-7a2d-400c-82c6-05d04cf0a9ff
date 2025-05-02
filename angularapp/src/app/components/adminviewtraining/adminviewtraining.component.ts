@@ -11,7 +11,6 @@ import { PhysicalTrainingService } from 'src/app/services/physical-training.serv
   templateUrl: './adminviewtraining.component.html',
   styleUrls: ['./adminviewtraining.component.css']
 })
-<<<<<<< HEAD
 export class AdminviewtrainingComponent implements OnInit {
 
   trainings: PhysicalTraining[] = [];
@@ -78,14 +77,6 @@ export class AdminviewtrainingComponent implements OnInit {
         });
       }
     }
-=======
-export class AdminViewTrainingComponent implements OnInit {
- 
-
-  constructor() {}
-  ngOnInit(): void {
-    
->>>>>>> b10dfc60dc99de4db0d7ecb598188718570d2977
   }
 
   pageChanged(event: number): void {
