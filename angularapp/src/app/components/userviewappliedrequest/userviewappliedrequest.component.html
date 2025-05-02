@@ -17,15 +17,12 @@
         <tbody>
             <tr *ngFor="let training of filteredTrainings| paginate: { itemsPerPage: 6, currentPage: page }; let i = index">
                 <td>{{i+1 + (page - 1) * 6}}</td>
-                <td>{{ training.PhysicalTraining.TrainerName }}</td>
-                <td>{{ training.RequestDate }}</td>
+                <td>{{ training.PhysicalTraining.TrainingName }}</td>
+                <td>{{ training.RequestDate | date:'yyyy-MM-dd' }}</td>
                 <td>{{ training.Status }}</td>
                 <td>
-                    <button *ngIf="!isApplied(training.PhysicalTrainingId)" [routerLink]="['/applytraining', training.PhysicalTrainingId]">
-                        Apply
-                    </button>
-                    <button *ngIf="isApplied(training.PhysicalTrainingId)" class="redButton">
-                        Applied
+                    <button class="redButton" (click)="openDialog(training)">
+                        Delete
                     </button>
                 </td>
             </tr>

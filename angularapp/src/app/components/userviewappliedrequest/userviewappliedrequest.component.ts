@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { PhysicalTrainingRequest } from 'src/app/models/physical-training-request.model';
 import { PhysicalTrainingService } from 'src/app/services/physical-training.service';
 
@@ -10,22 +9,27 @@ import { PhysicalTrainingService } from 'src/app/services/physical-training.serv
 })
 export class UserviewappliedrequestComponent implements OnInit {
 
-  trainings: PhysicalTrainingRequest[] = [];
-    filteredTrainings: any[] = [];
+    trainings: PhysicalTrainingRequest[] = [];
+    filteredTrainings: PhysicalTrainingRequest[] = [];
     searchQuery: string = '';
     deleteId: number | null = null;
     isDialogOpen : boolean = false;
     selectedTrainingRequest : PhysicalTrainingRequest | null = null;
     page : number = 1;
+
+    userId: number;
  
-    constructor(private trainingService: PhysicalTrainingService,private route: ActivatedRoute,private router:Router) {}
+    constructor(private trainingService: PhysicalTrainingService) {}
  
     ngOnInit(): void {
+      const storedUser = localStorage.getItem('currentUser');
+      const user = JSON.parse(storedUser);
+      this.userId = user.UserId;
       this.getTrainings();
     }
  
     getTrainings(): void {
-      this.trainingService.getAllPhysicalTrainingRequests().subscribe((data) => {
+      this.trainingService.getPhysicalTrainingRequestsByUserId(this.userId).subscribe((data) => {
         console.log(data);
         this.trainings = data;
         this.filteredTrainings = data;
