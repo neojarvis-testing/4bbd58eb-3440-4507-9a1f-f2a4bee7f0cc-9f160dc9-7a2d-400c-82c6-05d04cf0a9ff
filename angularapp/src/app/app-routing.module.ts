@@ -20,13 +20,13 @@ import { UseraddrequestComponent } from './components/useraddrequest/useraddrequ
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'admin', component: AdminnavComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] } },
+  { path: 'admin', component: HomeComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] } },
   { path: 'add-training', component: AdminaddtrainingComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] } },
   { path: 'view-trainings', component: AdminviewtrainingComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] } },
   { path: 'trainings-requested', component: AdminviewappliedrequestComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] } },
   { path: 'adminedittraining/:id', component: AdminedittrainingComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] } },
   { path: 'view-feedbacks', component: AdminviewfeedbackComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] } },
-  { path: 'user', component: UsernavComponent, canActivate: [AuthGuard], data: { roles: ['User'] } },
+  { path: 'user', component: HomeComponent, canActivate: [AuthGuard], data: { roles: ['User'] } },
   { path: 'viewalltrainings', component: UserviewtrainingComponent, canActivate: [AuthGuard], data: { roles: ['User'] } },
   { path: 'applytraining/:id', component: UseraddrequestComponent, canActivate: [AuthGuard], data: { roles: ['User'] } },
   { path: 'appliedtrainings', component: UserviewappliedrequestComponent, canActivate: [AuthGuard], data: { roles: ['User'] } },

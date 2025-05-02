@@ -63,12 +63,6 @@ thead {
   background-color: #326c9d;
 }
 
-/* Message Styles */
-#noRecordsFound {
-  text-align: center;
-  color: #e74c3c;
-  font-size: 18px;
-}
 
 button{
     background: #1fb71f;
