@@ -9,8 +9,10 @@ import { PhysicalTrainingService } from 'src/app/services/physical-training.serv
   templateUrl: './useraddrequest.component.html',
   styleUrls: ['./useraddrequest.component.css']
 })
-export class UseraddrequestComponent implements OnInit {
+export class UserAddRequestComponent implements OnInit {
+ 
 
+<<<<<<< HEAD
   trainingRequest: PhysicalTrainingRequest = {
     UserId: 0,
     PhysicalTrainingId: 0,
@@ -69,3 +71,16 @@ export class UseraddrequestComponent implements OnInit {
     this.router.navigate(['/viewalltrainings']);
   }
 }
+=======
+  constructor(
+   
+  ) {}
+
+  ngOnInit(): void {
+    
+  }
+
+ 
+
+}
+>>>>>>> 6c4b9d6d03fe718c058d69e9f3b8263c62015b83
