@@ -1,0 +1,41 @@
+<div class="container">
+    <div>
+        <h2>
+            Training Request Form
+        </h2>
+        <a [routerLink]="['/viewalltrainings']">
+            <button class="backButton">Back</button>
+        </a>
+    </div>
+    <div>
+        <form #trainingRequestForm="ngForm" (ngSubmit)="applyForTraining()">
+            <div>
+                <label for="healthConditions">Health Conditions<span class="error">*</span></label>
+                <input type="text" id="healthConditions" name="healthConditions" [(ngModel)]="trainingRequest.HealthConditions" required />
+                <div *ngIf="formSubmitted && !trainingRequest.HealthConditions" class="error">
+                    Health conditions are required
+                </div>
+            </div>
+            <div>
+                <label for="fitnessGoals">Fitness Goals<span class="error">*</span></label>
+                <input type="text" id="fitnessGoals" name="fitnessGoals" [(ngModel)]="trainingRequest.FitnessGoals" required />
+                <div *ngIf="formSubmitted && !trainingRequest.FitnessGoals" class="error">
+                    Fitness goals are required
+                </div>
+            </div>
+            <div>
+                <label for="comments">Comments</label>
+                <textarea id="comments" name="comments" [(ngModel)]="trainingRequest.Comments" required></textarea>
+            </div>
+
+            <button type="submit" id="dis" class="success">Submit</button>
+        </form>
+    </div>
+</div>
+
+<div *ngIf="isDialogOpen" class="dialog">
+    <div class="dialog-content">
+        <p><b>Successfully Submitted!</b></p>
+        <button class="btn btn-danger" (click)="closeDialog()">OK</button>
+    </div>
+</div>
