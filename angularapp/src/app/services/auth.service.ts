@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
@@ -70,4 +71,9 @@ export class AuthService {
     this.currentUserSubject.next(null);
   }
 }
+<<<<<<< HEAD
  
+=======
+=======
+>>>>>>> 6c4b9d6d03fe718c058d69e9f3b8263c62015b83
+>>>>>>> b10dfc60dc99de4db0d7ecb598188718570d2977

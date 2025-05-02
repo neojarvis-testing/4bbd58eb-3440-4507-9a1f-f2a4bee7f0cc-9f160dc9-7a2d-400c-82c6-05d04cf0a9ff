@@ -6,6 +6,7 @@ import { PhysicalTraining } from 'src/app/models/physical-training.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { PhysicalTrainingService } from 'src/app/services/physical-training.service';
 
+
 @Component({
   selector: 'app-userviewtraining',
   templateUrl: './userviewtraining.component.html',
@@ -13,6 +14,7 @@ import { PhysicalTrainingService } from 'src/app/services/physical-training.serv
 })
 export class UserviewtrainingComponent implements OnInit {
 
+<<<<<<< HEAD
     trainings: any;
     filteredTrainings: PhysicalTraining[] = [];
     searchQuery: string = '';
@@ -71,6 +73,16 @@ export class UserviewtrainingComponent implements OnInit {
     pageChanged(event: number): void {
       this.page = event;
     }
+=======
+
+  constructor(
+
+  ) { }
+
+  ngOnInit(): void {
+
+  }
+>>>>>>> b10dfc60dc99de4db0d7ecb598188718570d2977
 }
 
 

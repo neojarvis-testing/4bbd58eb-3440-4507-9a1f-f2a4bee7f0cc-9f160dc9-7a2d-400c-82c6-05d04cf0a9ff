@@ -1,13 +1,19 @@
+<<<<<<< HEAD
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
+=======
+import { Component } from '@angular/core';
+
+>>>>>>> b10dfc60dc99de4db0d7ecb598188718570d2977
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css']
 })
+<<<<<<< HEAD
 export class RegistrationComponent implements OnInit {
 
   roles: string[] = ['Admin', 'User'];
@@ -64,3 +70,11 @@ export class RegistrationComponent implements OnInit {
     }
   }
 }
+=======
+export class RegistrationComponent {
+
+
+  constructor() { }
+}
+
+>>>>>>> b10dfc60dc99de4db0d7ecb598188718570d2977

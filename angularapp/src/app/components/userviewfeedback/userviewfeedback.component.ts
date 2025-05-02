@@ -6,12 +6,14 @@ import { Feedback } from 'src/app/models/feedback.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { FeedbackService } from 'src/app/services/feedback.service';
 
+
 @Component({
   selector: 'app-userviewfeedback',
   templateUrl: './userviewfeedback.component.html',
   styleUrls: ['./userviewfeedback.component.css']
 })
 export class UserviewfeedbackComponent implements OnInit {
+<<<<<<< HEAD
 
     feedbacks: Feedback[] = [];
     deleteId: number | null = null;
@@ -62,4 +64,15 @@ export class UserviewfeedbackComponent implements OnInit {
     pageChanged(event: number): void {
       this.page = event;
     }
+=======
+ 
+  constructor() {}
+
+  ngOnInit(): void {
+    
+  }
+
+  // Fetch feedbacks for the current user
+ 
+>>>>>>> b10dfc60dc99de4db0d7ecb598188718570d2977
 }
