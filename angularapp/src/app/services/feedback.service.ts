@@ -12,7 +12,7 @@ export class FeedbackService {
   constructor(private http: HttpClient) {}
 
   // Helper method to retrieve Authorization headers with JWT token
-  private getAuthHeaders(): HttpHeaders {
+  private getAuthHeaders(): HttpHeaders {                                                                      
     const token = localStorage.getItem('jwtToken');
     return new HttpHeaders().set('Authorization', `Bearer ${token}`);
   }
