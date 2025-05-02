@@ -36,7 +36,15 @@ export class AdminviewappliedrequestComponent implements OnInit {
 
   populateStatusTracker() {
     this.trainingRequests.forEach(app => {
-      this.statusTracker[app.PhysicalTrainingId] = { isApproved: false, isRejected: false };
+      if(app.Status == "Approved"){
+        this.statusTracker[app.PhysicalTrainingId] = { isApproved: true, isRejected: false };
+      }
+      else if(app.Status == "Rejected"){
+        this.statusTracker[app.PhysicalTrainingId] = { isApproved: false, isRejected: true };
+      }
+      else{
+        this.statusTracker[app.PhysicalTrainingId] = { isApproved: false, isRejected: false };
+      }
     });
   }
 

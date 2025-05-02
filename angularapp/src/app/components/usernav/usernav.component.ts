@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -9,7 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class UsernavComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
  
   user: User = {
     UserId: 0,
@@ -27,5 +28,6 @@ export class UsernavComponent implements OnInit {
  
   logout() {
     this.authService.logout();
+    this.router.navigate(['/']);
   }
 }
