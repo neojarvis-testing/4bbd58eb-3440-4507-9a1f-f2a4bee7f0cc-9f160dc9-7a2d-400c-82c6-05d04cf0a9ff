@@ -1,0 +1,98 @@
+
+body {
+    font-family: 'Lobster';
+    background: linear-gradient(to right, #f9f9f9, #e3e3e3);
+    color: #333;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: filter 0.3s ease; /* Transition for the blur effect */
+}
+ 
+.feedback-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+ 
+.feedback-heading {
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+ 
+.feedback-label {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+ 
+.error {
+    color: red;
+    margin-left: 2px;
+}
+ 
+.feedback-textarea {
+    width: 100%;
+    height: 200px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    resize: vertical;
+}
+ 
+.feedback-submit {
+    margin-top: 20px;
+    padding: 10px 24px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+ 
+.feedback-submit:hover {
+    background-color: #0056b3;
+}
+ 
+.dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px); /* Apply blur effect */
+}
+ 
+.dialog-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+ 
+.btn-primary{
+    padding: 5px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+}
+ 
+/* Add blur effect to body when dialog is open */
+body.dialog-open {
+    filter: blur(5px);
+}
+

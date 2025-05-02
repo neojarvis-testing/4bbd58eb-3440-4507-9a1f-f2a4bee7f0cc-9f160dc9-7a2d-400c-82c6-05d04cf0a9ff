@@ -1,4 +1,7 @@
+
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/models/user.model';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-usernav',
@@ -7,9 +10,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UsernavComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private authService: AuthService) { }
+ 
+  user: User = {
+    UserId: 0,
+    Email: '',
+    Password: '',
+    Username: '',
+    MobileNumber: '',
+    UserRole: ''
   }
-
+  
+  ngOnInit(): void {
+    const storedUser = localStorage.getItem('currentUser');
+    this.user = JSON.parse(storedUser);
+  }
+ 
+  logout() {
+    this.authService.logout();
+  }
 }
+
+
+
+
+

@@ -4,36 +4,32 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { User } from '../models/user.model';
 import { Login } from '../models/login.model';
 import { tap } from 'rxjs/operators';
-
+import { Router } from '@angular/router';
+ 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-<<<<<<< HEAD
   public baseUrl = 'https://8080-afeeedcfbfbfcbfefbafcfdcadccdcfaff.premiumproject.examly.io/api';
-=======
->>>>>>> 198552416bbd9901c41f9ca855713c8a4f334c0b
-  public baseUrl = 'https://8080-abcbddecbfceedecbfefbafcfdcadccdcfaff.premiumproject.examly.io/api';
   private currentUserSubject: BehaviorSubject<User | null>;
   public currentUser: Observable<User | null>;
-
-  constructor(private http: HttpClient) {
+ 
+  constructor(private http: HttpClient, private router: Router) {
     const storedUser = localStorage.getItem('currentUser');
     this.currentUserSubject = new BehaviorSubject<User | null>(
       storedUser ? JSON.parse(storedUser) : null
     );
     this.currentUser = this.currentUserSubject.asObservable();
   }
-
+ 
   public get currentUserValue(): User | null {
     return this.currentUserSubject.value;
   }
-
+ 
   register(newUser: User): Observable<User> {
     return this.http.post<User>(`${this.baseUrl}/register`, newUser);
   }
-
-<<<<<<< HEAD
+ 
   login(loginData: Login): Observable<any> {
     return this.http.post<{ token: string; user: User }>(`${this.baseUrl}/login`, loginData).pipe(
       tap(response => {
@@ -42,12 +38,6 @@ export class AuthService {
         const user = response.User;
         console.log('Storing token:', token);
         console.log('Storing user:', user);      
-=======
-  login(loginData: Login): Observable<{ token: string; user: User }> {
-    return this.http.post<{ token: string; user: User }>(`${this.baseUrl}/login`, loginData).pipe(
-      tap(response => {
-        const { token, user } = response;
->>>>>>> 198552416bbd9901c41f9ca855713c8a4f334c0b
         if (token && user) {
           localStorage.setItem('jwtToken', token);
           localStorage.setItem('currentUser', JSON.stringify(user));
@@ -56,34 +46,28 @@ export class AuthService {
       })
     );
   }
-
+ 
   isLoggedIn(): boolean {
     return !!localStorage.getItem('jwtToken');
   }
-
+ 
   getUserRole(): string | null {
     const user = this.currentUserValue;
     return user ? user.UserRole : null;
   }
-
-<<<<<<< HEAD
+ 
   isAdmin(): boolean {
     return this.getUserRole() === 'Admin';
   }
-
+ 
   isUser(): boolean {
     return this.getUserRole() === 'User';
   }
-
-=======
->>>>>>> 198552416bbd9901c41f9ca855713c8a4f334c0b
+ 
   logout(): void {
     localStorage.removeItem('jwtToken');
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 198552416bbd9901c41f9ca855713c8a4f334c0b
+ 
