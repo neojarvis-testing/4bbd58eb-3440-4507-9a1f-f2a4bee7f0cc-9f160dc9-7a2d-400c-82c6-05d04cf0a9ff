@@ -1,0 +1,1059 @@
+adminaddtraining------------------->
+
+
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { PhysicalTraining } from 'src/app/models/physical-training.model';
+import { PhysicalTrainingService } from 'src/app/services/physical-training.service';
+
+@Component({
+  selector: 'app-adminaddtraining',
+  templateUrl: './adminaddtraining.component.html',
+  styleUrls: ['./adminaddtraining.component.css']
+})
+export class AdminaddtrainingComponent implements OnInit {
+
+  newTraining : PhysicalTraining = {
+    TrainingName: '',
+    Description: '',
+    TrainerName: '',
+    Location: '',
+    IsIndoor: true,
+    Fee: 0,
+    FocusArea: '',
+    PhysicalRequirements: ''
+  }
+  formSubmitted: boolean = false;
+  trainings : PhysicalTraining[] = []
+  isTrainingExist : boolean = false;
+  isDialogOpen : boolean = false;
+  
+  constructor(private trainingService : PhysicalTrainingService, private router: Router) { }
+ 
+ 
+  ngOnInit(): void {
+     this.loadTrainings();
+  }
+ 
+  loadTrainings() {
+    this.trainingService.getAllPhysicalTrainings().subscribe((data) => {
+      this.trainings = data;
+      console.log(this.trainings);
+    })
+  }
+ 
+  addTraining() {
+    this.formSubmitted = true;
+    console.log(`${this.formSubmitted} formsub`);
+    const isUnique = this.trainings.every(i => i.TrainingName.toLowerCase() != this.newTraining.TrainingName.toLowerCase())
+    console.log(isUnique);
+    
+    if(isUnique) {
+      if(this.IsFormValid()) {
+        this.trainingService.addPhysicalTraining(this.newTraining).subscribe(() => {
+          this.resetForm();
+        })
+        this.openDialog();
+      }
+    } else {
+      this.isTrainingExist = true;
+    }
+  }
+
+  IsFormValid(): boolean{
+    if(this.newTraining.TrainerName &&  
+      this.newTraining.Description && 
+      this.newTraining.TrainerName && 
+      this.newTraining.Location && 
+      this.newTraining.Fee && 
+      this.newTraining.FocusArea && 
+      this.newTraining.PhysicalRequirements){
+        return true;
+    }
+    else{
+      return false;
+    }
+  }
+
+  resetForm(): void{
+    this.formSubmitted = false;
+    this.newTraining = {
+      TrainingName: '',
+      Description: '',
+      TrainerName: '',
+      Location: '',
+      IsIndoor: true,
+      Fee: 0,
+      FocusArea: '',
+      PhysicalRequirements: ''
+    }
+  }
+
+
+  openDialog() {
+    this.isDialogOpen = true;
+    document.body.classList.add('dialog-open');
+  }
+ 
+  closeDialog(): void {
+    this.isDialogOpen = false;
+    document.body.classList.remove('dialog-open');
+    this.router.navigate(['/view-trainings']);
+  }
+}
+
+
+
+
+
+<div>
+    <div>
+        <div class="form-container">
+            <div class="header-container">
+                <h2>Create New Training</h2>
+            </div>
+            <form #trainingForm="ngForm" (ngSubmit)="addTraining()">
+                <div>
+                    <label for="Name">Training Name<span class="error">*</span></label>
+                    <input type="text" id="Name" name="Name" [(ngModel)]="newTraining.TrainingName" placeholder="Training Name" required />
+                    <div *ngIf="formSubmitted && !newTraining.TrainingName" class="error">
+                        *Training Name is required
+                    </div>
+                </div>
+
+                <div>
+                    <label for="Description">Description<span class="error">*</span></label>
+                    <input type="text" id="Description" name="Description" [(ngModel)]="newTraining.Description"
+                    placeholder="Training Description" required />
+                    <div *ngIf="formSubmitted && !newTraining.Description" class="error">
+                        *Description is required
+                    </div>
+                </div>
+
+                <div>
+                    <label for="Trainer">Trainer Name<span class="error">*</span></label>
+                    <input type="text" id="Trainer" name="Trainer" [(ngModel)]="newTraining.TrainerName"
+                    placeholder="Trainer Name" required />
+                    <div *ngIf="formSubmitted && !newTraining.TrainerName" class="error">
+                        *Trainer Name is required
+                    </div>
+                </div>
+
+                <div>
+                    <label for="Location">Location<span class="error">*</span></label>
+                    <input type="text" id="Location" name="Location" [(ngModel)]="newTraining.Location"
+                    placeholder="Location" required />
+                    <div *ngIf="formSubmitted && !newTraining.Location" class="error">
+                        *Location is required
+                    </div>
+                </div>
+
+                <div>
+                    <label for="Type">Indoor/Outdoor<span class="error">*</span></label>
+                    <select name="Type" id="Type"
+                        [(ngModel)]="newTraining.IsIndoor" required>
+                        <option value="true" selected>Indoor</option>
+                        <option value="false">Outdoor</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="Fee">Fee<span class="error">*</span></label>
+                    <input type="number" id="Fee" name="Fee" [(ngModel)]="newTraining.Fee"
+                    placeholder="Fee" required />
+                    <div *ngIf="formSubmitted && !newTraining.Fee" class="error">
+                        *Fee is required
+                    </div>
+                </div>
+
+                <div>
+                    <label for="FocusArea">Focus Area<span class="error">*</span></label>
+                    <input type="FocusArea" id="FocusArea" name="FocusArea" [(ngModel)]="newTraining.FocusArea"
+                    placeholder="FocusArea" required />
+                    <div *ngIf="formSubmitted && !newTraining.FocusArea" class="error">
+                        *FocusArea is required
+                    </div>
+                </div>
+
+                <div>
+                    <label for="PhysicalRequirements">Physical Requirements<span class="error">*</span></label>
+                    <input type="text" id="PhysicalRequirements" name="PhysicalRequirements" [(ngModel)]="newTraining.PhysicalRequirements"
+                    placeholder="Physical Requirements" required />
+                    <div *ngIf="formSubmitted && !newTraining.PhysicalRequirements" class="error">
+                        *Physical Requirements are required
+                    </div>
+                </div>
+
+                <div *ngIf="trainingForm.invalid" class="error">
+                    *All fields are required
+                </div>
+
+                <div *ngIf="isTrainingExist" class="error">
+                    *Training with the same name already exists
+                </div>
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<div *ngIf="isDialogOpen" class="dialog">
+    <div class="dialog-content">
+        <p><b>Successfully Added!</b></p>
+        <button (click)="closeDialog()">OK</button>
+    </div>
+</div>
+
+
+
+
+
+
+
+.form-container {
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.header-container{
+  margin-bottom: 40px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: bold;
+  display: block;
+  margin-top: 10px;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 4px;
+  box-sizing: border-box;
+}
+
+.error {
+  color: red;
+  font-size: 0.9em;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+button:disabled {
+  background-color: lightgray;
+}
+
+/* Add blur effect to body when dialog is open */
+body.dialog-open {
+  filter: blur(5px);
+}
+
+/* Dialog styling */
+.dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(5px);
+  /* Apply blur effect to dialog background */
+}
+
+.dialog-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.dialog-content p {
+  margin: 0 0 20px;
+}
+
+.dialog-content button {
+  background-color: #007bff;
+  color: white;
+  /* Changed button text color to white */
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.dialog-content button:hover {
+  background-color: #006de1;
+}
+
+.btn-favicon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: background-color 0.3s ease;
+  /* Add transition for smooth color change */
+  color: grey;
+  /* Change favicon color */
+  font-size: 20px;
+  /* Adjust size if needed */
+  margin-left: 10px;
+}
+
+.btn-favicon:hover {
+  color: #1abc9c;
+  /* Change hover color to desired color */
+}
+
+.fa-arrow-circle-left {
+  font-size: 35px;
+  /* Increase size of the icon */
+}
+
+
+===========================================================
+
+
+adminedittraining--------------------------------------->
+
+
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { PhysicalTraining } from 'src/app/models/physical-training.model';
+import { PhysicalTrainingService } from 'src/app/services/physical-training.service';
+
+@Component({
+  selector: 'app-adminedittraining',
+  templateUrl: './adminedittraining.component.html',
+  styleUrls: ['./adminedittraining.component.css']
+})
+export class AdminedittrainingComponent implements OnInit {
+
+  training : PhysicalTraining = {
+    TrainingName: '',
+    Description: '',
+    TrainerName: '',
+    Location: '',
+    IsIndoor: true,
+    Fee: 0,
+    FocusArea: '',
+    PhysicalRequirements: ''
+  }
+  
+  trainings: PhysicalTraining[] = [];
+  trainingId: number;
+  isDialogOpen : boolean = false;
+  formSubmitted: boolean = false;
+
+   constructor(private trainingService: PhysicalTrainingService, private router: Router, private activeRoute: ActivatedRoute) { }
+
+  ngOnInit(): void {
+    this.activeRoute.params.subscribe((params) => {
+      this.trainingId = +params['id']
+      this.trainingService.getPhysicalTrainingById(this.trainingId).subscribe((data) => {
+        this.training = data;
+        console.log(this.training);
+      });
+    })
+    this.loadTrainings();
+  }
+
+ loadTrainings() {
+   this.trainingService.getAllPhysicalTrainings().subscribe((data) => {
+     this.trainings = data;
+     console.log(this.trainings);
+   })
+ }
+
+  updateTraining(): void {
+    this.formSubmitted = true;
+      if(this.IsFormValid()) {
+        this.trainingService.updatePhysicalTraining(this.trainingId, this.training).subscribe(() => {
+          this.openDialog();
+        }, error => {
+          console.error('Error updating investment', error);
+        });
+      }
+  }
+
+  IsFormValid(): boolean{
+    if(this.training.TrainerName &&  
+      this.training.Description && 
+      this.training.TrainerName && 
+      this.training.Location && 
+      this.training.Fee && 
+      this.training.FocusArea && 
+      this.training.PhysicalRequirements){
+        return true;
+    }
+    else{
+      return false;
+    }
+  }
+
+  openDialog() {
+    this.isDialogOpen = true;
+    document.body.classList.add('dialog-open');
+  }
+ 
+  closeDialog(): void {
+    this.isDialogOpen = false;
+    document.body.classList.remove('dialog-open');
+    this.router.navigate(['/view-trainings']);
+  }
+
+}
+
+
+
+
+
+
+<div>
+    <div>
+        <div class="form-container">
+            <div class="header-container">
+                <h2>Edit Training</h2>
+                <button class="btn btn-secondary btn-1" [routerLink]="['/view-trainings']">Back</button>
+            </div>
+            <form #trainingForm="ngForm" (ngSubmit)="updateTraining()">
+                <div>
+                    <label for="Name">Training Name<span class="error">*</span></label>
+                    <input type="text" id="Name" name="Name" [(ngModel)]="training.TrainingName" placeholder="Training Name" required />
+                    <div *ngIf="formSubmitted && !training.TrainingName" class="error">
+                        *Training Name is required
+                    </div>
+                </div>
+
+                <div>
+                    <label for="Description">Description<span class="error">*</span></label>
+                    <input type="text" id="Description" name="Description" [(ngModel)]="training.Description"
+                    placeholder="Training Description" required />
+                    <div *ngIf="formSubmitted && !training.Description" class="error">
+                        *Description is required
+                    </div>
+                </div>
+
+                <div>
+                    <label for="Trainer">Trainer Name<span class="error">*</span></label>
+                    <input type="text" id="Trainer" name="Trainer" [(ngModel)]="training.TrainerName"
+                    placeholder="Trainer Name" required />
+                    <div *ngIf="formSubmitted && !training.TrainerName" class="error">
+                        *Trainer Name is required
+                    </div>
+                </div>
+
+                <div>
+                    <label for="Location">Location<span class="error">*</span></label>
+                    <input type="text" id="Location" name="Location" [(ngModel)]="training.Location"
+                    placeholder="Location" required />
+                    <div *ngIf="formSubmitted && !training.Location" class="error">
+                        *Location is required
+                    </div>
+                </div>
+
+                <div>
+                    <label for="Type">Indoor/Outdoor<span class="error">*</span></label>
+                    <select name="Type" id="Type"
+                        [(ngModel)]="training.IsIndoor" required>
+                        <option value="true" selected>Indoor</option>
+                        <option value="false">Outdoor</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="Fee">Fee<span class="error">*</span></label>
+                    <input type="number" id="Fee" name="Fee" [(ngModel)]="training.Fee"
+                    placeholder="Fee" required />
+                    <div *ngIf="formSubmitted && !training.Fee" class="error">
+                        *Fee is required
+                    </div>
+                </div>
+
+                <div>
+                    <label for="FocusArea">Focus Area<span class="error">*</span></label>
+                    <input type="FocusArea" id="FocusArea" name="FocusArea" [(ngModel)]="training.FocusArea"
+                    placeholder="FocusArea" required />
+                    <div *ngIf="formSubmitted && !training.FocusArea" class="error">
+                        *FocusArea is required
+                    </div>
+                </div>
+
+                <div>
+                    <label for="PhysicalRequirements">Physical Requirements<span class="error">*</span></label>
+                    <input type="text" id="PhysicalRequirements" name="PhysicalRequirements" [(ngModel)]="training.PhysicalRequirements"
+                    placeholder="Physical Requirements" required />
+                    <div *ngIf="formSubmitted && !training.PhysicalRequirements" class="error">
+                        *Physical Requirements are required
+                    </div>
+                </div>
+
+                <div *ngIf="trainingForm.invalid" class="error">
+                    *All fields are required
+                </div>
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="isDialogOpen" class="dialog">
+    <div class="dialog-content">
+        <p><b>Training updated successfully!</b></p>
+        <button (click)="closeDialog()">OK</button>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+.form-container {
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.header-container{
+  margin-bottom: -25px;
+}
+.btn-1{
+  position: relative;
+  left: 334px;
+  bottom: 67px;
+  width: 65px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: bold;
+  display: block;
+  margin-top: 10px;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 4px;
+  box-sizing: border-box;
+}
+
+.error {
+  color: red;
+  font-size: 0.9em;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+button:disabled {
+  background-color: lightgray;
+}
+
+/* Add blur effect to body when dialog is open */
+body.dialog-open {
+  filter: blur(5px);
+}
+
+/* Dialog styling */
+.dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(5px);
+  /* Apply blur effect to dialog background */
+}
+
+.dialog-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.dialog-content p {
+  margin: 0 0 20px;
+}
+
+.dialog-content button {
+  background-color: #007bff;
+  color: white;
+  /* Changed button text color to white */
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.dialog-content button:hover {
+  background-color: #006de1;
+}
+
+.btn-favicon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: background-color 0.3s ease;
+  /* Add transition for smooth color change */
+  color: grey;
+  /* Change favicon color */
+  font-size: 20px;
+  /* Adjust size if needed */
+  margin-left: 10px;
+}
+
+.btn-favicon:hover {
+  color: #1abc9c;
+  /* Change hover color to desired color */
+}
+
+.fa-arrow-circle-left {
+  font-size: 35px;
+  /* Increase size of the icon */
+}
+
+
+
+
+============================================================
+
+
+adminviewtraining------------------------------->
+
+
+
+
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { PhysicalTrainingRequest } from 'src/app/models/physical-training-request.model';
+import { PhysicalTraining } from 'src/app/models/physical-training.model';
+import { PhysicalTrainingService } from 'src/app/services/physical-training.service';
+
+@Component({
+  selector: 'app-adminviewtraining',
+  templateUrl: './adminviewtraining.component.html',
+  styleUrls: ['./adminviewtraining.component.css']
+})
+export class AdminviewtrainingComponent implements OnInit {
+
+  trainings: PhysicalTraining[] = [];
+  appliedTrainings: PhysicalTrainingRequest[] = [];
+  searchTerm: string = '';
+  isDialogueOpen: boolean = false;
+  selectedTraining: PhysicalTraining | null = null;
+  errorMessage: string = '';
+  page : number = 1
+ 
+ constructor(private trainingService: PhysicalTrainingService, private router: Router) { }
+ 
+  ngOnInit(): void {
+    this.loadTrainings();
+    this.loadAppliedTrainings();
+  }
+ 
+  loadTrainings(): void {
+    this.trainingService.getAllPhysicalTrainings().subscribe((data) => {
+      console.log(data);
+      this.trainings = data;
+    });
+  }
+ 
+  loadAppliedTrainings(): void {
+    this.trainingService.getAllPhysicalTrainingRequests().subscribe((data) => {
+      console.log(data);
+      this.appliedTrainings = data;
+    });
+  }
+ 
+  filteredTrainings(): PhysicalTraining[] {
+    return this.trainings.filter(inv =>
+      inv.TrainingName.toLowerCase().includes(this.searchTerm.toLowerCase()));
+  }
+ 
+  editTraining(training: PhysicalTraining): void {
+    this.router.navigate(['/adminedittraining', training.PhysicalTrainingId]);
+  }
+ 
+  openDialogue(training: PhysicalTraining): void {
+    this.selectedTraining = training;
+    this.isDialogueOpen = true;
+    this.errorMessage = '';
+    document.body.classList.add('dialog-open');
+  }
+ 
+  closeDialogue(): void {
+    this.isDialogueOpen = false;
+    this.selectedTraining = null;
+    this.errorMessage = '';
+    document.body.classList.remove('dialog-open');
+  }
+ 
+  deleteTraining(): void {
+    if (this.selectedTraining) {
+      const isApplied = this.appliedTrainings.some(app => app.PhysicalTrainingId === this.selectedTraining!.PhysicalTrainingId);
+      if (isApplied) {
+        this.errorMessage = 'Training cannot be deleted, it is referenced in Training Request';
+      } else {
+        this.trainingService.deletePhysicalTraining(this.selectedTraining.PhysicalTrainingId).subscribe(() => {
+          this.loadTrainings();
+          this.closeDialogue();
+        });
+      }
+    }
+  }
+
+  pageChanged(event: number): void {
+    this.page = event;
+  }
+}
+
+
+
+
+
+
+
+<div class="navbar"> </div>
+<div class="training-container">
+  <h1>Training Sessions</h1>
+  <hr class="heading-line">
+  <head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
+</head>
+   <div>
+    <input type="text" id="searchInput" [(ngModel)]="searchTerm" placeholder="Search by Training Name..." class="search-box" />
+</div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>S.No</th>
+        <th>Training Name</th>
+        <th>Location</th>
+        <th>Trainer Name</th>
+        <th>Fee</th>
+        <th>Focus Area</th>
+        <th>Description</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let training of filteredTrainings()| paginate: { itemsPerPage: 6, currentPage: page }; let i = index">
+        <td>{{i+1 + (page - 1) * 6}}</td>
+        <td>{{ training.TrainingName }}</td>
+        <td>{{ training.Location }}</td>
+        <td>{{ training.TrainerName }}</td>
+        <td>{{ training.Fee | currency:'INR':'symbol' }}</td>
+        <td>{{ training.FocusArea }}</td>
+        <td>{{ training.Description }}</td>
+        <td>
+          <button (click)="editTraining(training)">Edit</button>
+          <button (click)="openDialogue(training)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table> 
+</div>
+
+<pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+
+    <div class="dialog" tabindex="-1" role="dialog" [ngClass]="{'show':isDialogueOpen}" aria-labelledby="profileDialogLabel" style="display: block;" *ngIf="isDialogueOpen">
+        <div class="dialog-dialog dialog-dialog-centered" role="document">
+            <div class="dialog-content">
+                <div class="dialog-body text-center" style="font-family: 'Gilroy-Medium',sans-serif;">
+                    <p><strong>Are you sure you want to delete {{ selectedTraining?.TrainingName }}?</strong></p>
+                    <div *ngIf="errorMessage" class="text-danger"><strong>{{ errorMessage }}</strong></div>
+                </div>
+                <div class="dialog-footer">
+                    <button (click)="deleteTraining()">Yes, Delete</button>
+                    <button type="button" class="btn btn-danger" (click)="closeDialogue()">Cancel</button>
+                </div>
+            </div>
+          </div> 
+
+
+
+
+
+
+
+
+
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #f9f9f9, #e3e3e3);
+    color: #333;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1 {
+    font-family: 'Lobster', cursive;
+    text-align: center;
+    color: #2c3e50;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+}
+
+.heading-line {
+    width: 50%;
+    margin: 0 auto 20px auto;
+    border: none;
+    border-top: 3px solid #34495e;
+    opacity: 0.5;
+}
+
+/* Search Input */
+#searchInput {
+    width: calc(100% - 50%);
+    padding: 2px 100px;
+    margin-bottom: 2px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 16px;
+    margin-left: 350px;
+}
+
+.search-box {
+    padding: 8px 10px 8px 10px;
+    border: 2px solid grey;
+    border-radius: 10px;
+    font-size: 16px;
+    flex: 1;
+    width: 40px;
+    height: 40px;
+}
+
+label[for="filterByStatus"] {
+    margin-right: 10px;
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    color: #000;
+}
+
+/* Buttons */
+button {
+    padding: 2px 6px;
+    margin-left: 3px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #2980b9;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background-color: #1f6391;
+    transform: translateY(-2px);
+}
+
+button:active {
+    background-color: #1a5276;
+    transform: translateY(0);
+}
+
+/* Table Styles */
+table {
+    width: calc(100% - 40px);
+    margin: 20px 20px;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    animation: slideIn 0.5s ease-in-out;
+}
+
+th, td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background: linear-gradient(to right, #34495e, #2c3e50);
+    color: #fff;
+}
+
+td {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Dialog Styling */
+.dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    z-index: 9999;
+}
+
+.dialog-dialog {
+    position: fixed; /* Change from absolute to fixed */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center the modal */
+    background: #fff;
+    padding: 20px 40px;
+    border-radius: 8px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 80%;
+    overflow-y: auto; /* Add scroll if content is too tall */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dialog-content {
+    text-align: center;
+}
+
+.dialog-body p {
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+.dialog-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.dialog-footer button {
+    width: auto;
+    padding: 6px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.dialog-footer button:first-child {
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+.dialog-footer button:last-child {
+    background-color: #95a5a6;
+    color: #fff;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Message Styles */
+#noRecordsFound {
+    text-align: center;
+    color: #e74c3c;
+    font-size: 18px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    #searchInput {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .search-sep {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .dialog-dialog {
+        width: 95%;
+        padding: 15px 20px;
+    }
+}
+
+/* Add Gap Between Search and Filter */
+.search-sep {
+    display: flex;
+    gap: 900px;
+}
