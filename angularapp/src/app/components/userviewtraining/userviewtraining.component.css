@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* Global Styles */
 body {
   font-family: 'Lobster', cursive;
@@ -74,3 +75,83 @@ button{
 .redButton{
   background-color: red;
 }
+=======
+
+
+/* Global Styles */
+body {
+    font-family: 'Lobster', cursive;
+    background: linear-gradient(to right, #f9f9f9, #e3e3e3);
+    color: #333;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  
+  }
+  
+  .trainings-container {
+    padding: 30px 50px;
+    font-family: Arial, sans-serif;
+  }
+   
+  .trainings-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+   
+  .search-bar {
+    margin-bottom: 15px;
+    text-align: left;
+  }
+   
+  .search-bar input {
+    padding: 8px 10px;
+    width: 350px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0px 0px 3px 0px;
+  }
+   
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+  }
+   
+  th, td {
+    padding: 12px 10px;
+    border: 1px solid #ccc;
+    text-align: left;
+    font-size: 14px;
+  }
+   
+  thead {
+    background-color: #326c9d;
+    color: white;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .line {
+    margin: 10px 0; /* Adds one line space (10px top and bottom) */
+    border: 0;
+    height: 1px;
+    box-shadow: 0px 0px 1px 0px;
+    background-color: #326c9d;
+  }
+  
+  
+  button{
+      background: #1fb71f;
+      border: none;
+      padding: 5px;
+      color: white;
+  }
+  
+  .redButton{
+    background-color: red;
+  }
+>>>>>>> f676c4cbf7e504b1c98afb9fd928cabae364b8b0

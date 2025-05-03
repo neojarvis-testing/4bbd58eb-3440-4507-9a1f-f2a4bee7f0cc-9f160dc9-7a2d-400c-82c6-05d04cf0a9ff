@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> f676c4cbf7e504b1c98afb9fd928cabae364b8b0
 <div class="trainings-container">
     <h2>My Feedback</h2>
     <hr class="line">
@@ -10,8 +15,13 @@
             </tr>
         </thead>
         <tbody>
+<<<<<<< HEAD
             <tr *ngFor="let feedback of feedbacks; let i = index">
                 <td>{{i+1}}</td>
+=======
+            <tr *ngFor="let feedback of feedbacks| paginate: { itemsPerPage: 6, currentPage: page }; let i = index">
+                <td>{{i+1 + (page - 1) * 6}}</td>
+>>>>>>> f676c4cbf7e504b1c98afb9fd928cabae364b8b0
                 <td>{{feedback.FeedbackText}}</td>
                 <td>
                     <button class="redButton" (click)="openDialog(feedback)">Delete</button>
@@ -20,6 +30,11 @@
         </tbody>
         <p *ngIf="feedbacks.length == 0">Oops! No records found</p>
     </table>
+<<<<<<< HEAD
+=======
+    <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+
+>>>>>>> f676c4cbf7e504b1c98afb9fd928cabae364b8b0
 
     <div class="dialog" *ngIf="isDialogOpen">
         <div class="dialog-content">
@@ -32,4 +47,12 @@
             </div>
         </div>
     </div>
+<<<<<<< HEAD
 </div>
+=======
+</div>
+
+
+
+
+>>>>>>> f676c4cbf7e504b1c98afb9fd928cabae364b8b0

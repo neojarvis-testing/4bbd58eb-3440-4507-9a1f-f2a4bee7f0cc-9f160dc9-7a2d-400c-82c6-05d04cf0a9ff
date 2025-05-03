@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="trainings-container">
   <h1 class="text-center">Training Sessions</h1>
   <hr class="line">
@@ -5,6 +6,20 @@
     <input type="text" id="searchInput" [(ngModel)]="searchTerm" placeholder="Search by Training Name..."
       class="search-box" />
   </div>
+=======
+<<<<<<< HEAD
+
+<div class="navbar"> </div>
+<div class="training-container">
+  <h1>Training Sessions</h1>
+  <hr class="heading-line">
+  <head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
+</head>
+   <div>
+    <input type="text" id="searchInput" [(ngModel)]="searchTerm" placeholder="Search by Training Name..." class="search-box" />
+</div>
+>>>>>>> f676c4cbf7e504b1c98afb9fd928cabae364b8b0
 
   <table>
     <thead>
@@ -20,8 +35,13 @@
       </tr>
     </thead>
     <tbody>
+<<<<<<< HEAD
       <tr *ngFor="let training of filteredTrainings(); let i = index">
         <td>{{i+1}}</td>
+=======
+      <tr *ngFor="let training of filteredTrainings()| paginate: { itemsPerPage: 6, currentPage: page }; let i = index">
+        <td>{{i+1 + (page - 1) * 6}}</td>
+>>>>>>> f676c4cbf7e504b1c98afb9fd928cabae364b8b0
         <td>{{ training.TrainingName }}</td>
         <td>{{ training.Location }}</td>
         <td>{{ training.TrainerName }}</td>
@@ -30,6 +50,7 @@
         <td>{{ training.Description }}</td>
         <td>
           <button (click)="editTraining(training)">Edit</button>
+<<<<<<< HEAD
           <button (click)="openDialogue(training)" class="redButton">Delete</button>
         </td>
       </tr>
@@ -51,3 +72,34 @@
       </div>
     </div>
   </div>
+=======
+          <button (click)="openDialogue(training)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table> 
+</div>
+
+<pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+
+    <div class="dialog" tabindex="-1" role="dialog" [ngClass]="{'show':isDialogueOpen}" aria-labelledby="profileDialogLabel" style="display: block;" *ngIf="isDialogueOpen">
+        <div class="dialog-dialog dialog-dialog-centered" role="document">
+            <div class="dialog-content">
+                <div class="dialog-body text-center" style="font-family: 'Gilroy-Medium',sans-serif;">
+                    <p><strong>Are you sure you want to delete {{ selectedTraining?.TrainingName }}?</strong></p>
+                    <div *ngIf="errorMessage" class="text-danger"><strong>{{ errorMessage }}</strong></div>
+                </div>
+                <div class="dialog-footer">
+                    <button (click)="deleteTraining()">Yes, Delete</button>
+                    <button type="button" class="btn btn-danger" (click)="closeDialogue()">Cancel</button>
+                </div>
+            </div>
+          </div> 
+
+
+
+
+=======
+<h2>Training Sessions</h2>
+>>>>>>> 198552416bbd9901c41f9ca855713c8a4f334c0b
+>>>>>>> f676c4cbf7e504b1c98afb9fd928cabae364b8b0

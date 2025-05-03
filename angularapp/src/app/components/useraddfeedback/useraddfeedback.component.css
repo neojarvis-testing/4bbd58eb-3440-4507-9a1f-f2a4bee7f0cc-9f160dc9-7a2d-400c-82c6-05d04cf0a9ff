@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> f676c4cbf7e504b1c98afb9fd928cabae364b8b0
 body {
     font-family: 'Lobster';
     background: linear-gradient(to right, #f9f9f9, #e3e3e3);
@@ -93,4 +98,9 @@ body {
 /* Add blur effect to body when dialog is open */
 body.dialog-open {
     filter: blur(5px);
+<<<<<<< HEAD
 }
+=======
+}
+
+>>>>>>> f676c4cbf7e504b1c98afb9fd928cabae364b8b0

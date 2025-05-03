@@ -1,3 +1,5 @@
+
+
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PhysicalTrainingRequest } from 'src/app/models/physical-training-request.model';
@@ -76,4 +78,14 @@ export class AdminviewtrainingComponent implements OnInit {
       }
     }
   }
+<<<<<<< HEAD
+=======
+
+  pageChanged(event: number): void {
+    this.page = event;
+  }
+>>>>>>> f676c4cbf7e504b1c98afb9fd928cabae364b8b0
 }
+
+
+

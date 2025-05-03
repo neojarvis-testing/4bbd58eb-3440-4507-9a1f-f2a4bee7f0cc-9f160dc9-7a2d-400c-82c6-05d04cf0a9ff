@@ -1,3 +1,5 @@
+
+
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PhysicalTrainingRequest } from 'src/app/models/physical-training-request.model';
@@ -36,6 +38,7 @@ export class AdminviewappliedrequestComponent implements OnInit {
 
   populateStatusTracker() {
     this.trainingRequests.forEach(app => {
+<<<<<<< HEAD
       if(app.Status == "Approved"){
         this.statusTracker[app.PhysicalTrainingId] = { isApproved: true, isRejected: false };
       }
@@ -48,6 +51,13 @@ export class AdminviewappliedrequestComponent implements OnInit {
     });
   }
 user
+  filterByTrainingName() {
+    this.tempTrainingRequests = this.trainingRequests.filter(t => t.PhysicalTraining.TrainingName.toLowerCase().includes(this.searchByTrainingName.toLowerCase()))
+=======
+      this.statusTracker[app.PhysicalTrainingId] = { isApproved: false, isRejected: false };
+    });
+  }
+
   filterByTrainingName() {
     this.tempTrainingRequests = this.trainingRequests.filter(t => t.PhysicalTraining.TrainingName.toLowerCase().includes(this.searchByTrainingName.toLowerCase()))
   }
@@ -75,4 +85,34 @@ user
       this.statusTracker[trainingRequest.PhysicalTrainingId].isApproved = false;
     });
   }
+
+  pageChanged(event: number): void {
+    this.page = event;
+>>>>>>> f676c4cbf7e504b1c98afb9fd928cabae364b8b0
+  }
+
+  filterByStatus() {
+    if(this.filterByTrainingStatus === "All") {
+      this.tempTrainingRequests = this.trainingRequests;
+    } else {
+      this.tempTrainingRequests = this.trainingRequests.filter(t => t.Status.toLowerCase().includes(this.filterByTrainingStatus.toLowerCase()))
+    }
+  }
+
+  approveTraining(trainingRequest: PhysicalTrainingRequest) {
+    trainingRequest.Status = "Approved";
+    this.trainingService.updatePhysicalTrainingRequest(trainingRequest.PhysicalTrainingRequestId, trainingRequest).subscribe(() => {
+      this.statusTracker[trainingRequest.PhysicalTrainingId].isApproved = true;
+      this.statusTracker[trainingRequest.PhysicalTrainingId].isRejected = false;
+    });
+  }
+
+  rejectTraining(trainingRequest: PhysicalTrainingRequest) {
+    trainingRequest.Status = "Rejected";
+    this.trainingService.updatePhysicalTrainingRequest(trainingRequest.PhysicalTrainingRequestId, trainingRequest).subscribe(() => {
+      this.statusTracker[trainingRequest.PhysicalTrainingId].isRejected = true;
+      this.statusTracker[trainingRequest.PhysicalTrainingId].isApproved = false;
+    });
+  }
 }
+

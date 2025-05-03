@@ -1,3 +1,5 @@
+
+
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PhysicalTrainingRequest } from 'src/app/models/physical-training-request.model';
@@ -69,3 +71,6 @@ export class UseraddrequestComponent implements OnInit {
     this.router.navigate(['/viewalltrainings']);
   }
 }
+
+
+

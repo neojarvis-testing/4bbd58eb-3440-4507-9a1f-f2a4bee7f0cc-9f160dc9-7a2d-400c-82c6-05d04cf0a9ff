@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PhysicalTraining } from 'src/app/models/physical-training.model';
@@ -84,3 +85,6 @@ export class AdminedittrainingComponent implements OnInit {
   }
 
 }
+
+
+
