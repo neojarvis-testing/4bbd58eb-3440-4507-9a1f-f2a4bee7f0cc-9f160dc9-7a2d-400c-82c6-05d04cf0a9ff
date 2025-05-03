@@ -34,7 +34,7 @@ const routes: Routes = [
   { path: 'myfeedbacks', component: UserviewfeedbackComponent, canActivate: [AuthGuard], data: { roles: ['User'] } },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegistrationComponent },
-  { path: 'error', component: ErrorComponent, data: { message: 'Something went wrong.' } },
+  { path: 'error', component: ErrorComponent},
   { path: '**', redirectTo: '/error' }
 ];
 

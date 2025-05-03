@@ -16,6 +16,10 @@ nav h2 a{
     letter-spacing: 1px;
     font-family: 'Georgia', serif;
     text-decoration: none;
+    transition: color 0.3s ease;
+}
+nav h2 a:hover{
+    color: #1abc9c; /* Teal background on hover */
 }
 
 .list-items{
@@ -33,8 +37,8 @@ nav li a {
     color: white;
     text-decoration: none;
     font-size: 1rem;
+    transition: color 0.3s ease;
 }
-
-nav li a:hover {
-    text-decoration: underline;
+nav li a:hover{
+    color: #1abc9c; /* Teal background on hover */
 }

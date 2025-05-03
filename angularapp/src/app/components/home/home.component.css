@@ -10,6 +10,10 @@ h2{
     margin-bottom: 1.5rem;
     color: white;
     -webkit-text-stroke: 1px black;
+    transition: color 0.3s ease;
+}
+h2:hover{
+    color: #1abc9c; /* Teal background on hover */
 }
 
 .home-description {

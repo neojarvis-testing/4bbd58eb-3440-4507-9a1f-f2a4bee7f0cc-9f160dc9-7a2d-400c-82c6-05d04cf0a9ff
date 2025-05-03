@@ -12,6 +12,7 @@ import { Login } from 'src/app/models/login.model';
 export class LoginComponent implements OnInit {
   email: string = '';
   password: string = '';
+  invalidCredentials: boolean = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -37,12 +38,16 @@ export class LoginComponent implements OnInit {
           }
         },
         error: err => {
+          this.invalidCredentials = true;
           console.error('Login failed', err);
-          alert("Login failed. Please check your credentials and try again.");
         }
       });
     } else {
       return;
     }
+  }
+
+  removeError(): void{
+    this.invalidCredentials = false;
   }
 }
