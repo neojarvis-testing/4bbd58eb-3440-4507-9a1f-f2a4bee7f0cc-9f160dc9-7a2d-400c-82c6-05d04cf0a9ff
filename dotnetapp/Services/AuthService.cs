@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.EntityFrameworkCore;
-using BCrypt.Net; // Add this for bcrypt hashing
+using BCrypt.Net;
 
 namespace dotnetapp.Services
 {
