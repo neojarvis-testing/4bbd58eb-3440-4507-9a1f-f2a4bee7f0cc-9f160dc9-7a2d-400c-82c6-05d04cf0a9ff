@@ -7,13 +7,12 @@ import { Feedback } from '../models/feedback.model';
   providedIn: 'root'
 })
 export class FeedbackService {
-  private baseUrl = 'https://8080-afeeedcfbfbfcbfefbafcfdcadccdcfaff.premiumproject.examly.io/api/feedback';
-
+  private baseUrl = 'https://8080-caccabeeacbfefbafcfdcadccdcfaff.premiumproject.examly.io/api/feedback';
 
   constructor(private http: HttpClient) {}
 
   // Helper method to retrieve Authorization headers with JWT token
-  private getAuthHeaders(): HttpHeaders {                                                                      
+  private getAuthHeaders(): HttpHeaders {
     const token = localStorage.getItem('jwtToken');
     return new HttpHeaders().set('Authorization', `Bearer ${token}`);
   }

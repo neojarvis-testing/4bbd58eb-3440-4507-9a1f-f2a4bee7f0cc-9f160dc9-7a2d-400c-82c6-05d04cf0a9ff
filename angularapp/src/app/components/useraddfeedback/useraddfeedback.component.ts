@@ -1,5 +1,3 @@
-
-
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Feedback } from 'src/app/models/feedback.model';
@@ -61,6 +59,3 @@ export class UseraddfeedbackComponent implements OnInit {
 }
 
 }
-
-
-

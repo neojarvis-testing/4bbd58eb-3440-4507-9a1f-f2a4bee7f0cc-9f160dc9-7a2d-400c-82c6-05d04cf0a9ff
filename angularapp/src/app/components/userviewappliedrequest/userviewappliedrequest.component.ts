@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { PhysicalTrainingRequest } from 'src/app/models/physical-training-request.model';
 import { PhysicalTrainingService } from 'src/app/services/physical-training.service';
@@ -17,7 +16,6 @@ export class UserviewappliedrequestComponent implements OnInit {
     isDialogOpen : boolean = false;
     selectedTrainingRequest : PhysicalTrainingRequest | null = null;
     page : number = 1;
-<<<<<<< HEAD
 
     userId: number = 0;
  
@@ -45,57 +43,6 @@ export class UserviewappliedrequestComponent implements OnInit {
         this.filteredTrainings = this.trainings.filter(training => training.PhysicalTraining.TrainerName.toLowerCase().includes(this.searchQuery.toLowerCase())
         );
       }
-=======
-
-    userId: number;
- 
-    constructor(private trainingService: PhysicalTrainingService) {}
- 
-    ngOnInit(): void {
-      const storedUser = localStorage.getItem('currentUser');
-      const user = JSON.parse(storedUser);
-      this.userId = user.UserId;
-      this.getTrainings();
-    }
- 
-    getTrainings(): void {
-      this.trainingService.getPhysicalTrainingRequestsByUserId(this.userId).subscribe((data) => {
-        console.log(data);
-        this.trainings = data;
-        this.filteredTrainings = data;
-      });
-    }
- 
-    searchTrainings(): void {
-      if (this.searchQuery.trim() === ''){
-        this.filteredTrainings = this.trainings;
-      } else {
-        this.filteredTrainings = this.trainings.filter(training => training.PhysicalTraining.TrainerName.toLowerCase().includes(this.searchQuery.toLowerCase())
-        );
-      }
-    }
-
-    openDialog(trainingRequest : PhysicalTrainingRequest) {
-      this.selectedTrainingRequest = trainingRequest
-      console.log(this.selectedTrainingRequest);
-      this.isDialogOpen = true;
-    }
-
-    closeDialog() {
-      this.isDialogOpen = false;
-      this.selectedTrainingRequest = null;
-    }
-  
-    confirmDelete():void{
-      this.trainingService.deletePhysicalTrainingRequest(this.selectedTrainingRequest.PhysicalTrainingRequestId).subscribe(() => {
-        this.getTrainings();
-        this.closeDialog();
-      })
-    }
-
-    pageChanged(event: number): void {
-      this.page = event;
->>>>>>> f676c4cbf7e504b1c98afb9fd928cabae364b8b0
     }
 
     openDialog(trainingRequest : PhysicalTrainingRequest) {
@@ -116,4 +63,3 @@ export class UserviewappliedrequestComponent implements OnInit {
       })
     }
 }
-

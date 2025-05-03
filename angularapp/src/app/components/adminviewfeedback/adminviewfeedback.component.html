@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> f676c4cbf7e504b1c98afb9fd928cabae364b8b0
 <div class="feedback-container" [ngClass]="{'blur-background': isProfileModalOpen}">
     <h2>Feedback Details</h2>
     <hr class="line">
@@ -18,13 +12,8 @@
             </tr>
         </thead>
         <tbody *ngIf="feedbacks.length > 0">
-<<<<<<< HEAD
             <tr *ngFor="let item of feedbacks; let i = index">
                 <td>{{i+1}}</td>
-=======
-            <tr *ngFor="let item of feedbacks | paginate: { itemsPerPage: 10, currentPage: page }; let i = index">
-                <td>{{i+1 + (page - 1) * 10}}</td>
->>>>>>> f676c4cbf7e504b1c98afb9fd928cabae364b8b0
                 <td>{{item.User?.Username}}</td>
                 <td>{{item.FeedbackText}}</td>
                 <td>{{item.Date | date:'yyyy-MM-dd'}}</td>
@@ -37,11 +26,6 @@
     </table>
 </div>
 
-<<<<<<< HEAD
-=======
-<pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
-
->>>>>>> f676c4cbf7e504b1c98afb9fd928cabae364b8b0
 <div class="modal" tabindex="-1" role="dialog" [ngClass]="{'show': isProfileModalOpen}"
     aria-labelledby="profileModalLabel" aria-hidden="true" *ngIf="isProfileModalOpen">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -59,12 +43,4 @@
             </div>
         </div>
     </div>
-<<<<<<< HEAD
 </div>
-=======
-</div>
-
-
-
-
->>>>>>> f676c4cbf7e504b1c98afb9fd928cabae364b8b0

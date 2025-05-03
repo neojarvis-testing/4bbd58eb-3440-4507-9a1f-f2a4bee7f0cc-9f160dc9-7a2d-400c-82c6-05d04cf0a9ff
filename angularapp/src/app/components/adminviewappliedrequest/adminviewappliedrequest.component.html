@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-=======
-
-
->>>>>>> f676c4cbf7e504b1c98afb9fd928cabae364b8b0
 <div class="trainings-container">
     <h2>Training Requests for Approval</h2>
     <hr class="line">
@@ -36,13 +31,8 @@
             </tr>
         </thead>
         <tbody *ngIf="tempTrainingRequests.length > 0">
-<<<<<<< HEAD
             <tr *ngFor="let item of tempTrainingRequests; let i = index">
                 <td>{{i+1}}</td>
-=======
-            <tr *ngFor="let item of tempTrainingRequests | paginate: { itemsPerPage: 10, currentPage: page }; let i = index">
-                <td>{{i+1 + (page - 1) * 10}}</td>
->>>>>>> f676c4cbf7e504b1c98afb9fd928cabae364b8b0
                 <td>{{item.User?.Username}}</td>
                 <td>{{item.PhysicalTraining.TrainingName}}</td>
                 <td>{{item.PhysicalTraining.Location}}</td>
@@ -60,14 +50,4 @@
             Oops! No Record Found.
         </div>
     </table>
-<<<<<<< HEAD
 </div>
-=======
-    
-    <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
-</div>
-
-
-
-
->>>>>>> f676c4cbf7e504b1c98afb9fd928cabae364b8b0

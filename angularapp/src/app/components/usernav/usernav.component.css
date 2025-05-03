@@ -1,13 +1,8 @@
-<<<<<<< HEAD
-=======
-
-
->>>>>>> f676c4cbf7e504b1c98afb9fd928cabae364b8b0
 /* Universal Box Sizing */
 * {
     box-sizing: border-box;
 }
-
+ 
 body{
     margin: 0;
 }
@@ -192,4 +187,3 @@ nav ul li button:hover {
         display: block;
     }
 }
- 

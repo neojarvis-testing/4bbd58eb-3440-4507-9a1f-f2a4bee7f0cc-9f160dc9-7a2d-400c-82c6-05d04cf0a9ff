@@ -1,5 +1,3 @@
-
-
 import { Component, OnInit } from '@angular/core';
 import { Feedback } from 'src/app/models/feedback.model';
 import { FeedbackService } from 'src/app/services/feedback.service';
@@ -36,15 +34,5 @@ export class AdminviewfeedbackComponent implements OnInit {
   closeProfileModal() {
     this.isProfileModalOpen=false;
     this.selectedUser=null;
-<<<<<<< HEAD
-=======
-  }
- 
-  pageChanged(event: number): void {
-    this.page = event;
->>>>>>> f676c4cbf7e504b1c98afb9fd928cabae364b8b0
   }
 }
-
-
-

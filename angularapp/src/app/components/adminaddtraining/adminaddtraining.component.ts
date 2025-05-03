@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> f676c4cbf7e504b1c98afb9fd928cabae364b8b0
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -103,5 +99,3 @@ export class AdminaddtrainingComponent implements OnInit {
     this.router.navigate(['/view-trainings']);
   }
 }
-
-

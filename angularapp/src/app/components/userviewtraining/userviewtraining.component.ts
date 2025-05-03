@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PhysicalTrainingRequest } from 'src/app/models/physical-training-request.model';
@@ -18,7 +17,6 @@ export class UserviewtrainingComponent implements OnInit {
     searchQuery: string = '';
     appliedTrainings: number[] = [];
     page : number = 1;
-<<<<<<< HEAD
 
     userId: number = 0; // Replace with the actual user ID
  
@@ -64,66 +62,8 @@ export class UserviewtrainingComponent implements OnInit {
       }
     }
 
-=======
-
-    userId: number; // Replace with the actual user ID
- 
-    constructor(private trainingService: PhysicalTrainingService, private router : Router, private as : AuthService) {}
- 
-    ngOnInit(): void {
-      this.getTrainings();
-      const storedUser = localStorage.getItem('currentUser');
-      const user = JSON.parse(storedUser);
-      console.log(user);
-      console.log(user.UserId);
-      this.userId = user.UserId;
-    }
-
-    getTrainings(): void {
-      this.trainingService.getAllPhysicalTrainings().subscribe((data) => {
-        this.trainings = data;
-        this.filteredTrainings = data;
-        this.getUserAppliedTrainings();
-      });
-    }
- 
-    getUserAppliedTrainings(): void {
-      this.trainingService.getAllPhysicalTrainingRequests().subscribe((data: PhysicalTrainingRequest[]) => {
-        console.log(data);
-        console.log(this.userId);
-        
-        this.appliedTrainings = data
-          .filter(app => app.UserId === this.userId)
-          .map(app => app.PhysicalTrainingId);
-      });
-    }
- 
-    searchTrainings(): void {
-      if (this.searchQuery.trim() === '') {
-        this.filteredTrainings = this.trainings;
-      } else {
-        this.filteredTrainings = this.trainings.filter(training =>
-          training.TrainingName.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-          training.Description.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-          training.FocusArea.toLowerCase().includes(this.searchQuery.toLowerCase())
-        );
-      }
-    }
-
->>>>>>> f676c4cbf7e504b1c98afb9fd928cabae364b8b0
     isApplied(investmentId: number): boolean {
       console.log(this.appliedTrainings);
       return this.appliedTrainings.includes(investmentId);
     }
-<<<<<<< HEAD
-=======
-
-    pageChanged(event: number): void {
-      this.page = event;
-    }
->>>>>>> f676c4cbf7e504b1c98afb9fd928cabae364b8b0
 }
-
-
-
-

@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-=======
-
-
->>>>>>> f676c4cbf7e504b1c98afb9fd928cabae364b8b0
 <div class="trainings-container">
     <h2> Applied Training Requests</h2>
      <hr class="line">
@@ -20,13 +15,8 @@
             </tr>
         </thead>
         <tbody>
-<<<<<<< HEAD
             <tr *ngFor="let training of filteredTrainings; let i = index">
                 <td>{{i+1}}</td>
-=======
-            <tr *ngFor="let training of filteredTrainings| paginate: { itemsPerPage: 6, currentPage: page }; let i = index">
-                <td>{{i+1 + (page - 1) * 6}}</td>
->>>>>>> f676c4cbf7e504b1c98afb9fd928cabae364b8b0
                 <td>{{ training.PhysicalTraining.TrainingName }}</td>
                 <td>{{ training.RequestDate | date:'yyyy-MM-dd' }}</td>
                 <td>{{ training.Status }}</td>
@@ -38,10 +28,6 @@
             </tr>
         </tbody>
     </table>
-<<<<<<< HEAD
-=======
-    <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
->>>>>>> f676c4cbf7e504b1c98afb9fd928cabae364b8b0
 
     <p id="noRecordsFound" style="display:none;">Oops! No records found</p>
     
@@ -59,11 +45,4 @@
         </div>
       </div>
     
-<<<<<<< HEAD
 </div>
-=======
-</div>
-
-
-
->>>>>>> f676c4cbf7e504b1c98afb9fd928cabae364b8b0
