@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AdminSecretKey } from 'src/app/constants';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -11,7 +12,6 @@ import { AuthService } from 'src/app/services/auth.service';
 export class RegistrationComponent implements OnInit {
 
   roles: string[] = ['Admin', 'User'];
-  AdminSecretKey: string = "AdminSecret12344321";
   username: string = '';
   email: string = '';
   password: string = '';
@@ -51,9 +51,9 @@ export class RegistrationComponent implements OnInit {
           return;
         }
       }
-      else if((newUser.Username && newUser.Email && newUser.Password && newUser.MobileNumber && newUser.UserRole && this.AdminSecretKey) && newUser.UserRole == "Admin")
+      else if((newUser.Username && newUser.Email && newUser.Password && newUser.MobileNumber && newUser.UserRole) && newUser.UserRole == "Admin")
       {
-        if(this.secretKey != this.AdminSecretKey){
+        if(this.secretKey != AdminSecretKey){
           this.wrongSecretKey = true;
           return;
         }

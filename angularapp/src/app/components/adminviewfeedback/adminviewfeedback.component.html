@@ -4,26 +4,27 @@
     <table>
         <thead>
             <tr>
-                <th>SNo.</th>
+                <th class="text-center">S.No</th>
                 <th>User Name</th>
                 <th>Feedback</th>
-                <th>Posted Date</th>
-                <th>Actions</th>
+                <th class="text-center">Posted Date</th>
+                <th class="text-center">Action</th>
             </tr>
         </thead>
         <tbody *ngIf="feedbacks.length > 0">
-            <tr *ngFor="let item of feedbacks; let i = index">
-                <td>{{i+1}}</td>
+            <tr *ngFor="let item of feedbacks | paginate: { itemsPerPage: 5, currentPage: page }; let i = index">
+                <td class="text-center">{{i+1 + (page - 1) * 5}}</td>
                 <td>{{item.User?.Username}}</td>
                 <td>{{item.FeedbackText}}</td>
-                <td>{{item.Date | date:'yyyy-MM-dd'}}</td>
-                <td>
+                <td class="text-center">{{item.Date | date:'yyyy-MM-dd'}}</td>
+                <td class="text-center">
                     <button class="btn-primary" type="submit" (click)="showProfile(item.User)">Show Profile</button>
                 </td>
             </tr>
         </tbody>
         <div *ngIf="feedbacks.length == 0">No Record Found</div>
     </table>
+    <pagination-controls class="paging" (pageChange)="pageChanged($event)"></pagination-controls>
 </div>
 
 <div class="modal" tabindex="-1" role="dialog" [ngClass]="{'show': isProfileModalOpen}"

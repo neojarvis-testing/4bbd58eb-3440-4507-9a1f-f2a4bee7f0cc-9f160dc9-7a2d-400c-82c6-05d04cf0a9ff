@@ -56,4 +56,8 @@ export class UserviewfeedbackComponent implements OnInit {
       this.closeDialog();
       this.loadFeedbacks();
     }
+
+    pageChanged(event: number): void {
+      this.page = event;
+    }
 }

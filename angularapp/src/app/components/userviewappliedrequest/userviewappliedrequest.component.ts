@@ -62,4 +62,8 @@ export class UserviewappliedrequestComponent implements OnInit {
         this.closeDialog();
       })
     }
+
+    pageChanged(event: number): void {
+      this.page = event;
+    }
 }

@@ -75,4 +75,8 @@ user
       this.statusTracker[trainingRequest.PhysicalTrainingId].isApproved = false;
     });
   }
+
+  pageChanged(event: number): void {
+    this.page = event;
+  }
 }

@@ -10,7 +10,7 @@
             <label for="filterByStatus">Filter By Status:</label>
             <select name="filterByStatus" id="filterByStatus" [(ngModel)]="filterByTrainingStatus"
                 (change)="filterByStatus()">
-                <option value="All">All</option>
+                <option value="All" selected>All</option>
                 <option value="Pending">Pending</option>
                 <option value="Approved">Approved</option>
                 <option value="Rejected">Rejceted</option>
@@ -21,24 +21,24 @@
     <table>
         <thead>
             <tr>
-                <th>S.No</th>
+                <th class="text-center">S.No</th>
                 <th>Username</th>
                 <th>Training Name</th>
                 <th>Location</th>
-                <th>Submission Date</th>
+                <th class="text-center">Submission Date</th>
                 <th>Status</th>
-                <th>Action</th>
+                <th class="text-center">Action</th>
             </tr>
         </thead>
         <tbody *ngIf="tempTrainingRequests.length > 0">
-            <tr *ngFor="let item of tempTrainingRequests; let i = index">
-                <td>{{i+1}}</td>
+            <tr *ngFor="let item of tempTrainingRequests | paginate: { itemsPerPage: 5, currentPage: page }; let i = index">
+                <td class="text-center">{{i+1 + (page - 1) * 5}}</td>
                 <td>{{item.User?.Username}}</td>
                 <td>{{item.PhysicalTraining.TrainingName}}</td>
                 <td>{{item.PhysicalTraining.Location}}</td>
-                <td>{{item.RequestDate | date:'yyyy-MM-dd'}}</td>
+                <td class="text-center">{{item.RequestDate | date:'yyyy-MM-dd'}}</td>
                 <td>{{item.Status}}</td>
-                <td>
+                <td class="text-center">
                     <button *ngIf="!statusTracker[item.PhysicalTrainingId]?.isApproved"
                         (click)="approveTraining(item)">Approve</button>
                     <button *ngIf="!statusTracker[item.PhysicalTrainingId]?.isRejected"
@@ -50,4 +50,5 @@
             Oops! No Record Found.
         </div>
     </table>
+    <pagination-controls class="paging" (pageChange)="pageChanged($event)"></pagination-controls>
 </div>

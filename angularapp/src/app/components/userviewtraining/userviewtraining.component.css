@@ -10,7 +10,7 @@ body {
 }
 
 .trainings-container {
-  padding: 30px 50px;
+  padding: 0px 50px;
   font-family: Arial, sans-serif;
 }
  
@@ -42,6 +42,13 @@ table {
 th, td {
   padding: 12px 10px;
   border: 1px solid #ccc;
+  text-align: center;
+  font-size: 14px;
+}
+
+th, td {
+  padding: 12px 10px;
+  border: 1px solid #ccc;
   text-align: left;
   font-size: 14px;
 }
@@ -51,6 +58,9 @@ thead {
   color: white;
 }
 
+.text-right {
+  text-align: right;
+}
 .text-center {
   text-align: center;
 }
@@ -73,4 +83,10 @@ button{
 
 .redButton{
   background-color: red;
+}
+
+.paging{
+  text-align: center;
+  position: relative;
+  right: 20px;
 }

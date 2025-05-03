@@ -10,7 +10,7 @@ body {
 }
 
 .feedback-container {
-  padding: 30px 50px;
+  padding: 0px 50px;
   font-family: Arial, sans-serif;
 }
 
@@ -69,6 +69,12 @@ button {
   background-color: red;
 }
 
+.paging {
+  text-align: center;
+  position: relative;
+  right: 20px;
+}
+
 .modal {
   position: fixed;
   top: 0;
@@ -78,8 +84,10 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  backdrop-filter: blur(5px); /* Background blur effect */
-  background-color: rgba(0, 0, 0, 0.4); /* Dark semi-transparent overlay */
+  backdrop-filter: blur(5px);
+  /* Background blur effect */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Dark semi-transparent overlay */
   z-index: 1050;
 }
 
@@ -92,7 +100,7 @@ button {
   background-color: #fff;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0,0,0,.3);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, .3);
   text-align: center;
 }
 

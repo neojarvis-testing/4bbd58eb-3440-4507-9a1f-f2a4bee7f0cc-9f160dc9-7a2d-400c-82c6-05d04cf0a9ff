@@ -76,4 +76,8 @@ export class AdminviewtrainingComponent implements OnInit {
       }
     }
   }
+
+  pageChanged(event: number): void {
+    this.page = event;
+  }
 }

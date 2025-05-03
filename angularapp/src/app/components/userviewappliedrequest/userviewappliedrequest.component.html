@@ -7,20 +7,20 @@
     <table>
         <thead>
             <tr>
-                <th>S.No</th>
+                <th class="text-center">S.No</th>
                 <th>Training Name</th>
-                <th>Request Date</th>
+                <th class="text-center">Request Date</th>
                 <th>Status</th>
-                <th>Action</th>
+                <th class="text-center">Action</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let training of filteredTrainings; let i = index">
-                <td>{{i+1}}</td>
+            <tr *ngFor="let training of filteredTrainings | paginate: { itemsPerPage: 5, currentPage: page }; let i = index">
+                <td class="text-center">{{i+1 + (page - 1) * 5}}</td>
                 <td>{{ training.PhysicalTraining.TrainingName }}</td>
-                <td>{{ training.RequestDate | date:'yyyy-MM-dd' }}</td>
+                <td class="text-center">{{ training.RequestDate | date:'yyyy-MM-dd' }}</td>
                 <td>{{ training.Status }}</td>
-                <td>
+                <td class="text-center">
                     <button class="redButton" (click)="openDialog(training)">
                         Delete
                     </button>
@@ -28,6 +28,7 @@
             </tr>
         </tbody>
     </table>
+    <pagination-controls class="paging" (pageChange)="pageChanged($event)"></pagination-controls>
 
     <p id="noRecordsFound" style="display:none;">Oops! No records found</p>
     

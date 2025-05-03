@@ -7,30 +7,30 @@
     <table>
         <thead>
             <tr>
-                <th>S.No</th>
+                <th class="text-center">S.No</th>
                 <th>Training Name</th>
                 <th>Description</th>
                 <th>Trainer Name</th>
                 <th>Location</th>
                 <th>Indoor/Outdoor</th>
-                <th>Fee</th>
+                <th class="text-center">Fee (Rs.)</th>
                 <th>Focus Area</th>
                 <th>Requirements</th>
-                <th>Action</th>
+                <th class="text-center">Action</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let training of filteredTrainings; let i = index">
-                <td>{{i+1 + (page - 1) * 6}}</td>
+            <tr *ngFor="let training of filteredTrainings | paginate: { itemsPerPage: 3, currentPage: page }; let i = index">
+                <td class="text-center">{{i+1 + (page - 1) * 3}}</td>
                 <td>{{ training.TrainingName }}</td>
                 <td>{{ training.Description }}</td>
                 <td>{{ training.TrainerName }}</td>
                 <td>{{ training.Location }}</td>
                 <td>{{ training.IsIndoor ? "Indoor" : "Outdoor" }}</td>
-                <td>{{ training.Fee | currency:'INR':'symbol' }}</td>
+                <td class="text-right">{{ training.Fee | number:'.2-2' }}</td>
                 <td>{{ training.FocusArea }}</td>
                 <td>{{ training.PhysicalRequirements }}</td>
-                <td>
+                <td class="text-center">
                     <button *ngIf="!isApplied(training.PhysicalTrainingId)" [routerLink]="['/applytraining', training.PhysicalTrainingId]">
                         Apply
                     </button>
@@ -41,6 +41,7 @@
             </tr>
         </tbody>
     </table>
+    <pagination-controls class="paging" (pageChange)="pageChanged($event)"></pagination-controls>
 
     <p id="noRecordsFound" style="display:none;">Oops! No records found</p> 
 </div>

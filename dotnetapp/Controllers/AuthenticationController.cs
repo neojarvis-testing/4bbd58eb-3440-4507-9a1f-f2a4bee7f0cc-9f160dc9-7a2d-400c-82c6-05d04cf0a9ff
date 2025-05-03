@@ -16,12 +16,14 @@ namespace dotnetapp.Controllers
     {
         private readonly IAuthService _authService;
         private readonly ApplicationDbContext _context;
+        private readonly IConfiguration _configuration;
         private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod()?.DeclaringType);
 
-        public AuthenticationController(ApplicationDbContext context, IAuthService authService)
+        public AuthenticationController(ApplicationDbContext context, IAuthService authService, IConfiguration configuration)
         {
             _authService = authService;
             _context = context;
+            _configuration = configuration;
         }
 
         // Handles user login and returns a JWT token upon successful authentication.

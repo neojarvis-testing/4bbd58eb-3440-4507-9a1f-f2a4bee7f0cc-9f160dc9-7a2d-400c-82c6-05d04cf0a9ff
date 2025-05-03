@@ -66,4 +66,8 @@ export class UserviewtrainingComponent implements OnInit {
       console.log(this.appliedTrainings);
       return this.appliedTrainings.includes(investmentId);
     }
+
+    pageChanged(event: number): void {
+      this.page = event;
+    }
 }
