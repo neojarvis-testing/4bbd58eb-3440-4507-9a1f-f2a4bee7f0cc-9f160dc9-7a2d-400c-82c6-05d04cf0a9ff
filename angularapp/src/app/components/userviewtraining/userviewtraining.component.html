@@ -20,7 +20,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let training of filteredTrainings| paginate: { itemsPerPage: 6, currentPage: page }; let i = index">
+            <tr *ngFor="let training of filteredTrainings; let i = index">
                 <td>{{i+1 + (page - 1) * 6}}</td>
                 <td>{{ training.TrainingName }}</td>
                 <td>{{ training.Description }}</td>
@@ -41,7 +41,6 @@
             </tr>
         </tbody>
     </table>
-    <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
 
     <p id="noRecordsFound" style="display:none;">Oops! No records found</p> 
 </div>

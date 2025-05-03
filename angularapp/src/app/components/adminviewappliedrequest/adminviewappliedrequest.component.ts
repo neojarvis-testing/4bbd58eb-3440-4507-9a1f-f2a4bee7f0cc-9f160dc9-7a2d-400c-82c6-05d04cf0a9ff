@@ -47,7 +47,7 @@ export class AdminviewappliedrequestComponent implements OnInit {
       }
     });
   }
-
+user
   filterByTrainingName() {
     this.tempTrainingRequests = this.trainingRequests.filter(t => t.PhysicalTraining.TrainingName.toLowerCase().includes(this.searchByTrainingName.toLowerCase()))
   }
@@ -75,9 +75,4 @@ export class AdminviewappliedrequestComponent implements OnInit {
       this.statusTracker[trainingRequest.PhysicalTrainingId].isApproved = false;
     });
   }
-
-  pageChanged(event: number): void {
-    this.page = event;
-  }
-
 }

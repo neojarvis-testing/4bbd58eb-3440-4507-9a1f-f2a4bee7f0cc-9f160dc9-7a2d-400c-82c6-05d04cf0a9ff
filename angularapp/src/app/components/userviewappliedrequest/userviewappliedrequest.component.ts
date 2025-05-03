@@ -17,14 +17,14 @@ export class UserviewappliedrequestComponent implements OnInit {
     selectedTrainingRequest : PhysicalTrainingRequest | null = null;
     page : number = 1;
 
-    userId: number;
+    userId: number = 0;
  
     constructor(private trainingService: PhysicalTrainingService) {}
  
     ngOnInit(): void {
       const storedUser = localStorage.getItem('currentUser');
       const user = JSON.parse(storedUser);
-      this.userId = user.UserId;
+      this.userId = user?.UserId;
       this.getTrainings();
     }
  
@@ -62,9 +62,4 @@ export class UserviewappliedrequestComponent implements OnInit {
         this.closeDialog();
       })
     }
-
-    pageChanged(event: number): void {
-      this.page = event;
-    }
-
 }

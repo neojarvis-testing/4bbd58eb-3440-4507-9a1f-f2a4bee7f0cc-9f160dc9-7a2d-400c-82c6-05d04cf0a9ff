@@ -35,9 +35,4 @@ export class AdminviewfeedbackComponent implements OnInit {
     this.isProfileModalOpen=false;
     this.selectedUser=null;
   }
- 
-  pageChanged(event: number): void {
-    this.page = event;
-  }
-
 }

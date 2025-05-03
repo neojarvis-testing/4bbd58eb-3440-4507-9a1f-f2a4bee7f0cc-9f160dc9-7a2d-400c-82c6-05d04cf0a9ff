@@ -20,8 +20,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let training of filteredTrainings()| paginate: { itemsPerPage: 6, currentPage: page }; let i = index">
-        <td>{{i+1 + (page - 1) * 6}}</td>
+      <tr *ngFor="let training of filteredTrainings(); let i = index">
+        <td>{{i+1}}</td>
         <td>{{ training.TrainingName }}</td>
         <td>{{ training.Location }}</td>
         <td>{{ training.TrainerName }}</td>
@@ -36,8 +36,6 @@
     </tbody>
   </table>
 </div>
-
-<pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
 
 <div class="dialog" tabindex="-1" role="dialog" [ngClass]="{'show':isDialogueOpen}" aria-labelledby="profileDialogLabel"
   style="display: block;" *ngIf="isDialogueOpen">
