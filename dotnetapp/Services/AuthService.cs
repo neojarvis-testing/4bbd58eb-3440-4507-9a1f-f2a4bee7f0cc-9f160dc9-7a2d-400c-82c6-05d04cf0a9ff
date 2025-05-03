@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.EntityFrameworkCore;
+using BCrypt.Net; // Add this for bcrypt hashing
 
 namespace dotnetapp.Services
 {
@@ -37,11 +38,13 @@ namespace dotnetapp.Services
             if (userExists != null)
                 return (0, "User already exists");
 
+            var hashedPassword = BCrypt.Net.BCrypt.HashPassword(model.Password); // Hash password
+
             var appUser = new ApplicationUser
             {
                 Email = model.Email,
                 UserName = model.Email,
-                Name = model.Username.Length > 30 ? model.Username.Substring(0, 30) : model.Username // Store current user's name
+                Name = model.Username.Length > 30 ? model.Username.Substring(0, 30) : model.Username
             };
 
             var identityResult = await userManager.CreateAsync(appUser, model.Password);
@@ -56,7 +59,7 @@ namespace dotnetapp.Services
             var newUser = new User
             {
                 Email = model.Email,
-                Password = model.Password,
+                Password = hashedPassword, // Store hashed password
                 Username = model.Username,
                 MobileNumber = model.MobileNumber,
                 UserRole = role
@@ -69,17 +72,17 @@ namespace dotnetapp.Services
 
         public async Task<(int, string)> Login(LoginModel model)
         {
-            var user = await userManager.FindByEmailAsync(model.Email);
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
             if (user == null)
                 return (0, "Invalid email");
 
-            if (!await userManager.CheckPasswordAsync(user, model.Password))
+            if (!BCrypt.Net.BCrypt.Verify(model.Password, user.Password)) // Verify hashed password
                 return (0, "Invalid password");
 
-            var userRoles = await userManager.GetRolesAsync(user);
+            var userRoles = await userManager.GetRolesAsync(await userManager.FindByEmailAsync(model.Email));
             var authClaims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, user.Name), // Store authenticated user's name
+                new Claim(ClaimTypes.Name, user.Username), // Store authenticated user's name
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 

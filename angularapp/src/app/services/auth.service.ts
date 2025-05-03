@@ -34,7 +34,7 @@ export class AuthService {
     return this.http.post<{ token: string; user: User }>(`${this.baseUrl}/login`, loginData).pipe(
       tap(response => {
         console.log('Login API response:', response);
-        const token = response.Token;
+        const token = response.token;
         const user = response.User;
         console.log('Storing token:', token);
         console.log('Storing user:', user);      

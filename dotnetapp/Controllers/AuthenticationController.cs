@@ -50,7 +50,7 @@ namespace dotnetapp.Controllers
                 }
 
                 log.Info($"Login successful for user: {model.Email}");
-                return Ok(new { Token = result.Item2, User = user });
+                return Ok(new { token = result.Item2, User = user });
             }
             catch (Exception ex)
             {
