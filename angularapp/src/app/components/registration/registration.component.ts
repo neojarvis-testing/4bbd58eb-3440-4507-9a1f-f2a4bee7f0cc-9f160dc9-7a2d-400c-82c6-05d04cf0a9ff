@@ -11,16 +11,19 @@ import { AuthService } from 'src/app/services/auth.service';
 export class RegistrationComponent implements OnInit {
 
   roles: string[] = ['Admin', 'User'];
+  AdminSecretKey: string = "AdminSecret12344321";
   username: string = '';
   email: string = '';
   password: string = '';
   confirmPassword: string = '';
   mobileNumber: string = '';
   userrole: string = '';
+  secretKey: string = '';
+  wrongSecretKey: boolean = false;
 
   formSubmitted:boolean=false;
   
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(public authService: AuthService, private router: Router) {}
   
   ngOnInit(): void {
   }
@@ -32,10 +35,10 @@ export class RegistrationComponent implements OnInit {
         Email: this.email,
         Password: this.password,
         MobileNumber: this.mobileNumber,
-        UserRole: this.userrole
+        UserRole: this.userrole,
       };
       
-      if(newUser.Username && newUser.Email && newUser.Password && newUser.MobileNumber && newUser.UserRole)
+      if((newUser.Username && newUser.Email && newUser.Password && newUser.MobileNumber && newUser.UserRole) && newUser.UserRole == "User")
       {
         if(this.validatePassword() && !this.checkpassword()){
           this.authService.register(newUser).subscribe(() => {
@@ -48,9 +51,30 @@ export class RegistrationComponent implements OnInit {
           return;
         }
       }
+      else if((newUser.Username && newUser.Email && newUser.Password && newUser.MobileNumber && newUser.UserRole && this.AdminSecretKey) && newUser.UserRole == "Admin")
+      {
+        if(this.secretKey != this.AdminSecretKey){
+          this.wrongSecretKey = true;
+          return;
+        }
+        if(this.validatePassword() && !this.checkpassword()){
+          this.authService.register(newUser).subscribe(()=>{
+              alert('Registration successful!');
+              this.router.navigate(['/login']);
+          });
+          console.log(newUser);
+        }
+        else{
+          return;
+        }
+      }
       else{
         return;
       }
+  }
+
+  removeError(): void{
+    this.wrongSecretKey = false;
   }
 
   validatePassword(): boolean {
