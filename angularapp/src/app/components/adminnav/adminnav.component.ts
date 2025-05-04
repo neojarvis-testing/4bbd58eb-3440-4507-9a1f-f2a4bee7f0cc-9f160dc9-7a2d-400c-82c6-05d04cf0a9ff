@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
@@ -9,9 +10,8 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./adminnav.component.css']
 })
 export class AdminnavComponent implements OnInit {
-
-  isUserDialogOpen: boolean = false;
-
+  isUserDialogOpen: boolean = false;  
+  constructor(private authService: AuthService) { }
   constructor(private authService: AuthService, private router: Router) { }
 
   user: User = {
@@ -43,3 +43,5 @@ export class AdminnavComponent implements OnInit {
   }
 
 }
+
+

@@ -5,9 +5,15 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    transition: filter 0.3s ease; /* Transition for the blur effect */
+    transition: filter 0.3s ease, background 0.3s, color 0.3s;
 }
- 
+
+/* Dark mode support */
+body.dark-mode {
+    background: #222;
+    color: #ddd;
+}
+
 .feedback-container {
     max-width: 600px;
     margin: 40px auto;
@@ -16,26 +22,43 @@ body {
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     font-family: Arial, sans-serif;
+    transition: transform 0.3s ease-in-out;
 }
- 
+
+/* Hover effect: Slight scale */
+.feedback-container:hover {
+    transform: scale(1.02);
+}
+
+/* Dark mode styling */
+.feedback-container.dark-mode {
+    background: #333;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+}
+
+/* Heading styling */
 .feedback-heading {
     text-align: center;
-    font-size: 28px;
+    font-size: 30px;
     font-weight: bold;
+    color: #444;
     margin-bottom: 25px;
 }
- 
+
+/* Label */
 .feedback-label {
     display: block;
     font-size: 18px;
     margin-bottom: 8px;
 }
- 
+
+/* Error message */
 .error {
     color: red;
     margin-left: 2px;
 }
- 
+
+/* Textarea styling */
 .feedback-textarea {
     width: 100%;
     height: 200px;
@@ -44,8 +67,17 @@ body {
     border-radius: 8px;
     font-size: 16px;
     resize: vertical;
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
- 
+
+/* Hover effect: Highlighted focus */
+.feedback-textarea:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+    outline: none;
+}
+
+/* Hover effect: Change button color */
 .feedback-submit {
     margin-top: 20px;
     padding: 10px 24px;
@@ -55,13 +87,22 @@ body {
     border: none;
     border-radius: 6px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.2s ease-in-out, box-shadow 0.3s;
 }
- 
+
+/* Button glow effect */
 .feedback-submit:hover {
     background-color: #0056b3;
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.6);
 }
- 
+
+/* Button press effect */
+.feedback-submit:active {
+    transform: scale(0.95);
+}
+
+/* Dialog effects */
 .dialog {
     position: fixed;
     top: 0;
@@ -72,25 +113,60 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    backdrop-filter: blur(5px); /* Apply blur effect */
+    backdrop-filter: blur(5px);
 }
- 
+
+/* Smooth fade-in for dialog */
 .dialog-content {
     background: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
+    animation: fadeIn 0.3s ease-in;
 }
- 
-.btn-primary{
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Add blur effect to body when dialog is open */
+body.dialog-open {
+    filter: blur(5px);
+}
+
+/* Primary button */
+.btn-primary {
     padding: 5px;
     background-color: #007bff;
     color: white;
     border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, transform 0.2s;
 }
- 
-/* Add blur effect to body when dialog is open */
-body.dialog-open {
-    filter: blur(5px);
+
+/* Button hover effect */
+.btn-primary:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+/* Button press effect */
+.btn-primary:active {
+    transform: scale(0.95);
+}
+
+/* Auto-save effect */
+.saved-notice {
+    color: green;
+    font-size: 14px;
+    text-align: right;
 }

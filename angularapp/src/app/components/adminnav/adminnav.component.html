@@ -31,3 +31,25 @@
       </div>
   </div>
 </div>
+    <ul>
+      <li><h1>TRAINING HUB</h1></li>
+      <li>{{user.Username}}/{{user.UserRole}}</li>
+<nav>
+    <ul>
+      <li><h1>Training Hub</h1></li>
+      <li>{{user?.Username}}/{{user?.UserRole}}</li>
+      <li><a [routerLink]="['/']">Home</a></li>
+      
+      <li class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn">Training</a>
+        <ul class="dropdown-content">
+          <li><a [routerLink]="['/add-training']">Add Training</a></li>
+          <li><a [routerLink]="['/view-trainings']">View Training</a></li>
+        </ul>
+      </li>
+      
+      <li><a [routerLink]="['/trainings-requested']">Training Requested</a></li>
+      <li><a [routerLink]="['/view-feedbacks']">Feedbacks</a></li>
+      <li><button (click)="logout()" [routerLink]="['/login']">Logout</button></li>
+    </ul>
+  </nav>
