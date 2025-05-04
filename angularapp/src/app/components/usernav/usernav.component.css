@@ -2,7 +2,7 @@
 * {
     box-sizing: border-box;
 }
-
+ 
 body{
     margin: 0;
 }
@@ -187,4 +187,3 @@ nav ul li button:hover {
         display: block;
     }
 }
- 
