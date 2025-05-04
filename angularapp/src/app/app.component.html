@@ -1,0 +1,8 @@
+<nav *ngIf="!authService.isLoggedIn()">
+   <app-navbar></app-navbar>
+</nav>
+<nav *ngIf="authService.isLoggedIn()">
+   <app-adminnav *ngIf="authService.isAdmin()"></app-adminnav>
+   <app-usernav *ngIf="authService.isUser()"></app-usernav>
+</nav>
+<router-outlet></router-outlet>

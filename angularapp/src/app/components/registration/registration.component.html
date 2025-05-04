@@ -1,0 +1,87 @@
+<div class="form-container">
+  <h2>Registration</h2>
+  <form #registrationForm="ngForm" (ngSubmit)="register()">
+
+    <!-- Username -->
+    <label for="username">Username<span class="error">*</span></label>
+    <input (click)="removeError()" type="text" id="username" name="username" [(ngModel)]="username" required />
+    <div class="error" *ngIf="formSubmitted && !username">*Username is required</div>
+
+    <!-- Email -->
+    <label for="email">Email<span class="error">*</span></label>
+    <input (click)="removeError()" type="email" id="email" name="email" [(ngModel)]="email" #mail="ngModel" required />
+    <div class="error" *ngIf="formSubmitted && !email">
+      *Email is required
+    </div>
+    <div class="error" *ngIf="formSubmitted && mail?.value && mail.errors?.email">
+      *Please enter a valid email
+    </div>
+
+    <!-- Password -->
+    <label for="password">Password<span class="error">*</span></label>
+    <input (click)="removeError()" type="password" id="password" name="password" [(ngModel)]="password" required />
+    <div class="error" *ngIf="formSubmitted && !password">
+      *Password is required
+    </div>
+    <div class="error" *ngIf="formSubmitted && password && !validatePassword()">
+      *Password must include at least one uppercase letter, one lowercase letter, one digit, and one special character
+    </div>
+
+    <!-- Confirm Password -->
+    <label for="confirmPassword">Confirm Password<span class="error">*</span></label>
+    <input (click)="removeError()" type="password" id="confirmPassword" name="confirmPassword"
+      [(ngModel)]="confirmPassword" required />
+    <div class="error" *ngIf="formSubmitted && !confirmPassword">
+      *Confirm Password is required
+    </div>
+    <div class="error" *ngIf="(formSubmitted && checkpassword())">
+      *Passwords do not match
+    </div>
+
+    <!-- Mobile Number -->
+    <label for="mobile">Mobile Number<span class="error">*</span></label>
+    <input (click)="removeError()" type="text" id="mobile" name="mobile" [(ngModel)]="mobileNumber" required />
+    <div class="error" *ngIf="formSubmitted && !mobileNumber">
+      *Mobile Number is required
+    </div>
+    <div class="error" *ngIf="formSubmitted && mobileNumber.length !== 10">
+      *Mobile number must be 10 digits
+    </div>
+
+    <!-- Role -->
+    <label for="role">Role<span class="error">*</span></label>
+    <select (click)="removeError()" id="role" name="role" [(ngModel)]="userrole" required>
+      <option value="">Select a role</option>
+      <option *ngFor="let r of roles" [value]="r">{{ r }}</option>
+    </select>
+    <div class="error" *ngIf="formSubmitted && !userrole">
+      *Role is required
+    </div>
+
+    <div *ngIf="userrole == 'Admin'">
+      <label for="secretKey">Admin Secret Key<span class="error">*</span></label>
+      <input (click)="removeError()" type="text" id="secretKey" name="secretKey" [(ngModel)]="secretKey"
+        autocomplete="off" required />
+      <div class="error" *ngIf="formSubmitted && !secretKey">
+        *Admin Secret Key is required
+      </div>
+    </div>
+
+    <div class="error" *ngIf="wrongSecretKey">
+      *Please provide correct Admin Secret Key !
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" [disabled]="registrationForm.invalid">
+      Register
+    </button>
+  </form>
+</div>
+
+
+<div *ngIf="isDialogOpen" class="dialog">
+  <div class="dialog-content">
+    <p><b>Successfully Registered !</b></p>
+    <button (click)="closeDialog()">OK</button>
+  </div>
+</div>

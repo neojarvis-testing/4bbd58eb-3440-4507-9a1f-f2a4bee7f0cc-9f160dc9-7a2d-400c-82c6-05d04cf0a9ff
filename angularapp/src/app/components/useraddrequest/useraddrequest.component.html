@@ -1,0 +1,51 @@
+<div class="container">
+    <div>
+        <h2>
+            Training Request Form
+        </h2>
+        <a [routerLink]="['/viewalltrainings']">
+            <button class="backButton">Back</button>
+        </a>
+    </div>
+    <div>
+        <form #trainingRequestForm="ngForm" (ngSubmit)="applyForTraining(trainingRequestForm)">
+            <div>
+                <label for="healthConditions">Health Conditions<span class="error">*</span></label>
+                <input type="text" id="healthConditions" name="healthConditions" [(ngModel)]="trainingRequest.HealthConditions" required minlength="5" maxlength="300" />
+                <div *ngIf="formSubmitted && !trainingRequest.HealthConditions" class="error">
+                    *Health conditions are required
+                </div>
+                <div *ngIf="formSubmitted && trainingRequest.HealthConditions && (trainingRequest.HealthConditions.length < 5 || trainingRequest.HealthConditions.length > 300)" class="error">
+                    *HealthConditions info must be between 5 and 300 characters
+                </div>
+            </div>
+            <div>
+                <label for="fitnessGoals">Fitness Goals<span class="error">*</span></label>
+                <input type="text" id="fitnessGoals" name="fitnessGoals" [(ngModel)]="trainingRequest.FitnessGoals" required minlength="5" maxlength="300" />
+                <div *ngIf="formSubmitted && !trainingRequest.FitnessGoals" class="error">
+                    *Fitness goals info are required
+                </div>
+                <div *ngIf="formSubmitted && trainingRequest.FitnessGoals && (trainingRequest.FitnessGoals.length < 5 || trainingRequest.FitnessGoals.length > 300)" class="error">
+                    *Fitness goals info must be between 5 and 300 characters
+                </div>
+            </div>
+            <div>
+                <label for="comments">Comments</label>
+                <textarea id="comments" name="comments" [(ngModel)]="trainingRequest.Comments"></textarea>
+            </div>
+
+            <div *ngIf="trainingRequestForm.invalid && formSubmitted" class="error">
+                *Except Comments, All fields are required
+            </div>
+
+            <button type="submit" id="dis" class="success">Submit</button>
+        </form>
+    </div>
+</div>
+
+<div *ngIf="isDialogOpen" class="dialog">
+    <div class="dialog-content">
+        <p><b>Successfully Submitted!</b></p>
+        <button class="btn btn-danger" (click)="closeDialog()">OK</button>
+    </div>
+</div>

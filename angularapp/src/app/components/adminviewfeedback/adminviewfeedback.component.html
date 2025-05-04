@@ -1,0 +1,61 @@
+<div class="feedback-container" [ngClass]="{'blur-background': isProfileModalOpen}">
+    <h2>Feedback Details</h2>
+    <hr class="line">
+    <table>
+        <thead>
+            <tr>
+                <th class="text-center">S.No</th>
+                <th>User Name</th>
+                <th>Feedback</th>
+                <th class="text-center">Posted Date</th>
+                <th class="text-center">Action</th>
+            </tr>
+        </thead>
+        <tbody *ngIf="feedbacks.length > 0">
+            <tr *ngFor="let item of feedbacks | paginate: { itemsPerPage: 6, currentPage: page }; let i = index">
+                <td class="text-center">{{i+1 + (page - 1) * 6}}</td>
+            <tr *ngFor="let item of feedbacks | paginate: { itemsPerPage: 10, currentPage: page }; let i = index">
+                <td>{{i+1 + (page - 1) * 10}}</td>
+            <tr *ngFor="let item of feedbacks; let i = index">
+                <td>{{i+1}}</td>
+                <td>{{item.User?.Username}}</td>
+                <td>{{item.FeedbackText}}</td>
+                <td class="text-center">{{item.Date | date:'yyyy-MM-dd'}}</td>
+                <td class="text-center">
+                    <button class="btn-primary" type="submit" (click)="showProfile(item.User)">Show Profile</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div *ngIf="loading" class="spinner-container">
+        <mat-spinner diameter="60" strokeWidth="6"></mat-spinner>
+    </div>
+    <p id="noRecordsFound" *ngIf="!loading && feedbacks.length === 0">Oops! No feedbacks found</p>
+    <pagination-controls class="paging" (pageChange)="pageChanged($event)"></pagination-controls>
+</div>
+
+<pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+
+<div class="modal" tabindex="-1" role="dialog" [ngClass]="{'show': isProfileModalOpen}"
+    aria-labelledby="profileModalLabel" aria-hidden="true" *ngIf="isProfileModalOpen">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h5 class="modal-title">User Details</h5>
+            </div>
+            <div class="modal-body">
+                <p><strong>Email: </strong>{{selectedUser?.Email}}</p>
+                <p><strong>Username: </strong>{{selectedUser?.Username}}</p>
+                <p><strong>Mobile Number: </strong>{{selectedUser?.MobileNumber}}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" (click)="closeProfileModal()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</div>

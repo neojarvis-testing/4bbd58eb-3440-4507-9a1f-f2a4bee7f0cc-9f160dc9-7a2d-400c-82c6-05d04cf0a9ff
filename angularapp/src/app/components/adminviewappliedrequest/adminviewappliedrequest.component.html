@@ -1,0 +1,65 @@
+<div class="trainings-container">
+    <h2>Training Requests for Approval</h2>
+    <hr class="line">
+    <div class="search-sep">
+        <div class="left search-bar" >    
+            <input type="text" id="investmentType" name="investmentType" placeholder="Search By Training Name..."
+                [(ngModel)]="searchByTrainingName" (input)="filterByTrainingName()">
+        </div>
+        <div class="right">
+            <label for="filterByStatus">Filter By Status:</label>
+            <select class="selectDropDown" name="filterByStatus" id="filterByStatus" [(ngModel)]="filterByTrainingStatus"
+                (change)="filterByStatus()">
+                <option value="All">All</option>
+                <option value="Pending">Pending</option>
+                <option value="Approved">Approved</option>
+                <option value="Rejected">Rejceted</option>
+            </select>
+        </div>
+    </div>
+ 
+    <table>
+        <thead>
+            <tr>
+                <th class="text-center">S.No</th>
+                <th>Username</th>
+                <th>Training Name</th>
+                <th>Location</th>
+                <th class="text-center">Submission Date</th>
+                <th>Status</th>
+                <th class="text-center">Action</th>
+            </tr>
+        </thead>
+        <tbody *ngIf="tempTrainingRequests.length > 0">
+            <tr *ngFor="let item of tempTrainingRequests | paginate: { itemsPerPage: 6, currentPage: page }; let i = index">
+                <td class="text-center">{{i+1 + (page - 1) * 6}}</td>
+            <tr *ngFor="let item of tempTrainingRequests | paginate: { itemsPerPage: 10, currentPage: page }; let i = index">
+                <td>{{i+1 + (page - 1) * 10}}</td>
+            <tr *ngFor="let item of tempTrainingRequests; let i = index">
+                <td>{{i+1}}</td>
+                <td>{{item.User?.Username}}</td>
+                <td>{{item.PhysicalTraining.TrainingName}}</td>
+                <td>{{item.PhysicalTraining.Location}}</td>
+                <td class="text-center">{{item.RequestDate | date:'yyyy-MM-dd'}}</td>
+                <td>{{item.Status}}</td>
+                <td class="text-center">
+                    <button *ngIf="!statusTracker[item.PhysicalTrainingId]?.isApproved"
+                        (click)="approveTraining(item)" class="greenButton">Approve</button>
+                    <button *ngIf="!statusTracker[item.PhysicalTrainingId]?.isRejected"
+                        (click)="rejectTraining(item)" class="redButton">Reject</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div *ngIf="loading" class="spinner-container">
+        <mat-spinner diameter="60" strokeWidth="6" ></mat-spinner>
+      </div>
+      <p id="noRecordsFound" *ngIf="!loading && tempTrainingRequests.length === 0">Oops! No requests found</p>
+    <pagination-controls class="paging" (pageChange)="pageChanged($event)"></pagination-controls>
+        <div *ngIf="tempTrainingRequests.length == 0">
+            Oops! No Record Found.
+        </div>
+    </table>    
+    <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+</div>
+

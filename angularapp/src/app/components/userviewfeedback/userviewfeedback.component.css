@@ -1,0 +1,161 @@
+/* Global Styles */
+body {
+  font-family: 'Lobster', cursive;
+  background: linear-gradient(to right, #f9f9f9, #e3e3e3);
+  color: #333;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.trainings-container {
+  padding: 0px 50px;
+  font-family: Arial, sans-serif;
+}
+
+.trainings-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+}
+
+th,
+td {
+  padding: 12px 10px;
+  border: 1px solid #ccc;
+  text-align: left;
+  font-size: 14px;
+}
+
+thead {
+  background-color: #326c9d;
+  color: white;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.line {
+  margin: 10px 0;
+  /* Adds one line space (10px top and bottom) */
+  border: 0;
+  height: 1px;
+  box-shadow: 0px 0px 1px 0px;
+  background-color: #326c9d;
+}
+
+/* Message Styles */
+#noRecordsFound {
+  text-align: center;
+  font-size: 18px;
+}
+
+button {
+  background: #1fb71f;
+  border: none;
+  padding: 5px;
+  color: white;
+}
+
+.redButton {
+  background-color: red;
+  border: none;
+  padding: 5px;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.redButton:hover {
+  background-color: darkred;
+  transform: scale(1.05);
+  transition: all 0.3s ease;
+}
+
+.paging {
+  text-align: center;
+  position: relative;
+  right: 20px;
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+/* Add blur effect to body when dialog is open */
+body.dialog-open {
+  filter: blur(5px);
+}
+
+/* Modal */
+.modal-dialog {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.modal-body p {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.modal-footer button {
+  width: auto;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modal-footer button:first-child {
+  background-color: #f44336;
+  /* Green */
+  color: #fff;
+}
+
+.modal-footer button:last-child {
+  background-color: #8a8a8a;
+  /* Red */
+  color: #fff;
+}
+
+/* Dialog styling */
+.dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(5px);
+  /* Apply blur effect to dialog background */
+}
+
+.dialog-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
