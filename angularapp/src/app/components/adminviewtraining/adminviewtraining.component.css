@@ -149,3 +149,15 @@ button {
   background-color: #95a5a6;
   color: #fff;
 }
+
+#noRecordsFound {
+  text-align: center;
+  font-size: 18px;
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}

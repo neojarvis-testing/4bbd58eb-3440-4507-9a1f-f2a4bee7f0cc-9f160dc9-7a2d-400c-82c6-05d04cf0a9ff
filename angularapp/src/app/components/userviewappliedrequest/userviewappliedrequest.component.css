@@ -68,7 +68,6 @@ thead {
 /* Message Styles */
 #noRecordsFound {
   text-align: center;
-  color: #e74c3c;
   font-size: 18px;
 }
 
@@ -154,4 +153,11 @@ thead {
 
 .modal-footer button:hover {
   background-color: #34495e;
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
 }

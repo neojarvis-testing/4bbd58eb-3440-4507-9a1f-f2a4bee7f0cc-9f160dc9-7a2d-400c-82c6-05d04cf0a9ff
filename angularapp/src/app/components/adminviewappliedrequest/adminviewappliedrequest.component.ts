@@ -17,6 +17,7 @@ export class AdminviewappliedrequestComponent implements OnInit {
   currentStatus : string = 'Pending'
   selectedTrainingRequest : PhysicalTrainingRequest | null = null;
   statusTracker: { [key: number]: { isApproved: boolean, isRejected: boolean } } = {};
+  loading: boolean = true;
   page : number = 1
 
   constructor(private  trainingService : PhysicalTrainingService, private route : Router) { }
@@ -26,11 +27,16 @@ export class AdminviewappliedrequestComponent implements OnInit {
   }
 
   loadAppliedTrainings() {
+    this.loading = true;
     this.trainingService.getAllPhysicalTrainingRequests().subscribe((data) => {
       console.log(data)
       this.trainingRequests = data;
       this.tempTrainingRequests = data;
       this.populateStatusTracker();
+      this.loading = false;
+    }, error => {
+      this.loading = false;
+      console.log(error);
     })
   }
 

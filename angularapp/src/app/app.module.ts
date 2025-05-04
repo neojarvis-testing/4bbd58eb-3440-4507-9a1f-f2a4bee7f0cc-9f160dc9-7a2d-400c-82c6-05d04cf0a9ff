@@ -23,6 +23,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     HttpClientModule,
     CommonModule,
     ReactiveFormsModule,
+    MatProgressSpinnerModule,
     NgxPaginationModule
   ],
   providers: [],

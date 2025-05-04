@@ -87,3 +87,15 @@ button{
   position: relative;
   right: 20px;
 }
+
+#noRecordsFound {
+  text-align: center;
+  font-size: 18px;
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}

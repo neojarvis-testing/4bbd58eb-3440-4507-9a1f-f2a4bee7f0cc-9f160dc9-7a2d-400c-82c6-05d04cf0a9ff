@@ -16,6 +16,7 @@ export class UserviewfeedbackComponent implements OnInit {
     isDialogOpen : boolean = false;
     selectedFeedback: Feedback | null = null;
     UserId : number = 0;
+    loading: boolean = true;
     page : number = 1;
     
  
@@ -29,8 +30,13 @@ export class UserviewfeedbackComponent implements OnInit {
     }
  
     loadFeedbacks(): void {
+      this.loading = true;
       this.feedbackService.getAllFeedbacksByUserId(this.UserId).subscribe((data) => {
         this.feedbacks = data;
+        this.loading = false;
+      }, error => {
+        this.loading = false;
+        console.log(error);
       });
     }
 

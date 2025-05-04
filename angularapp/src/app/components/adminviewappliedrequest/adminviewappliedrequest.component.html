@@ -46,9 +46,10 @@
                 </td>
             </tr>
         </tbody>
-        <div *ngIf="tempTrainingRequests.length == 0">
-            Oops! No Record Found.
-        </div>
     </table>
+    <div *ngIf="loading" class="spinner-container">
+        <mat-spinner diameter="60" strokeWidth="6" ></mat-spinner>
+      </div>
+      <p id="noRecordsFound" *ngIf="!loading && tempTrainingRequests.length === 0">Oops! No requests found</p>
     <pagination-controls class="paging" (pageChange)="pageChanged($event)"></pagination-controls>
 </div>

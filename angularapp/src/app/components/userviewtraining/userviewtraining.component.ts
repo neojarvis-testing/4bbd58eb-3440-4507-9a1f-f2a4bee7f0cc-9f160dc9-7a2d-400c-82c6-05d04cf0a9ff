@@ -16,6 +16,7 @@ export class UserviewtrainingComponent implements OnInit {
     filteredTrainings: PhysicalTraining[] = [];
     searchQuery: string = '';
     appliedTrainings: number[] = [];
+    loading: boolean = true;
     page : number = 1;
 
     userId: number = 0; // Replace with the actual user ID
@@ -32,10 +33,15 @@ export class UserviewtrainingComponent implements OnInit {
     }
 
     getTrainings(): void {
+      this.loading = true;
       this.trainingService.getAllPhysicalTrainings().subscribe((data) => {
         this.trainings = data;
         this.filteredTrainings = data;
         this.getUserAppliedTrainings();
+        this.loading = false;
+      }, error => {
+        this.loading = false;
+        console.log(error);
       });
     }
  

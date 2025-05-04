@@ -17,6 +17,7 @@ export class AdminviewtrainingComponent implements OnInit {
   isDialogueOpen: boolean = false;
   selectedTraining: PhysicalTraining | null = null;
   errorMessage: string = '';
+  loading: boolean = true;
   page : number = 1
  
  constructor(private trainingService: PhysicalTrainingService, private router: Router) { }
@@ -27,9 +28,14 @@ export class AdminviewtrainingComponent implements OnInit {
   }
  
   loadTrainings(): void {
+    this.loading = true;
     this.trainingService.getAllPhysicalTrainings().subscribe((data) => {
       console.log(data);
       this.trainings = data;
+      this.loading = false;
+    }, error => {
+      this.loading = false;
+      console.log(error);
     });
   }
  

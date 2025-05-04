@@ -54,7 +54,6 @@ thead {
 /* Message Styles */
 #noRecordsFound {
   text-align: center;
-  color: #e74c3c;
   font-size: 18px;
 }
 
@@ -73,6 +72,13 @@ button {
   text-align: center;
   position: relative;
   right: 20px;
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
 }
 
 /* Add blur effect to body when dialog is open */

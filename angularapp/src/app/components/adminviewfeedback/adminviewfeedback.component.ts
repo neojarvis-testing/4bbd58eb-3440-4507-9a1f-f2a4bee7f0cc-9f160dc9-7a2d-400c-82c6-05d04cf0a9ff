@@ -11,7 +11,8 @@ export class AdminviewfeedbackComponent implements OnInit {
 
   feedbacks : Feedback[] = []
   selectedUser:any
-  isProfileModalOpen:boolean=false
+  isProfileModalOpen:boolean=false;
+  loading: boolean = true;
   page: number = 1;
  
   constructor(private feedbackService : FeedbackService) { }
@@ -21,9 +22,14 @@ export class AdminviewfeedbackComponent implements OnInit {
   }
  
   loadFeedbacks() {
+    this.loading = true;
     this.feedbackService.getFeedbacks().subscribe((data) => {
       this.feedbacks = data;
-    })
+      this.loading = false;
+    }, error => {
+      this.loading = false;
+      console.log(error);
+    });
   }
  
   showProfile(user : any) {

@@ -35,6 +35,11 @@
       </tr>
     </tbody>
   </table>
+
+  <div *ngIf="loading" class="spinner-container">
+    <mat-spinner diameter="60" strokeWidth="6" ></mat-spinner>
+  </div>
+  <p id="noRecordsFound" *ngIf="!loading && trainings.length === 0">Oops! Trainings not found</p>
   <pagination-controls class="paging" (pageChange)="pageChanged($event)"></pagination-controls>
 </div>
 

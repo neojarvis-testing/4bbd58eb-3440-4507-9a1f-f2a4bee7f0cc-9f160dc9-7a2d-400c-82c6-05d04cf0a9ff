@@ -28,9 +28,13 @@
             </tr>
         </tbody>
     </table>
+    
+    <div *ngIf="loading" class="spinner-container">
+      <mat-spinner diameter="60" strokeWidth="6" ></mat-spinner>
+    </div>
+    <p id="noRecordsFound" *ngIf="!loading && filteredTrainings.length === 0">You have not applied for any training</p>
     <pagination-controls class="paging" (pageChange)="pageChanged($event)"></pagination-controls>
-
-    <p id="noRecordsFound" style="display:none;">Oops! No records found</p>
+    
     
     <div class="modal" tabindex="-1" role="dialog" [ngClass]="{'show':isDialogueOpen}" aria-labelledby="profileModalLabel" style="display: block;" *ngIf="isDialogOpen">
         <div class="modal-dialog modal-dialog-centered" role="document">

@@ -18,8 +18,12 @@
                 </td>
             </tr>
         </tbody>
-        <p *ngIf="feedbacks.length == 0">Oops! No records found</p>
     </table>
+
+    <div *ngIf="loading" class="spinner-container">
+        <mat-spinner diameter="60" strokeWidth="6"></mat-spinner>
+    </div>
+    <p id="noRecordsFound" *ngIf="!loading && feedbacks.length === 0">Oops! No feedbacks found</p>
     <pagination-controls class="paging" (pageChange)="pageChanged($event)"></pagination-controls>
 
     <div class="dialog" *ngIf="isDialogOpen">
