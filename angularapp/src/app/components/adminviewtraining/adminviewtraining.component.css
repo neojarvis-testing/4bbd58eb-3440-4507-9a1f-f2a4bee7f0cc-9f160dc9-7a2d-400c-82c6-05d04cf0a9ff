@@ -70,15 +70,35 @@ thead {
 }
 
 
-button {
+.greenButton {
   background: #1fb71f;
   border: none;
-  padding: 5px;
+  padding: 5px 13px;
   color: white;
+  cursor: pointer;
+  margin-bottom: 4px;
+  border-radius: 4px;
 }
 
 .redButton {
   background-color: red;
+  border: none;
+  padding: 5px;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.greenButton:hover {
+  background-color: #169c16;
+  transform: scale(1.05);
+  transition: all 0.3s ease;
+}
+
+.redButton:hover {
+  background-color: darkred;
+  transform: scale(1.05);
+  transition: all 0.3s ease;
 }
 
 .paging {
@@ -119,6 +139,10 @@ button {
 
 .dialog-content {
   text-align: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .dialog-body p {
@@ -128,7 +152,8 @@ button {
 
 .dialog-footer {
   display: flex;
-  justify-content: flex-end;
+  width: 40%;
+  justify-content: space-around;
   gap: 10px;
   margin-top: 20px;
 }

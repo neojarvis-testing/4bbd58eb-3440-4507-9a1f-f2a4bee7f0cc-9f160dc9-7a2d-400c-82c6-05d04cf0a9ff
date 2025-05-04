@@ -12,8 +12,8 @@
             </tr>
         </thead>
         <tbody *ngIf="feedbacks.length > 0">
-            <tr *ngFor="let item of feedbacks | paginate: { itemsPerPage: 5, currentPage: page }; let i = index">
-                <td class="text-center">{{i+1 + (page - 1) * 5}}</td>
+            <tr *ngFor="let item of feedbacks | paginate: { itemsPerPage: 6, currentPage: page }; let i = index">
+                <td class="text-center">{{i+1 + (page - 1) * 6}}</td>
                 <td>{{item.User?.Username}}</td>
                 <td>{{item.FeedbackText}}</td>
                 <td class="text-center">{{item.Date | date:'yyyy-MM-dd'}}</td>

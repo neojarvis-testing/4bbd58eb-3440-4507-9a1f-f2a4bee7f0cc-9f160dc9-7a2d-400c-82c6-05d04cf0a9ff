@@ -10,8 +10,8 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let feedback of feedbacks | paginate: { itemsPerPage: 5, currentPage: page }; let i = index">
-                <td class="text-center">{{i+1 + (page - 1) * 5}}</td>
+            <tr *ngFor="let feedback of feedbacks | paginate: { itemsPerPage: 6, currentPage: page }; let i = index">
+                <td class="text-center">{{i+1 + (page - 1) * 6}}</td>
                 <td>{{feedback.FeedbackText}}</td>
                 <td class="text-center">
                     <button class="redButton" (click)="openDialog(feedback)">Delete</button>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PhysicalTraining } from 'src/app/models/physical-training.model';
 import { PhysicalTrainingService } from 'src/app/services/physical-training.service';
@@ -10,7 +11,7 @@ import { PhysicalTrainingService } from 'src/app/services/physical-training.serv
 })
 export class AdminedittrainingComponent implements OnInit {
 
-  training : PhysicalTraining = {
+  training: PhysicalTraining = {
     TrainingName: '',
     Description: '',
     TrainerName: '',
@@ -20,13 +21,13 @@ export class AdminedittrainingComponent implements OnInit {
     FocusArea: '',
     PhysicalRequirements: ''
   }
-  
+
   trainings: PhysicalTraining[] = [];
   trainingId: number;
-  isDialogOpen : boolean = false;
+  isDialogOpen: boolean = false;
   formSubmitted: boolean = false;
 
-   constructor(private trainingService: PhysicalTrainingService, private router: Router, private activeRoute: ActivatedRoute) { }
+  constructor(private trainingService: PhysicalTrainingService, private router: Router, private activeRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.activeRoute.params.subscribe((params) => {
@@ -39,44 +40,47 @@ export class AdminedittrainingComponent implements OnInit {
     this.loadTrainings();
   }
 
- loadTrainings() {
-   this.trainingService.getAllPhysicalTrainings().subscribe((data) => {
-     this.trainings = data;
-     console.log(this.trainings);
-   })
- }
+  loadTrainings() {
+    this.trainingService.getAllPhysicalTrainings().subscribe((data) => {
+      this.trainings = data;
+      console.log(this.trainings);
+    })
+  }
 
-  updateTraining(): void {
+  updateTraining(form: NgForm): void {
     this.formSubmitted = true;
-      if(this.IsFormValid()) {
-        this.trainingService.updatePhysicalTraining(this.trainingId, this.training).subscribe(() => {
-          this.openDialog();
-        }, error => {
-          console.error('Error updating investment', error);
-        });
-      }
+
+    if (!form.valid) {
+      return;
+    }
+
+    this.trainingService.updatePhysicalTraining(this.trainingId, this.training).subscribe(() => {
+      this.openDialog();
+    }, error => {
+      console.error('Error updating investment', error);
+    });
   }
 
-  IsFormValid(): boolean{
-    if(this.training.TrainerName &&  
-      this.training.Description && 
-      this.training.TrainerName && 
-      this.training.Location && 
-      this.training.Fee && 
-      this.training.FocusArea && 
-      this.training.PhysicalRequirements){
-        return true;
-    }
-    else{
-      return false;
-    }
-  }
+  // IsFormValid(): boolean {
+  //   if (this.training.TrainerName &&
+  //     this.training.Description &&
+  //     this.training.TrainerName &&
+  //     this.training.Location &&
+  //     this.training.Fee &&
+  //     this.training.FocusArea &&
+  //     this.training.PhysicalRequirements) {
+  //     return true;
+  //   }
+  //   else {
+  //     return false;
+  //   }
+  // }
 
   openDialog() {
     this.isDialogOpen = true;
     document.body.classList.add('dialog-open');
   }
- 
+
   closeDialog(): void {
     this.isDialogOpen = false;
     document.body.classList.remove('dialog-open');

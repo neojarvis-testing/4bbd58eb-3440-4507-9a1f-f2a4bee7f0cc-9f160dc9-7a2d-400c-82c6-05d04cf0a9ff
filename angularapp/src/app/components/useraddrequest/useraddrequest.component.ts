@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PhysicalTrainingRequest } from 'src/app/models/physical-training-request.model';
 import { AuthService } from 'src/app/services/auth.service';
@@ -21,10 +22,10 @@ export class UseraddrequestComponent implements OnInit {
     Comments: ''
   }
 
-  isDialogOpen : boolean = false;
+  isDialogOpen: boolean = false;
   formSubmitted: boolean = false;
 
-  constructor(private router: Router, private trainingService: PhysicalTrainingService, private activatedRoute : ActivatedRoute, private authService : AuthService) {}
+  constructor(private router: Router, private trainingService: PhysicalTrainingService, private activatedRoute: ActivatedRoute, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
@@ -36,29 +37,32 @@ export class UseraddrequestComponent implements OnInit {
     })
   }
 
-  applyForTraining() {
+  applyForTraining(form: NgForm) {
     this.formSubmitted = true;
     console.log(this.trainingRequest);
-    if(this.isFormValid()) {
-      this.trainingService.addPhysicalTrainingRequest(this.trainingRequest).subscribe(() => {
-        this.openDialog();
-      })
+
+    if(!form.valid){
+      return;
     }
+
+    this.trainingService.addPhysicalTrainingRequest(this.trainingRequest).subscribe(() => {
+      this.openDialog();
+    })
   }
 
-  isFormValid(): boolean {
-    if(this.trainingRequest.UserId && 
-      this.trainingRequest.PhysicalTrainingId && 
-      this.trainingRequest.RequestDate && 
-      this.trainingRequest.Status && 
-      this.trainingRequest.HealthConditions && 
-      this.trainingRequest.FitnessGoals){
-      return true;
-    }
-    else{
-      return false;
-    }
-  }
+  // isFormValid(): boolean {
+  //   if(this.trainingRequest.UserId && 
+  //     this.trainingRequest.PhysicalTrainingId && 
+  //     this.trainingRequest.RequestDate && 
+  //     this.trainingRequest.Status && 
+  //     this.trainingRequest.HealthConditions && 
+  //     this.trainingRequest.FitnessGoals){
+  //     return true;
+  //   }
+  //   else{
+  //     return false;
+  //   }
+  // }
 
   openDialog() {
     this.isDialogOpen = true;

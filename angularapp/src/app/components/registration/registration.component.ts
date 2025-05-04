@@ -20,12 +20,13 @@ export class RegistrationComponent implements OnInit {
   userrole: string = '';
   secretKey: string = '';
   wrongSecretKey: boolean = false;
-
+  isDialogOpen: boolean = true;
   formSubmitted:boolean=false;
   
   constructor(public authService: AuthService, private router: Router) {}
   
   ngOnInit(): void {
+    this.openDialog();
   }
   
   register(): void {
@@ -42,8 +43,7 @@ export class RegistrationComponent implements OnInit {
       {
         if(this.validatePassword() && !this.checkpassword()){
           this.authService.register(newUser).subscribe(() => {
-            alert('Registration successful!');
-            this.router.navigate(['/login']);
+            this.openDialog();
           });
           console.log(newUser);
         }
@@ -59,8 +59,7 @@ export class RegistrationComponent implements OnInit {
         }
         if(this.validatePassword() && !this.checkpassword()){
           this.authService.register(newUser).subscribe(()=>{
-              alert('Registration successful!');
-              this.router.navigate(['/login']);
+            this.openDialog();
           });
           console.log(newUser);
         }
@@ -71,25 +70,36 @@ export class RegistrationComponent implements OnInit {
       else{
         return;
       }
-  }
-
-  removeError(): void{
-    this.wrongSecretKey = false;
-  }
-
-  validatePassword(): boolean {
-    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
-    return this.password ? regex.test(this.password) : false;
-  }
-
-  checkpassword():boolean
-  {
-    if(this.password == this.confirmPassword)
-    {
-      return false;
     }
+    
+    removeError(): void{
+      this.wrongSecretKey = false;
+    }
+    
+    validatePassword(): boolean {
+      const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+      return this.password ? regex.test(this.password) : false;
+    }
+    
+    checkpassword():boolean
+    {
+      if(this.password == this.confirmPassword)
+      {
+        return false;
+      }
     else{
       return true;
     }
+  }
+  
+  openDialog() {
+    this.isDialogOpen = true;
+    document.body.classList.add('dialog-open');
+  }
+  
+  closeDialog(): void {
+    this.isDialogOpen = false;
+    document.body.classList.remove('dialog-open');
+    this.router.navigate(['/login']);
   }
 }

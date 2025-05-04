@@ -66,6 +66,17 @@ button {
 
 .redButton {
   background-color: red;
+  border: none;
+  padding: 5px;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.redButton:hover {
+  background-color: darkred;
+  transform: scale(1.05);
+  transition: all 0.3s ease;
 }
 
 .paging {
@@ -88,6 +99,9 @@ body.dialog-open {
 
 /* Modal */
 .modal-dialog {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background: #fff;
   padding: 20px;
   border-radius: 8px;
@@ -101,7 +115,7 @@ body.dialog-open {
 
 .modal-footer {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-evenly;
 }
 
 .modal-footer button {
@@ -112,13 +126,13 @@ body.dialog-open {
 }
 
 .modal-footer button:first-child {
-  background-color: #4CAF50;
+  background-color: #f44336;
   /* Green */
   color: #fff;
 }
 
 .modal-footer button:last-child {
-  background-color: #f44336;
+  background-color: #8a8a8a;
   /* Red */
   color: #fff;
 }

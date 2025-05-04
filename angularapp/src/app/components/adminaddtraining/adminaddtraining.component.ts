@@ -11,7 +11,7 @@ import { PhysicalTrainingService } from 'src/app/services/physical-training.serv
 })
 export class AdminaddtrainingComponent implements OnInit {
 
-  newTraining : PhysicalTraining = {
+  newTraining: PhysicalTraining = {
     TrainingName: '',
     Description: '',
     TrainerName: '',
@@ -22,58 +22,60 @@ export class AdminaddtrainingComponent implements OnInit {
     PhysicalRequirements: ''
   }
   formSubmitted: boolean = false;
-  trainings : PhysicalTraining[] = []
-  isTrainingExist : boolean = false;
-  isDialogOpen : boolean = false;
-  
-  constructor(private trainingService : PhysicalTrainingService, private router: Router) { }
- 
- 
+  trainings: PhysicalTraining[] = []
+  isTrainingExist: boolean = false;
+  isDialogOpen: boolean = false;
+
+  constructor(private trainingService: PhysicalTrainingService, private router: Router) { }
+
+
   ngOnInit(): void {
-     this.loadTrainings();
+    this.loadTrainings();
   }
- 
+
   loadTrainings() {
     this.trainingService.getAllPhysicalTrainings().subscribe((data) => {
       this.trainings = data;
       console.log(this.trainings);
     })
   }
- 
-  addTraining() {
+
+  addTraining(form: NgForm) {
     this.formSubmitted = true;
-    console.log(`${this.formSubmitted} formsub`);
     const isUnique = this.trainings.every(i => i.TrainingName.toLowerCase() != this.newTraining.TrainingName.toLowerCase())
     console.log(isUnique);
-    
-    if(isUnique) {
-      if(this.IsFormValid()) {
-        this.trainingService.addPhysicalTraining(this.newTraining).subscribe(() => {
-          this.resetForm();
-        })
-        this.openDialog();
-      }
-    } else {
+
+    if (!form.valid) {
+      return;
+    }
+
+    if (!isUnique) {
       this.isTrainingExist = true;
+      return;
     }
+
+    this.trainingService.addPhysicalTraining(this.newTraining).subscribe(() => {
+      this.resetForm();
+      this.openDialog();
+    });
   }
 
-  IsFormValid(): boolean{
-    if(this.newTraining.TrainerName &&  
-      this.newTraining.Description && 
-      this.newTraining.TrainerName && 
-      this.newTraining.Location && 
-      this.newTraining.Fee && 
-      this.newTraining.FocusArea && 
-      this.newTraining.PhysicalRequirements){
-        return true;
-    }
-    else{
-      return false;
-    }
-  }
+  // IsFormValid(): boolean{
+  //   if(this.newTraining.TrainerName &&  
+  //     this.newTraining.Description && 
+  //     this.newTraining.TrainerName && 
+  //     this.newTraining.Location && 
+  //     this.newTraining.Fee && 
+  //     this.newTraining.FocusArea && 
+  //     this.newTraining.PhysicalRequirements){
+  //       return true;
+  //   }
+  //   else{
+  //     return false;
+  //   }
+  // }
 
-  resetForm(): void{
+  resetForm(): void {
     this.formSubmitted = false;
     this.newTraining = {
       TrainingName: '',
@@ -92,7 +94,7 @@ export class AdminaddtrainingComponent implements OnInit {
     this.isDialogOpen = true;
     document.body.classList.add('dialog-open');
   }
- 
+
   closeDialog(): void {
     this.isDialogOpen = false;
     document.body.classList.remove('dialog-open');

@@ -9,6 +9,8 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./usernav.component.css']
 })
 export class UsernavComponent implements OnInit {
+  
+  isUserDialogOpen: boolean = false;
 
   constructor(private authService: AuthService, private router: Router) { }
  
@@ -29,5 +31,15 @@ export class UsernavComponent implements OnInit {
   logout() {
     this.authService.logout();
     this.router.navigate(['/']);
+  }
+
+  openDialog() {
+    this.isUserDialogOpen = true;
+    document.body.classList.add('dialog-open');
+  }
+
+  closeDialog() {
+    this.isUserDialogOpen = false;
+    document.body.classList.remove('dialog-open');
   }
 }

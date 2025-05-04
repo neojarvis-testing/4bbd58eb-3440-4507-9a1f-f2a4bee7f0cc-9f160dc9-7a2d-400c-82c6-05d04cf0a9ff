@@ -5,79 +5,114 @@
                 <h2>Edit Training</h2>
                 <button class="btn btn-secondary btn-1" [routerLink]="['/view-trainings']">Back</button>
             </div>
-            <form #trainingForm="ngForm" (ngSubmit)="updateTraining()">
+            <form #trainingForm="ngForm" (ngSubmit)="updateTraining(trainingForm)">
                 <div>
                     <label for="Name">Training Name<span class="error">*</span></label>
-                    <input type="text" id="Name" name="Name" [(ngModel)]="training.TrainingName" placeholder="Training Name" required />
+                    <input type="text" id="Name" name="Name"
+                        [(ngModel)]="training.TrainingName"
+                        placeholder="Training Name" required minlength="3" maxlength="100" disabled />
                     <div *ngIf="formSubmitted && !training.TrainingName" class="error">
                         *Training Name is required
                     </div>
+                    <div *ngIf="formSubmitted && training.TrainingName && (training.TrainingName.length < 3 || training.TrainingName.length > 100)" class="error">
+                        *Training Name must be between 3 and 100 characters
+                    </div>
                 </div>
-
+            
+                <!-- Description -->
                 <div>
                     <label for="Description">Description<span class="error">*</span></label>
-                    <input type="text" id="Description" name="Description" [(ngModel)]="training.Description"
-                    placeholder="Training Description" required />
+                    <input type="text" id="Description" name="Description"
+                        [(ngModel)]="training.Description"
+                        placeholder="Training Description" required minlength="10" maxlength="1000" />
                     <div *ngIf="formSubmitted && !training.Description" class="error">
                         *Description is required
                     </div>
+                    <div *ngIf="formSubmitted && training.Description && (training.Description.length < 10 || training.Description.length > 1000)" class="error">
+                        *Description must be between 10 and 1000 characters
+                    </div>
                 </div>
-
+            
+                <!-- Trainer Name -->
                 <div>
                     <label for="Trainer">Trainer Name<span class="error">*</span></label>
-                    <input type="text" id="Trainer" name="Trainer" [(ngModel)]="training.TrainerName"
-                    placeholder="Trainer Name" required />
+                    <input type="text" id="Trainer" name="Trainer"
+                        [(ngModel)]="training.TrainerName"
+                        placeholder="Trainer Name" required minlength="3" maxlength="50" />
                     <div *ngIf="formSubmitted && !training.TrainerName" class="error">
                         *Trainer Name is required
                     </div>
+                    <div *ngIf="formSubmitted && training.TrainerName && (training.TrainerName.length < 3 || training.TrainerName.length > 50)" class="error">
+                        *Trainer Name must be between 3 and 50 characters
+                    </div>
                 </div>
-
+            
+                <!-- Location -->
                 <div>
                     <label for="Location">Location<span class="error">*</span></label>
-                    <input type="text" id="Location" name="Location" [(ngModel)]="training.Location"
-                    placeholder="Location" required />
+                    <input type="text" id="Location" name="Location"
+                        [(ngModel)]="training.Location"
+                        placeholder="Location" required minlength="5" maxlength="200" />
                     <div *ngIf="formSubmitted && !training.Location" class="error">
                         *Location is required
                     </div>
+                    <div *ngIf="formSubmitted && training.Location && (training.Location.length < 5 || training.Location.length > 200)" class="error">
+                        *Location must be between 5 and 200 characters
+                    </div>
                 </div>
-
+            
+                <!-- Indoor/Outdoor -->
                 <div>
                     <label for="Type">Indoor/Outdoor<span class="error">*</span></label>
-                    <select name="Type" id="Type"
-                        [(ngModel)]="training.IsIndoor" required>
+                    <select name="Type" id="Type" [(ngModel)]="training.IsIndoor" required>
                         <option value="true" selected>Indoor</option>
                         <option value="false">Outdoor</option>
                     </select>
                 </div>
-
+            
+                <!-- Fee -->
                 <div>
                     <label for="Fee">Fee<span class="error">*</span></label>
-                    <input type="number" id="Fee" name="Fee" [(ngModel)]="training.Fee"
-                    placeholder="Fee" required />
-                    <div *ngIf="formSubmitted && !training.Fee" class="error">
+                    <input type="number" id="Fee" name="Fee"
+                        [(ngModel)]="training.Fee"
+                        placeholder="Fee" required min="0" />
+                    <div *ngIf="formSubmitted && !training.Fee && training.Fee !== 0" class="error">
                         *Fee is required
                     </div>
+                    <div *ngIf="formSubmitted && training.Fee < 0" class="error">
+                        *Fee must be a non-negative value
+                    </div>
                 </div>
-
+            
+                <!-- Focus Area -->
                 <div>
                     <label for="FocusArea">Focus Area<span class="error">*</span></label>
-                    <input type="FocusArea" id="FocusArea" name="FocusArea" [(ngModel)]="training.FocusArea"
-                    placeholder="FocusArea" required />
+                    <input type="text" id="FocusArea" name="FocusArea"
+                        [(ngModel)]="training.FocusArea"
+                        placeholder="FocusArea" required minlength="3" maxlength="100" />
                     <div *ngIf="formSubmitted && !training.FocusArea" class="error">
                         *FocusArea is required
                     </div>
+                    <div *ngIf="formSubmitted && training.FocusArea && (training.FocusArea.length < 3 || training.FocusArea.length > 100)" class="error">
+                        *FocusArea must be between 3 and 100 characters
+                    </div>
                 </div>
-
+            
+                <!-- Physical Requirements -->
                 <div>
                     <label for="PhysicalRequirements">Physical Requirements<span class="error">*</span></label>
-                    <input type="text" id="PhysicalRequirements" name="PhysicalRequirements" [(ngModel)]="training.PhysicalRequirements"
-                    placeholder="Physical Requirements" required />
+                    <input type="text" id="PhysicalRequirements" name="PhysicalRequirements"
+                        [(ngModel)]="training.PhysicalRequirements"
+                        placeholder="Physical Requirements" required minlength="5" maxlength="300" />
                     <div *ngIf="formSubmitted && !training.PhysicalRequirements" class="error">
                         *Physical Requirements are required
                     </div>
+                    <div *ngIf="formSubmitted && training.PhysicalRequirements && (training.PhysicalRequirements.length < 5 || training.PhysicalRequirements.length > 300)" class="error">
+                        *Physical Requirements must be between 5 and 300 characters
+                    </div>
                 </div>
 
-                <div *ngIf="trainingForm.invalid" class="error">
+                <div *ngIf="trainingForm.invalid && formSubmitted" class="error">
                     *All fields are required
                 </div>
 

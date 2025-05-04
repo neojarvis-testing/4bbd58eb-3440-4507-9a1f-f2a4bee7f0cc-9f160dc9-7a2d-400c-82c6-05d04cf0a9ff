@@ -9,9 +9,11 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./adminnav.component.css']
 })
 export class AdminnavComponent implements OnInit {
-  
+
+  isUserDialogOpen: boolean = false;
+
   constructor(private authService: AuthService, private router: Router) { }
- 
+
   user: User = {
     Email: '',
     Password: '',
@@ -19,15 +21,25 @@ export class AdminnavComponent implements OnInit {
     MobileNumber: '',
     UserRole: ''
   }
-  
+
   ngOnInit(): void {
     const storedUser = localStorage.getItem('currentUser');
     this.user = JSON.parse(storedUser);
   }
- 
+
   logout() {
     this.authService.logout();
     this.router.navigate(['/']);
+  }
+
+  openDialog() {
+    this.isUserDialogOpen = true;
+    document.body.classList.add('dialog-open');
+  }
+
+  closeDialog() {
+    this.isUserDialogOpen = false;
+    document.body.classList.remove('dialog-open');
   }
 
 }

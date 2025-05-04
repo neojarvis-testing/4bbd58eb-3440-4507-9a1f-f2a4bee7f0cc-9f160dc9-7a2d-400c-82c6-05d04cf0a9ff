@@ -10,17 +10,17 @@ import { FeedbackService } from 'src/app/services/feedback.service';
 })
 export class UseraddfeedbackComponent implements OnInit {
 
-  newFeedback : Feedback = {
-    FeedbackId : 0,
-    UserId : 0,
-    FeedbackText : '',
-    Date : new Date()
+  newFeedback: Feedback = {
+    FeedbackId: 0,
+    UserId: 0,
+    FeedbackText: '',
+    Date: new Date()
   }
 
-  isUserDialogOpen : boolean = false
-  formSubmitted : boolean = false
+  isUserDialogOpen: boolean = false
+  formSubmitted: boolean = false
 
-  constructor(private feedbackService : FeedbackService, private activatedRouter : ActivatedRoute, private router: Router) { }
+  constructor(private feedbackService: FeedbackService, private activatedRouter: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.activatedRouter.params.subscribe((params) => {
@@ -31,18 +31,18 @@ export class UseraddfeedbackComponent implements OnInit {
 
   addFeedback() {
     this.formSubmitted = true;
-    if(this.isFormValid()) {
+    if (this.isFormValid()) {
       this.feedbackService.sendFeedback(this.newFeedback).subscribe(() => {
       })
       this.openDialog();
     }
   }
 
-  isFormValid(): boolean{
-    if(this.newFeedback.FeedbackText){
+  isFormValid(): boolean {
+    if (this.newFeedback.FeedbackText) {
       return true;
     }
-    else{
+    else {
       return false;
     }
   }
@@ -50,12 +50,12 @@ export class UseraddfeedbackComponent implements OnInit {
   openDialog() {
     this.isUserDialogOpen = true;
     document.body.classList.add('dialog-open');
-}
-  
+  }
+
   closeDialog() {
     this.isUserDialogOpen = false;
     document.body.classList.remove('dialog-open');
     this.router.navigate(['/myfeedbacks']);
-}
+  }
 
 }

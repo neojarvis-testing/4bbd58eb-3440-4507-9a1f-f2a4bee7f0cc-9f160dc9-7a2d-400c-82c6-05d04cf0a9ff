@@ -1,20 +1,33 @@
 <nav>
-    <ul>
-      <li><h1>Training Hub</h1></li>
-      <li>{{user?.Username}}/{{user?.UserRole}}</li>
-      <li><a [routerLink]="['/']">Home</a></li>
-      
-      <li class="dropdown">
-        <a href="javascript:void(0)" class="dropbtn">Training</a>
-        <ul class="dropdown-content">
-          <li><a [routerLink]="['/add-training']">Add Training</a></li>
-          <li><a [routerLink]="['/view-trainings']">View Training</a></li>
-        </ul>
-      </li>
-      
-      <li><a [routerLink]="['/trainings-requested']">Training Requested</a></li>
-      <li><a [routerLink]="['/view-feedbacks']">Feedbacks</a></li>
-      <li><button (click)="logout()" [routerLink]="['/login']">Logout</button></li>
-    </ul>
-  </nav>
-  
+  <ul>
+    <li>
+      <h1>Training Hub</h1>
+    </li>
+    <li>{{user?.Username}}/{{user?.UserRole}}</li>
+    <li><a [routerLink]="['/']">Home</a></li>
+
+    <li class="dropdown">
+      <a href="javascript:void(0)" class="dropbtn">Training</a>
+      <ul class="dropdown-content">
+        <li><a [routerLink]="['/add-training']">Add Training</a></li>
+        <li><a [routerLink]="['/view-trainings']">View Training</a></li>
+      </ul>
+    </li>
+
+    <li><a [routerLink]="['/trainings-requested']">Training Requested</a></li>
+    <li><a [routerLink]="['/view-feedbacks']">Feedbacks</a></li>
+    <li><button (click)="openDialog()">Logout</button></li>
+  </ul>
+</nav>
+
+<div class="dialog" *ngIf="isUserDialogOpen">
+  <div class="dialog-content">
+      <div class="modal-body text-center">
+          <p><strong>Are you sure you want to logout?</strong></p>
+      </div>
+      <div class="modal-footer">
+          <button (click)="logout()">Logout</button>
+          <button type="button" (click)="closeDialog()">Cancel</button>
+      </div>
+  </div>
+</div>

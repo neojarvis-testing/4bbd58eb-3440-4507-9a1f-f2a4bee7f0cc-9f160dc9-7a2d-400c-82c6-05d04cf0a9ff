@@ -13,7 +13,7 @@ export class AdminviewappliedrequestComponent implements OnInit {
   trainingRequests : PhysicalTrainingRequest[] = []
   tempTrainingRequests : PhysicalTrainingRequest[] = []
   searchByTrainingName : string = '';
-  filterByTrainingStatus : string = '';
+  filterByTrainingStatus : string = 'All';
   currentStatus : string = 'Pending'
   selectedTrainingRequest : PhysicalTrainingRequest | null = null;
   statusTracker: { [key: number]: { isApproved: boolean, isRejected: boolean } } = {};

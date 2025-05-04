@@ -23,8 +23,8 @@
         </thead>
         <tbody>
             <tr
-                *ngFor="let training of filteredTrainings | paginate: { itemsPerPage: 3, currentPage: page }; let i = index">
-                <td class="text-center">{{i+1 + (page - 1) * 3}}</td>
+                *ngFor="let training of filteredTrainings | paginate: { itemsPerPage: 6, currentPage: page }; let i = index">
+                <td class="text-center">{{i+1 + (page - 1) * 6}}</td>
                 <td>{{ training.TrainingName }}</td>
                 <td>{{ training.Description }}</td>
                 <td>{{ training.TrainerName }}</td>
@@ -35,10 +35,10 @@
                 <td>{{ training.PhysicalRequirements }}</td>
                 <td class="text-center">
                     <button *ngIf="!isApplied(training.PhysicalTrainingId)"
-                        [routerLink]="['/applytraining', training.PhysicalTrainingId]">
+                        [routerLink]="['/applytraining', training.PhysicalTrainingId]" class="greenButton">
                         Apply
                     </button>
-                    <button *ngIf="isApplied(training.PhysicalTrainingId)" class="redButton">
+                    <button *ngIf="isApplied(training.PhysicalTrainingId)" class="redButton" disabled >
                         Applied
                     </button>
                 </td>
