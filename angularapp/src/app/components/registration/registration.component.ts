@@ -20,13 +20,12 @@ export class RegistrationComponent implements OnInit {
   userrole: string = '';
   secretKey: string = '';
   wrongSecretKey: boolean = false;
-  isDialogOpen: boolean = true;
+  isDialogOpen: boolean = false;
   formSubmitted:boolean=false;
   
   constructor(public authService: AuthService, private router: Router) {}
   
   ngOnInit(): void {
-    this.openDialog();
   }
   
   register(): void {

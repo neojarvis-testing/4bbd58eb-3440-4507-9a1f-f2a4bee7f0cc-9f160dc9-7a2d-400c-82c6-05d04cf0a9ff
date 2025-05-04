@@ -24,6 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { AgGridModule } from 'ag-grid-angular';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     CommonModule,
     ReactiveFormsModule,
     MatProgressSpinnerModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    AgGridModule.withComponents([])
   ],
   providers: [],
   bootstrap: [AppComponent]
