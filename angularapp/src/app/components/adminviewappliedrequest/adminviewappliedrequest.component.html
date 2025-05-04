@@ -31,6 +31,8 @@
             </tr>
         </thead>
         <tbody *ngIf="tempTrainingRequests.length > 0">
+            <tr *ngFor="let item of tempTrainingRequests | paginate: { itemsPerPage: 10, currentPage: page }; let i = index">
+                <td>{{i+1 + (page - 1) * 10}}</td>
             <tr *ngFor="let item of tempTrainingRequests; let i = index">
                 <td>{{i+1}}</td>
                 <td>{{item.User?.Username}}</td>
@@ -49,5 +51,7 @@
         <div *ngIf="tempTrainingRequests.length == 0">
             Oops! No Record Found.
         </div>
-    </table>
+    </table>    
+    <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
 </div>
+
