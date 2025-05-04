@@ -44,6 +44,10 @@ button:hover{
     background-color: blue;
 }
 
+button:disabled {
+    background-color: lightgray;
+}
+
 p{
     text-align: center;
 }

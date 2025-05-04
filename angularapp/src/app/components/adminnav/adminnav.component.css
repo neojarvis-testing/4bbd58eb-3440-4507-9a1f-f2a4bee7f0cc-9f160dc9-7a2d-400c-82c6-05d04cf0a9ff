@@ -1,5 +1,3 @@
-
-
 /* Universal Box Sizing */
 * {
     box-sizing: border-box;
@@ -185,5 +183,3 @@ nav ul li button:hover {
         display: block;
     }
 }
- 
-

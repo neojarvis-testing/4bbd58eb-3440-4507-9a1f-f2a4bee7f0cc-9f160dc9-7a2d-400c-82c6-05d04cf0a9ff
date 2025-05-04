@@ -12,7 +12,6 @@ namespace dotnetapp.Models
     {
         // Unique identifier for the training request
         [Key]
-        [JsonIgnore]
         public int PhysicalTrainingRequestId { get; set; }
  
         // User ID of the person making the request (required field)
@@ -22,7 +21,7 @@ namespace dotnetapp.Models
  
         // Navigation property for the user who made the request
         // Ignored during JSON serialization to prevent circular dependency
-        [JsonIgnore]
+        [JsonIgnore(Condition=JsonIgnoreCondition.WhenWritingNull)]
         public User? User { get; set; }
  
         // Physical training ID for the requested session (required field)
@@ -31,7 +30,7 @@ namespace dotnetapp.Models
         public int PhysicalTrainingId { get; set; }
  
         // Navigation property for the requested physical training session
-        [JsonIgnore]
+        [JsonIgnore(Condition=JsonIgnoreCondition.WhenWritingNull)]
         public PhysicalTraining? PhysicalTraining { get; set; }
  
         // Date when the request was made

@@ -37,11 +37,16 @@ export class RegistrationComponent implements OnInit {
       
       if(newUser.Username && newUser.Email && newUser.Password && newUser.MobileNumber && newUser.UserRole)
       {
-        this.authService.register(newUser).subscribe(() => {
-          alert('Registration successful!');
-          this.router.navigate(['/login']);
-        });
-        console.log(newUser);
+        if(this.validatePassword() && !this.checkpassword()){
+          this.authService.register(newUser).subscribe(() => {
+            alert('Registration successful!');
+            this.router.navigate(['/login']);
+          });
+          console.log(newUser);
+        }
+        else{
+          return;
+        }
       }
       else{
         return;

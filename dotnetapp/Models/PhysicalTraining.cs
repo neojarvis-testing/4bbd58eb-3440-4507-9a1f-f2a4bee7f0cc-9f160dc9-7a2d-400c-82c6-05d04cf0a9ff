@@ -14,7 +14,6 @@ namespace dotnetapp.Models
     {
         // Unique identifier for the physical training session
         [Key]
-        [JsonIgnore]
         public int PhysicalTrainingId { get; set; }
  
         // Name of the training session (required)
@@ -34,7 +33,7 @@ namespace dotnetapp.Models
  
         // Location where the training session will be conducted
         [Required(ErrorMessage = "Location is required.")]
-        [StringLength(200, MinimumLength = 5, ErrorMessage = "Location must be between 5 and 200 characters long.")]
+        [StringLength(200, MinimumLength = 3, ErrorMessage = "Location must be between 5 and 200 characters long.")]
         public string Location { get; set; }
  
         // Indicates whether the session is conducted indoors or outdoors

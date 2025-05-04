@@ -1,6 +1,3 @@
-
-
-
 <div class="feedback-container" [ngClass]="{'blur-background': isProfileModalOpen}">
     <h2>Feedback Details</h2>
     <hr class="line">
@@ -17,6 +14,8 @@
         <tbody *ngIf="feedbacks.length > 0">
             <tr *ngFor="let item of feedbacks | paginate: { itemsPerPage: 10, currentPage: page }; let i = index">
                 <td>{{i+1 + (page - 1) * 10}}</td>
+            <tr *ngFor="let item of feedbacks; let i = index">
+                <td>{{i+1}}</td>
                 <td>{{item.User?.Username}}</td>
                 <td>{{item.FeedbackText}}</td>
                 <td>{{item.Date | date:'yyyy-MM-dd'}}</td>
@@ -53,3 +52,4 @@
 
 
 
+</div>

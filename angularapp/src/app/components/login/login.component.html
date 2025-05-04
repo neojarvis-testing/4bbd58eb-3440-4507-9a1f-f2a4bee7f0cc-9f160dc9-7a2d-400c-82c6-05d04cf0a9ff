@@ -12,11 +12,10 @@
             <label for="password">Password<span class="required">*</span></label>
             <input type="password" id="password" name="password" [(ngModel)]="password" required #passwordNgModel="ngModel">
             <div class="error-message" *ngIf="passwordNgModel.invalid && (passwordNgModel.dirty || passwordNgModel.touched)">
-                Password is required<br />
-                Password must include at least one uppercase letter, one lowercase letter, one digit, and one special character
+                Password is required
             </div>
         </div>
-        <button type="submit" id="submit">Login</button>
+        <button type="submit" id="submit" [disabled]="loginForm.invalid">Login</button>
     </form>
     <p>Don't have an account? <a class="blue-link" routerLink="/register">Register here</a></p>
 </div>

@@ -10,7 +10,6 @@ namespace dotnetapp.Models
     {
         // Unique identifier for the feedback
         [Key]
-        [JsonIgnore]
         public int FeedbackId { get; set; }
  
         // User ID of the person who provided the feedback, linking to the User entity
@@ -20,7 +19,7 @@ namespace dotnetapp.Models
  
         // Navigation property to reference the User entity
         // Ignored during JSON serialization to prevent circular dependency issues
-        [JsonIgnore]
+        [JsonIgnore(Condition=JsonIgnoreCondition.WhenWritingNull)]
         public User? User { get; set; }
  
         // Stores the textual feedback provided by the user
