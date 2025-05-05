@@ -10,8 +10,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
-  public baseUrl = 'https://8080-afeeedcfbfbfcbfefbafcfdcadccdcfaff.premiumproject.examly.io/api';
-  public baseUrl = 'https://8080-caccabeeacbfefbafcfdcadccdcfaff.premiumproject.examly.io/api';
+  public baseUrl = 'https://8080-abcbddecbfceedecbfefbafcfdcadccdcfaff.premiumproject.examly.io/api';
   
   private currentUserSubject: BehaviorSubject<User | null>;
   public currentUser: Observable<User | null>;
