@@ -60,7 +60,7 @@
 
     <div *ngIf="userrole == 'Admin'">
       <label for="secretKey">Admin Secret Key<span class="error">*</span></label>
-      <input (click)="removeError()" type="text" id="secretKey" name="secretKey" [(ngModel)]="secretKey"
+      <input (click)="removeError()" type="password" id="secretKey" name="secretKey" [(ngModel)]="secretKey"
         autocomplete="off" required />
       <div class="error" *ngIf="formSubmitted && !secretKey">
         *Admin Secret Key is required

@@ -45,7 +45,7 @@ import { AgGridModule } from 'ag-grid-angular';
     UsernavComponent,
     UserviewappliedrequestComponent,
     UserviewfeedbackComponent,
-    UserviewtrainingComponent
+    UserviewtrainingComponent,
   ],
   imports: [
     BrowserModule,
