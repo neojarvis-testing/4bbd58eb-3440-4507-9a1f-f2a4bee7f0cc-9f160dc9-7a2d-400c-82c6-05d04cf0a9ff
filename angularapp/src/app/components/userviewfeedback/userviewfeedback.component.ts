@@ -51,6 +51,7 @@ export class UserviewfeedbackComponent implements OnInit {
       this.isDialogOpen = false;
       this.selectedFeedback = null;
       document.body.classList.remove('dialog-open');
+      this.loadFeedbacks();
     }
   
     confirmDelete():void{
@@ -59,8 +60,8 @@ export class UserviewfeedbackComponent implements OnInit {
       (error) => {
         console.log(error);
       });
-      this.closeDialog();
       this.loadFeedbacks();
+      this.closeDialog();
     }
 
     pageChanged(event: number): void {

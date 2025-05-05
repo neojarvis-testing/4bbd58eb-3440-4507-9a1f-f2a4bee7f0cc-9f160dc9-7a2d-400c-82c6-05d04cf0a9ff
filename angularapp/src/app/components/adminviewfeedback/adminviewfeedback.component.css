@@ -135,6 +135,10 @@ button {
   font-weight: bold;
 }
 
+.modal-body{
+  text-align: left;
+}
+
 .modal-body p {
   margin: 10px 0;
   font-size: 16px;

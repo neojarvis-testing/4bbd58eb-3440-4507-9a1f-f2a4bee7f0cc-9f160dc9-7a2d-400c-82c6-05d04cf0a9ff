@@ -17,6 +17,7 @@ export class AdminviewappliedrequestComponent implements OnInit {
   currentStatus : string = 'Pending'
   selectedTrainingRequest : PhysicalTrainingRequest | null = null;
   statusTracker: { [key: number]: { isApproved: boolean, isRejected: boolean } } = {};
+  isRequestModalOpen: boolean = false;
   loading: boolean = true;
   page : number = 1
 
@@ -80,6 +81,16 @@ user
       this.statusTracker[trainingRequest.PhysicalTrainingId].isRejected = true;
       this.statusTracker[trainingRequest.PhysicalTrainingId].isApproved = false;
     });
+  }
+
+  showRequestDetails(request : any) {
+    this.selectedTrainingRequest=request;
+    this.isRequestModalOpen=true;
+  }
+ 
+  closeRequestModal() {
+    this.isRequestModalOpen=false;
+    this.selectedTrainingRequest=null;
   }
 
   pageChanged(event: number): void {

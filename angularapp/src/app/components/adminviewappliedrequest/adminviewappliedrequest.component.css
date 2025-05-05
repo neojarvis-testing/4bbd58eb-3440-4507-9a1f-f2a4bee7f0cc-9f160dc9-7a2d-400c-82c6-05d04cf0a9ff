@@ -98,6 +98,16 @@ thead {
   border-radius: 4px;
 }
 
+.primaryBtn {
+  background-color: #007bff;
+  border: none;
+  padding: 5px;
+  margin-left: 4px;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
 .greenButton:hover {
   background-color: #169c16;
   transform: scale(1.05);
@@ -106,6 +116,12 @@ thead {
 
 .redButton:hover {
   background-color: darkred;
+  transform: scale(1.05);
+  transition: all 0.3s ease;
+}
+
+.primaryBtn:hover {
+  background-color: #006cdf;
   transform: scale(1.05);
   transition: all 0.3s ease;
 }
@@ -126,4 +142,72 @@ thead {
   justify-content: center;
   align-items: center;
   height: 200px;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(5px);
+  /* Background blur effect */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Dark semi-transparent overlay */
+  z-index: 1050;
+}
+
+.modal-dialog {
+  max-width: 400px;
+  margin: auto;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, .3);
+  text-align: center;
+}
+
+.modal-header {
+  border-bottom: none;
+  justify-content: center;
+}
+
+.modal-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.modal-body{
+  text-align: left;
+}
+
+.modal-body p {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.modal-footer {
+  justify-content: center;
+  margin-top: 15px;
+  border-top: none;
+}
+
+.modal-footer button {
+  background-color: #d9534f;
+  border: none;
+  color: white;
+  padding: 8px 20px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modal-footer button:hover {
+  background-color: #c9302c;
 }
