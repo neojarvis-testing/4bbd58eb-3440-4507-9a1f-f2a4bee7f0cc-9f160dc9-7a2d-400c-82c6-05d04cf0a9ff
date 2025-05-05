@@ -1,0 +1,54 @@
+<div class="trainings-container">
+  <h2> Applied Training Requests</h2>
+  <hr class="line">
+  <div class="search-bar">
+    <input type="text" name="serachInput" id="searchInput" placeholder="Search..." [(ngModel)]="searchQuery"
+      (input)="searchTrainings()">
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th class="text-center">S.No</th>
+        <th>Training Name</th>
+        <th class="text-center">Request Date</th>
+        <th>Status</th>
+        <th class="text-center">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let training of filteredTrainings | paginate: { itemsPerPage: 6, currentPage: page }; let i = index">
+        <td class="text-center">{{i+1 + (page - 1) * 6}}</td>
+        <td>{{ training.PhysicalTraining.TrainingName }}</td>
+        <td class="text-center">{{ training.RequestDate | date:'yyyy-MM-dd' }}</td>
+        <td>{{ training.Status }}</td>
+        <td class="text-center">
+          <button class="redButton" (click)="openDialog(training)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="loading" class="spinner-container">
+    <mat-spinner diameter="60" strokeWidth="6"></mat-spinner>
+  </div>
+  <p id="noRecordsFound" *ngIf="!loading && filteredTrainings.length === 0">You have not applied for any training</p>
+  <pagination-controls class="paging" (pageChange)="pageChanged($event)"></pagination-controls>
+
+
+
+
+  <div class="dialog" *ngIf="isDialogOpen">
+    <div class="dialog-content">
+      <div class="modal-body text-center">
+        <p><strong>Are you sure you want to delete?</strong></p>
+      </div>
+      <div class="modal-footer">
+        <button (click)="confirmDelete()">Yes, Delete</button>
+        <button type="button" (click)="closeDialog()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+</div>

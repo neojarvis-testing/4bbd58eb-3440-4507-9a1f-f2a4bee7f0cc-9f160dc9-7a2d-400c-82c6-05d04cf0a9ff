@@ -1,0 +1,56 @@
+<div class="trainings-container">
+    <h2> Available Trainings </h2>
+    <hr class="line">
+    <div class="search-bar">
+        <input type="text" name="serachInput" id="searchInput"
+            placeholder="Search by Training Name, Description, or Focus Area" [(ngModel)]="searchQuery"
+            (input)="searchTrainings()">
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th class="text-center">S.No</th>
+                <th>Training Name</th>
+                <th>Description</th>
+                <th>Trainer Name</th>
+                <th>Location</th>
+                <th>Indoor/Outdoor</th>
+                <th class="text-center">Fee (Rs.)</th>
+                <th>Focus Area</th>
+                <th>Requirements</th>
+                <th class="text-center">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr
+                *ngFor="let training of filteredTrainings | paginate: { itemsPerPage: 6, currentPage: page }; let i = index">
+                <td class="text-center">{{i+1 + (page - 1) * 6}}</td>
+                <td>{{ training.TrainingName }}</td>
+                <td>{{ training.Description }}</td>
+                <td>{{ training.TrainerName }}</td>
+                <td>{{ training.Location }}</td>
+                <td>{{ training.IsIndoor ? "Indoor" : "Outdoor" }}</td>
+                <td class="text-right">{{ training.Fee | number:'.2-2' }}</td>
+                <td>{{ training.FocusArea }}</td>
+                <td>{{ training.PhysicalRequirements }}</td>
+                <td class="text-center">
+                    <button *ngIf="!isApplied(training.PhysicalTrainingId)"
+                        [routerLink]="['/applytraining', training.PhysicalTrainingId]" class="greenButton">
+                        Apply
+                    </button>
+                    <button *ngIf="isApplied(training.PhysicalTrainingId)" class="redButton" disabled >
+                        Applied
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div *ngIf="loading" class="spinner-container">
+        <mat-spinner diameter="60" strokeWidth="6"></mat-spinner>
+    </div>
+    <p id="noRecordsFound" *ngIf="!loading && filteredTrainings.length === 0">Oops! No trainings available right now</p>
+    <pagination-controls class="paging" (pageChange)="pageChanged($event)"></pagination-controls>
+
+    <p id="noRecordsFound" style="display:none;">Oops! No records found</p>
+</div>

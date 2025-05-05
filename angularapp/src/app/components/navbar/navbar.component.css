@@ -1,0 +1,44 @@
+nav{
+    background: linear-gradient(to right, #003366, #6a0dad);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    font-family: 'Segoe UI', sans-serif;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+nav h2 a{
+    color: white;
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+    font-family: 'Georgia', serif;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+nav h2 a:hover{
+    color: #1abc9c; /* Teal background on hover */
+}
+
+.list-items{
+    display: flex;
+    flex-direction: row;
+}
+
+nav li {
+    margin-left: 50px;
+    display: flex;
+    gap: 1.5rem;
+}
+
+nav li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+nav li a:hover{
+    color: #1abc9c; /* Teal background on hover */
+}

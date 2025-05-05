@@ -1,0 +1,59 @@
+<div class="trainings-container">
+  <h2 class="text-center">Training Sessions</h2>
+  <hr class="line">
+  <div class="search-bar">
+    <input type="text" id="searchInput" [(ngModel)]="searchTerm" placeholder="Search by Training Name..."
+      class="search-box" />
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th class="text-center">S.No</th>
+        <th>Training Name</th>
+        <th>Location</th>
+        <th>Trainer Name</th>
+        <th class="text-center">Fee (Rs.)</th>
+        <th>Focus Area</th>
+        <th>Description</th>
+        <th class="text-center">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let training of filteredTrainings() | paginate: { itemsPerPage: 6, currentPage: page }; let i = index">
+        <td class="text-center">{{i+1 + (page - 1) * 6}}</td>
+        <td>{{ training.TrainingName }}</td>
+        <td>{{ training.Location }}</td>
+        <td>{{ training.TrainerName }}</td>
+        <td class="text-right">{{ training.Fee | number:'.2-2'}}</td>
+        <td>{{ training.FocusArea }}</td>
+        <td>{{ training.Description }}</td>
+        <td class="text-center">
+          <button (click)="editTraining(training)" class="greenButton">Edit</button>
+          <button (click)="openDialogue(training)" class="redButton">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="loading" class="spinner-container">
+    <mat-spinner diameter="60" strokeWidth="6" ></mat-spinner>
+  </div>
+  <p id="noRecordsFound" *ngIf="!loading && trainings.length === 0">Oops! Trainings not found</p>
+  <pagination-controls class="paging" (pageChange)="pageChanged($event)"></pagination-controls>
+</div>
+
+<div class="dialog" tabindex="-1" role="dialog" [ngClass]="{'show':isDialogueOpen}" aria-labelledby="profileDialogLabel"
+  style="display: block;" *ngIf="isDialogueOpen">
+  <div class="dialog-dialog dialog-dialog-centered" role="document">
+    <div class="dialog-content">
+      <div class="dialog-body text-center" style="font-family: 'Gilroy-Medium',sans-serif;">
+        <p><strong>Are you sure you want to delete {{ selectedTraining?.TrainingName }}?</strong></p>
+        <div *ngIf="errorMessage" class="text-danger"><strong>{{ errorMessage }}</strong></div>
+      </div>
+      <div class="dialog-footer">
+        <button (click)="deleteTraining()">Yes, Delete</button>
+        <button type="button" class="btn btn-danger" (click)="closeDialogue()">Cancel</button>
+      </div>
+    </div>
+  </div>
