@@ -8,8 +8,8 @@ import { PhysicalTrainingRequest } from '../models/physical-training-request.mod
   providedIn: 'root'
 })
 export class PhysicalTrainingService {
-  private baseTrainingUrl = 'https://8080-abcbddecbfceedecbfefbafcfdcadccdcfaff.premiumproject.examly.io/api/physicalTraining';
-  private baseRequestUrl = 'https://8080-abcbddecbfceedecbfefbafcfdcadccdcfaff.premiumproject.examly.io/api/physical-training-request';
+  private baseTrainingUrl = 'https://8080-caccabeeacbfefbafcfdcadccdcfaff.premiumproject.examly.io/api/physicalTraining';
+  private baseRequestUrl = 'https://8080-caccabeeacbfefbafcfdcadccdcfaff.premiumproject.examly.io/api/physical-training-request';
 
   constructor(private http: HttpClient) { }
 

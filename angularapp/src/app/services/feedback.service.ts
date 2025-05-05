@@ -7,7 +7,7 @@ import { Feedback } from '../models/feedback.model';
   providedIn: 'root'
 })
 export class FeedbackService {
-  private baseUrl = 'https://8080-abcbddecbfceedecbfefbafcfdcadccdcfaff.premiumproject.examly.io/api/feedback';
+  private baseUrl = 'https://8080-caccabeeacbfefbafcfdcadccdcfaff.premiumproject.examly.io/api/feedback';
 
   constructor(private http: HttpClient) {}
 

@@ -76,6 +76,48 @@ export class AdminviewappliedrequestComponent implements OnInit {
 
   pageChanged(event: number): void {
     this.page = event;
+      if(app.Status == "Approved"){
+        this.statusTracker[app.PhysicalTrainingId] = { isApproved: true, isRejected: false };
+      }
+      else if(app.Status == "Rejected"){
+        this.statusTracker[app.PhysicalTrainingId] = { isApproved: false, isRejected: true };
+      }
+      else{
+        this.statusTracker[app.PhysicalTrainingId] = { isApproved: false, isRejected: false };
+      }
+    });
+  }
+user
+  filterByTrainingName() {
+    this.tempTrainingRequests = this.trainingRequests.filter(t => t.PhysicalTraining.TrainingName.toLowerCase().includes(this.searchByTrainingName.toLowerCase()))
+  }
+
+  filterByStatus() {
+    if(this.filterByTrainingStatus === "All") {
+      this.tempTrainingRequests = this.trainingRequests;
+    } else {
+      this.tempTrainingRequests = this.trainingRequests.filter(t => t.Status.toLowerCase().includes(this.filterByTrainingStatus.toLowerCase()))
+    }
+  }
+
+  approveTraining(trainingRequest: PhysicalTrainingRequest) {
+    trainingRequest.Status = "Approved";
+    this.trainingService.updatePhysicalTrainingRequest(trainingRequest.PhysicalTrainingRequestId, trainingRequest).subscribe(() => {
+      this.statusTracker[trainingRequest.PhysicalTrainingId].isApproved = true;
+      this.statusTracker[trainingRequest.PhysicalTrainingId].isRejected = false;
+    });
+  }
+
+  rejectTraining(trainingRequest: PhysicalTrainingRequest) {
+    trainingRequest.Status = "Rejected";
+    this.trainingService.updatePhysicalTrainingRequest(trainingRequest.PhysicalTrainingRequestId, trainingRequest).subscribe(() => {
+      this.statusTracker[trainingRequest.PhysicalTrainingId].isRejected = true;
+      this.statusTracker[trainingRequest.PhysicalTrainingId].isApproved = false;
+    });
+  }
+
+  pageChanged(event: number): void {
+    this.page = event;
   }
 }
 
