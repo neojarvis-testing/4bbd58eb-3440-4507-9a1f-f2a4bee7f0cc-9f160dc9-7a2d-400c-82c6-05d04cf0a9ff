@@ -44,13 +44,13 @@ export class AdminviewappliedrequestComponent implements OnInit {
   populateStatusTracker() {
     this.trainingRequests.forEach(app => {
       if(app.Status == "Approved"){
-        this.statusTracker[app.PhysicalTrainingId] = { isApproved: true, isRejected: false };
+        this.statusTracker[app.PhysicalTrainingRequestId] = { isApproved: true, isRejected: false };
       }
       else if(app.Status == "Rejected"){
-        this.statusTracker[app.PhysicalTrainingId] = { isApproved: false, isRejected: true };
+        this.statusTracker[app.PhysicalTrainingRequestId] = { isApproved: false, isRejected: true };
       }
       else{
-        this.statusTracker[app.PhysicalTrainingId] = { isApproved: false, isRejected: false };
+        this.statusTracker[app.PhysicalTrainingRequestId] = { isApproved: false, isRejected: false };
       }
     });
   }
@@ -70,16 +70,16 @@ user
   approveTraining(trainingRequest: PhysicalTrainingRequest) {
     trainingRequest.Status = "Approved";
     this.trainingService.updatePhysicalTrainingRequest(trainingRequest.PhysicalTrainingRequestId, trainingRequest).subscribe(() => {
-      this.statusTracker[trainingRequest.PhysicalTrainingId].isApproved = true;
-      this.statusTracker[trainingRequest.PhysicalTrainingId].isRejected = false;
+      this.statusTracker[trainingRequest.PhysicalTrainingRequestId].isApproved = true;
+      this.statusTracker[trainingRequest.PhysicalTrainingRequestId].isRejected = false;
     });
   }
 
   rejectTraining(trainingRequest: PhysicalTrainingRequest) {
     trainingRequest.Status = "Rejected";
     this.trainingService.updatePhysicalTrainingRequest(trainingRequest.PhysicalTrainingRequestId, trainingRequest).subscribe(() => {
-      this.statusTracker[trainingRequest.PhysicalTrainingId].isRejected = true;
-      this.statusTracker[trainingRequest.PhysicalTrainingId].isApproved = false;
+      this.statusTracker[trainingRequest.PhysicalTrainingRequestId].isRejected = true;
+      this.statusTracker[trainingRequest.PhysicalTrainingRequestId].isApproved = false;
     });
   }
 
