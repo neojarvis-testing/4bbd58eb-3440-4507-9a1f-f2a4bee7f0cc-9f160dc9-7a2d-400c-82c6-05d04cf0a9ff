@@ -40,9 +40,9 @@
                 <td class="text-center">{{item.RequestDate | date:'yyyy-MM-dd'}}</td>
                 <td>{{item.Status}}</td>
                 <td class="text-center">
-                    <button *ngIf="!statusTracker[item.PhysicalTrainingId]?.isApproved" (click)="approveTraining(item)"
+                    <button *ngIf="!statusTracker[item.PhysicalTrainingRequestId]?.isApproved" (click)="approveTraining(item)"
                         class="greenButton">Approve</button>
-                    <button *ngIf="!statusTracker[item.PhysicalTrainingId]?.isRejected" (click)="rejectTraining(item)"
+                    <button *ngIf="!statusTracker[item.PhysicalTrainingRequestId]?.isRejected" (click)="rejectTraining(item)"
                         class="redButton">Reject</button>
                     <button class="primaryBtn" type="submit" (click)="showRequestDetails(item)">Request Details</button>
                 </td>
